@@ -1,0 +1,82 @@
+# Multidimensional Rasch Model {#multidimensional}
+
+What if we envision something that's multidimensional? We can model that with TAM. IN fact, this is one of TAM's great strengths. Do read package documentation, though. As the number of dimensions grows, you'll have to use particular estimation methods else the model will take to long to run. 
+
+## we start by assigning the items to a dimension using a Q-matrix
+
+If we want to have two dimensions, we'll create a matrix with two columns. A 1 or 0 denotes whether that item belongs to dimension 1 or 2 (or both!) 
+```{r include=FALSE}
+library(knitr)
+library(kableExtra)
+```
+```{r}
+Q <- matrix(data=0, nrow=15, ncol=2)
+
+Q[1:7, 1] <-1
+Q[8:15, 2] <- 1
+
+
+
+
+Q
+```
+
+click on the “Q” object in the environment pane to see what we just made
+
+## Run the multidimensional Rasch model
+```{r warning=FALSE, results='hide'}
+multi <- TAM::tam.mml(resp=hls, Q=Q)
+```
+
+## $\theta$ and $\delta$
+
+```{r}
+
+persons.multi <- tam.wle(multi)
+WLEestimates.multi <- persons.multi$theta
+thresholds.multi <- tam.threshold(multi)
+```
+
+```{r}
+#Fit and reliabilities
+Fit.multi <- tam.fit(multi)
+Fit.multi$itemfit
+multi$EAP.rel #EAP reliabilities
+```
+
+
+### Wright Map
+
+```{r}
+MDthetas.multi <-
+  cbind(persons.multi$theta.Dim01,persons.multi$theta.Dim02) #one line
+wrightMap(MDthetas.multi, thresholds.multi) #second line
+```
+
+Compare the first unidimensional model to the multidimensional one
+
+```{r}
+logLik(mod1)
+logLik(multi)
+anova(mod1, multi)
+```
+
+Alternatively, you can use `IRT.compareModels`
+```{r}
+compare <- CDM::IRT.compareModels(mod1, multi)
+compare
+summary(compare)
+```
+We see that model `multi` fits slightly better. However, the log likelihood difference test shows the difference is statististically significant.
+
+```{r echo=FALSE}
+kable(compare$LRtest)
+```
+```
+compare$LRtest
+```
+
+## Exercises
+1. what evidence points towards multidimensionality?
+2. compare the multidimensional model to the PCM model
+

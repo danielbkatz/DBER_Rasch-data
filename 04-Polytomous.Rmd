@@ -1,0 +1,103 @@
+# Polytomous Items
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+
+library(kableExtra)
+library(knitr)
+
+```
+## Polytymous item types (anything with a rating Scale)
+We can use the Rasch Partial Credit Model (PCM) to look at polytomous data too. We’ll start by bringing in the polytomous items from the survey. Note that TAM needs the bottom category to be coded as 0, so you may need to recode.
+
+```{r include=FALSE}
+hls2 <- read.csv("C:/Users/katzd/Downloads/hls_poly_scale.csv")
+```
+
+```
+hls2 <- read.csv("hls_poly_scale.csv")
+```
+```{r}
+head(hls2)
+```
+
+```
+View(hls2)
+```
+
+TAM will automatically run the PCM when our data is polytomous. There are other model-types for polytomous data such as the rating scale model. This may be more appropriate for Likert-type items. For more information, read TAM documentation or see the reference list (Bond & Fox, 2007)
+
+```{r warning=FALSE, results='hide'}
+
+mod2 <- tam(hls2)
+```
+
+```{r paged.print=TRUE}
+summary(mod2)
+```
+
+
+## Item Difficulties
+Now we'll get item and person characteristics just like before
+
+```{r}
+mod2$xsi
+ItemDiff2 <- mod2$xsi$xsi 
+ItemDiff2
+
+#note, if you want to see this in your viewer, you can also use View().
+```
+
+
+## Person ability (theta) estimates
+
+```{r}
+WLE.ability.poly <- tam.wle(mod2)
+person.ability.poly <- WLE.ability.poly$theta
+head(person.ability)
+
+
+```
+
+## Item fit statistics
+```{r}
+Fit.poly <- tam.fit(mod2)
+```
+
+```
+Fit.poly$itemfit
+```
+```{r}
+kable(Fit.poly$itemfit)
+```
+## Item characteristic curves (but now as thresholds). 
+There are item characteristic curves (ICCs) for each item choice
+
+```{r}
+tthresh.poly <- tam.threshold(mod2)
+plot(mod2, type = "items")
+```
+
+## Wright Map
+Here’s a polytomous Wright Map
+
+```{r}
+wrightMap(person.ability.poly, tthresh.poly)
+```
+
+## Exercises:
+1. Find an item for which Cat 3 is actually easier than the Cat 2 of another item. 
+2. Find an item that has two categories that are extremely close in severity.
+3.  Look at the ICC for item 14. Describe what is happening with Cat 3.
+
+## Model Comparison
+
+say we want to compare the two models we just ran (note, these aren't really comparable since it's a completely different model - not nested data)
+```{r}
+logLik(mod1)
+logLik(mod2)
+anova(mod1, mod2)
+```
+
+Log likelihood is the foundation of both AIC and BIC. AIC and BIC allow you to compare non-nested models while penalizing for model complexity (BIC penalizes more). In general, the model with a smaller AIC/BIC is the one that the data fit better. The two criteria sometimes disagree.
+

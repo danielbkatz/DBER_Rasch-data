@@ -1,0 +1,45 @@
+---
+title: "Introduction to Rasch Modelling"
+author: "Anthony Clairmont, Daniel Katz, Mike Wilton"
+output:
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+  bookdown::pdf_book:
+    keep_tex: yes
+  bookdown::html_book:
+    css: toc.css
+documentclass: book
+---
+
+
+# Installing R and R-Studio {#install}
+
+## Instructions for installing R:
+1. Go to this web page: [http://cran.stat.ucla.edu/](http://cran.stat.ucla.edu/)
+1. Under the “Download and Install R” heading, select your operating system (Windows, Mac,
+Linux).
+1. The directions diverge at this stage, depending on your OS.  
+
+### For Mac, do the following:
+1. Under the “Latest Release” heading, select the top “.pkg” link. Save the file to your computer.
+2. This is the basic installer file.
+
+### For Windows do the following:
+1. Under the “Subdirectories” heading, select the top “base” link. Save the file to your computer.
+2. This is the basic installer file.
+
+
+1. Download and open the installer file. Now, just follow the instructions to set up R. The default settings are fine. No need to open the program yet.
+2. Now, we’re going to download R-Studio, which is the user interface that makes R faster and easier to use. It's an integrated development environment (IDE)
+3. Once you have R-Studio, you won’t need to open the “base R” GUI anymore, since R-Studio does this for you.
+
+## Instructions for installing R-Studio:
+1. Go to this web page: [https://www.rstudio.com/products/rstudio/download/#download](https://www.rstudio.com/products/rstudio/download/#download)
+2. Under the `Installers for Supported Platforms` header, select your operating system (Windows, Mac, Linux).
+3. Download and open the installer file and follow the instructions. The default settings are fine.
+4. Once R-Studio is installed, go ahead and open the program from your applications list (Start Menu/Launchpad/Desktop).  
+  

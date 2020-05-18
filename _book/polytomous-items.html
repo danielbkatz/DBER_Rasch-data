@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Polytomous Items | Measuring what Matters: Introduction to Rasch Analysis</title>
+  <meta name="description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Polytomous Items | Measuring what Matters: Introduction to Rasch Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Polytomous Items | Measuring what Matters: Introduction to Rasch Analysis" />
+  
+  <meta name="twitter:description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  
+
+<meta name="author" content="Exercise and data: Anthony Clairmont; Assistance, web: Daniel Katz; Direction: Mike Wilton" />
+
+
+<meta name="date" content="2020-05-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="person-abilities.html"/>
+<link rel="next" href="multidimensional.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Rasch Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installing R and R-Studio</a><ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#instructions-for-installing-r"><i class="fa fa-check"></i><b>2.1</b> Instructions for installing R:</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="install.html"><a href="install.html#for-mac-do-the-following"><i class="fa fa-check"></i><b>2.1.1</b> For Mac, do the following:</a></li>
+<li class="chapter" data-level="2.1.2" data-path="install.html"><a href="install.html#for-windows-do-the-following"><i class="fa fa-check"></i><b>2.1.2</b> For Windows do the following:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#instructions-for-installing-r-studio"><i class="fa fa-check"></i><b>2.2</b> Instructions for installing R-Studio:</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html"><i class="fa fa-check"></i><b>3</b> Setting up your workspace: Rstudio Projects</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#loading-necessary-packages-for-managine-files-and-cleaning-data"><i class="fa fa-check"></i><b>3.0.1</b> Loading necessary “packages” for managine files and cleaning data</a></li>
+<li class="chapter" data-level="3.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#setting-up-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting up the working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="Rasch.html"><a href="Rasch.html"><i class="fa fa-check"></i><b>4</b> The Rasch Model</a><ul>
+<li class="chapter" data-level="4.1" data-path="Rasch.html"><a href="Rasch.html#packages-necessary-for-running-the-rasch-model"><i class="fa fa-check"></i><b>4.1</b> Packages Necessary for running the Rasch model</a></li>
+<li class="chapter" data-level="4.2" data-path="Rasch.html"><a href="Rasch.html#reading-in-data"><i class="fa fa-check"></i><b>4.2</b> Reading in Data</a></li>
+<li class="chapter" data-level="4.3" data-path="Rasch.html"><a href="Rasch.html#see-the-first-few-rows-and-columns"><i class="fa fa-check"></i><b>4.3</b> See the first few rows and columns</a></li>
+<li class="chapter" data-level="4.4" data-path="Rasch.html"><a href="Rasch.html#the-rasch-model"><i class="fa fa-check"></i><b>4.4</b> The Rasch Model</a></li>
+<li class="chapter" data-level="4.5" data-path="Rasch.html"><a href="Rasch.html#running-the-rasch-model"><i class="fa fa-check"></i><b>4.5</b> Running the Rasch model</a></li>
+<li class="chapter" data-level="4.6" data-path="Rasch.html"><a href="Rasch.html#item-difficulties"><i class="fa fa-check"></i><b>4.6</b> Item Difficulties</a></li>
+<li class="chapter" data-level="4.7" data-path="Rasch.html"><a href="Rasch.html#visualize"><i class="fa fa-check"></i><b>4.7</b> Visualize</a></li>
+<li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="Rasch.html"><a href="Rasch.html#exercise"><i class="fa fa-check"></i><b>4.8.1</b> Exercise:</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="Rasch.html"><a href="Rasch.html#item-fit"><i class="fa fa-check"></i><b>4.9</b> Item Fit</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="Rasch.html"><a href="Rasch.html#exercise-1"><i class="fa fa-check"></i><b>4.9.1</b> Exercise:</a></li>
+<li class="chapter" data-level="4.9.2" data-path="Rasch.html"><a href="Rasch.html#optional-understanding-the-model"><i class="fa fa-check"></i><b>4.9.2</b> Optional: Understanding the model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>5</b> Person Abilities</a><ul>
+<li class="chapter" data-level="5.1" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>5.1</b> Wright Map</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-2"><i class="fa fa-check"></i><b>5.1.1</b> Exercise:</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>6</b> Polytomous Items</a><ul>
+<li class="chapter" data-level="6.1" data-path="polytomous-items.html"><a href="polytomous-items.html#polytymous-item-types-anything-with-a-rating-scale"><i class="fa fa-check"></i><b>6.1</b> Polytymous item types (anything with a rating Scale)</a></li>
+<li class="chapter" data-level="6.2" data-path="polytomous-items.html"><a href="polytomous-items.html#item-difficulties-1"><i class="fa fa-check"></i><b>6.2</b> Item Difficulties</a></li>
+<li class="chapter" data-level="6.3" data-path="polytomous-items.html"><a href="polytomous-items.html#person-ability-theta-estimates"><i class="fa fa-check"></i><b>6.3</b> Person ability (theta) estimates</a></li>
+<li class="chapter" data-level="6.4" data-path="polytomous-items.html"><a href="polytomous-items.html#item-fit-statistics"><i class="fa fa-check"></i><b>6.4</b> Item fit statistics</a></li>
+<li class="chapter" data-level="6.5" data-path="polytomous-items.html"><a href="polytomous-items.html#item-characteristic-curves-but-now-as-thresholds."><i class="fa fa-check"></i><b>6.5</b> Item characteristic curves (but now as thresholds).</a></li>
+<li class="chapter" data-level="6.6" data-path="polytomous-items.html"><a href="polytomous-items.html#wright-map-1"><i class="fa fa-check"></i><b>6.6</b> Wright Map</a></li>
+<li class="chapter" data-level="6.7" data-path="polytomous-items.html"><a href="polytomous-items.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises:</a></li>
+<li class="chapter" data-level="6.8" data-path="polytomous-items.html"><a href="polytomous-items.html#model-comparison"><i class="fa fa-check"></i><b>6.8</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="multidimensional.html"><a href="multidimensional.html"><i class="fa fa-check"></i><b>7</b> Multidimensional Rasch Model</a><ul>
+<li class="chapter" data-level="7.1" data-path="multidimensional.html"><a href="multidimensional.html#we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix"><i class="fa fa-check"></i><b>7.1</b> we start by assigning the items to a dimension using a Q-matrix</a></li>
+<li class="chapter" data-level="7.2" data-path="multidimensional.html"><a href="multidimensional.html#run-the-multidimensional-rasch-model"><i class="fa fa-check"></i><b>7.2</b> Run the multidimensional Rasch model</a></li>
+<li class="chapter" data-level="7.3" data-path="multidimensional.html"><a href="multidimensional.html#theta-and-delta"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></a><ul>
+<li class="chapter" data-level="7.3.1" data-path="multidimensional.html"><a href="multidimensional.html#wright-map-2"><i class="fa fa-check"></i><b>7.3.1</b> Wright Map</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="multidimensional.html"><a href="multidimensional.html#exercises-1"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Measuring what Matters: Introduction to Rasch Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="polytomous-items" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Polytomous Items</h1>
+<div id="polytymous-item-types-anything-with-a-rating-scale" class="section level2">
+<h2><span class="header-section-number">6.1</span> Polytymous item types (anything with a rating Scale)</h2>
+<p>We can use the Rasch Partial Credit Model (PCM) to look at polytomous data too. We’ll start by bringing in the polytomous items from the survey. Note that TAM needs the bottom category to be coded as 0, so you may need to recode.</p>
+<pre><code>hls2 &lt;- read.csv(&quot;hls_poly_scale.csv&quot;)</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">head</span>(hls2)</a></code></pre></div>
+<pre><code>##   Hls1 Hls2 Hls3 Hls4 Hls5 Hls6 Hls7 Hls8 Hls9 Hls10 Hls11 Hls12 Hls13 Hls14 Hls15 Hls16
+## 1    1    1    1    0    1    1    0    2    1     1     2     1     1     0     1     1
+## 2    2    1    1    1    2    1    1    2    1     1     2     2     2     1     1     2
+## 3    0    1    1    1    1    1    1    2    1     0     1     2     1     1     1     1
+## 4    1    1    0    0    2    1    0    1    0     0     2     1     1     1     2     1
+## 5    1    1    0    0    1    0    0    2    0     0     2     2     2     1     1     2
+## 6    1    1    1    1    2    1    1    1    1     0     2     2     2     1     2     1</code></pre>
+<pre><code>View(hls2)</code></pre>
+<p>TAM will automatically run the PCM when our data is polytomous. There are other model-types for polytomous data such as the rating scale model. This may be more appropriate for Likert-type items. For more information, read TAM documentation or see the reference list (Bond &amp; Fox, 2007)</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">mod2 &lt;-<span class="st"> </span><span class="kw">tam</span>(hls2)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">summary</span>(mod2)</a></code></pre></div>
+<pre><code>## ------------------------------------------------------------
+## TAM 3.5-19 (2020-05-05 22:45:39) 
+## R version 3.5.2 (2018-12-20) x86_64, mingw32 | nodename=LAPTOP-K7402PLE | login=katzd 
+## 
+## Date of Analysis: 2020-05-18 13:53:24 
+## Time difference of 0.2750001 secs
+## Computation time: 0.2750001 
+## 
+## Multidimensional Item Response Model in TAM 
+## 
+## IRT Model: 1PL
+## Call:
+## tam.mml(resp = resp)
+## 
+## ------------------------------------------------------------
+## Number of iterations = 57 
+## Numeric integration with 21 integration points
+## 
+## Deviance = 8371.25 
+## Log likelihood = -4185.63 
+## Number of persons = 317 
+## Number of persons used = 317 
+## Number of items = 16 
+## Number of estimated parameters = 49 
+##     Item threshold parameters = 48 
+##     Item slope parameters = 0 
+##     Regression parameters = 0 
+##     Variance/covariance parameters = 1 
+## 
+## AIC = 8469  | penalty=98    | AIC=-2*LL + 2*p 
+## AIC3 = 8518  | penalty=147    | AIC3=-2*LL + 3*p 
+## BIC = 8653  | penalty=282.19    | BIC=-2*LL + log(n)*p 
+## aBIC = 8497  | penalty=126.15    | aBIC=-2*LL + log((n-2)/24)*p  (adjusted BIC) 
+## CAIC = 8702  | penalty=331.19    | CAIC=-2*LL + [log(n)+1]*p  (consistent AIC) 
+## AICc = 8488  | penalty=116.35    | AICc=-2*LL + 2*p + 2*p*(p+1)/(n-p-1)  (bias corrected AIC) 
+## GHP = 0.8349     | GHP=( -LL + p ) / (#Persons * #Items)  (Gilula-Haberman log penalty) 
+## 
+## ------------------------------------------------------------
+## EAP Reliability
+## [1] 0.914
+## ------------------------------------------------------------
+## Covariances and Variances
+##       [,1]
+## [1,] 2.615
+## ------------------------------------------------------------
+## Correlations and Standard Deviations (in the diagonal)
+##       [,1]
+## [1,] 1.617
+## ------------------------------------------------------------
+## Regression Coefficients
+##      [,1]
+## [1,]    0
+## ------------------------------------------------------------
+## Item Parameters -A*Xsi
+##     item   N     M xsi.item AXsi_.Cat1 AXsi_.Cat2 AXsi_.Cat3 B.Cat1.Dim1 B.Cat2.Dim1 B.Cat3.Dim1
+## 1   Hls1 317 0.978    1.427     -1.846      0.452      4.282           1           2           3
+## 2   Hls2 317 0.874    2.074     -1.502      1.263      6.221           1           2           3
+## 3   Hls3 317 0.634    2.903     -0.381      3.581      8.709           1           2           3
+## 4   Hls4 317 0.530    2.809      0.176      4.500      8.428           1           2           3
+## 5   Hls5 317 1.091    1.198     -1.684     -0.302      3.595           1           2           3
+## 6   Hls6 317 0.830    1.818     -1.155      1.784      5.455           1           2           3
+## 7   Hls7 317 0.615    2.455     -0.166      3.587      7.364           1           2           3
+## 8   Hls8 317 1.237    0.781     -2.136     -1.239      2.342           1           2           3
+## 9   Hls9 317 0.644    2.098     -0.008      2.982      6.295           1           2           3
+## 10 Hls10 317 0.615    2.630     -0.183      3.511      7.890           1           2           3
+## 11 Hls11 317 1.413    0.325     -2.106     -1.934      0.974           1           2           3
+## 12 Hls12 317 1.338    0.512     -2.318     -1.805      1.537           1           2           3
+## 13 Hls13 317 1.136    1.162     -2.127     -0.789      3.487           1           2           3
+## 14 Hls14 317 1.063    1.070     -1.762      0.000      3.209           1           2           3
+## 15 Hls15 317 1.243    0.792     -2.043     -1.232      2.376           1           2           3
+## 16 Hls16 317 1.000    1.434     -1.629      0.278      4.303           1           2           3
+## 
+## Item Parameters Xsi
+##               xsi se.xsi
+## Hls1_Cat1  -1.846  0.177
+## Hls1_Cat2   2.298  0.174
+## Hls1_Cat3   3.830  0.464
+## Hls2_Cat1  -1.502  0.164
+## Hls2_Cat2   2.765  0.200
+## Hls2_Cat3   4.958  0.780
+## Hls3_Cat1  -0.381  0.138
+## Hls3_Cat2   3.962  0.321
+## Hls3_Cat3   5.127  1.117
+## Hls4_Cat1   0.176  0.133
+## Hls4_Cat2   4.325  0.378
+## Hls4_Cat3   3.927  0.853
+## Hls5_Cat1  -1.684  0.178
+## Hls5_Cat2   1.382  0.147
+## Hls5_Cat3   3.897  0.394
+## Hls6_Cat1  -1.155  0.154
+## Hls6_Cat2   2.939  0.211
+## Hls6_Cat3   3.671  0.519
+## Hls7_Cat1  -0.166  0.136
+## Hls7_Cat2   3.753  0.295
+## Hls7_Cat3   3.776  0.689
+## Hls8_Cat1  -2.136  0.199
+## Hls8_Cat2   0.897  0.139
+## Hls8_Cat3   3.581  0.324
+## Hls9_Cat1  -0.008  0.136
+## Hls9_Cat2   2.990  0.229
+## Hls9_Cat3   3.313  0.482
+## Hls10_Cat1 -0.183  0.136
+## Hls10_Cat2  3.695  0.292
+## Hls10_Cat3  4.379  0.822
+## Hls11_Cat1 -2.106  0.210
+## Hls11_Cat2  0.173  0.138
+## Hls11_Cat3  2.907  0.235
+## Hls12_Cat1 -2.318  0.212
+## Hls12_Cat2  0.513  0.136
+## Hls12_Cat3  3.342  0.282
+## Hls13_Cat1 -2.127  0.194
+## Hls13_Cat2  1.339  0.144
+## Hls13_Cat3  4.276  0.449
+## Hls14_Cat1 -1.761  0.178
+## Hls14_Cat2  1.762  0.155
+## Hls14_Cat3  3.208  0.331
+## Hls15_Cat1 -2.042  0.197
+## Hls15_Cat2  0.810  0.138
+## Hls15_Cat3  3.609  0.323
+## Hls16_Cat1 -1.629  0.172
+## Hls16_Cat2  1.907  0.160
+## Hls16_Cat3  4.025  0.457
+## 
+## Item Parameters in IRT parameterization
+##     item alpha  beta tau.Cat1 tau.Cat2 tau.Cat3
+## 1   Hls1     1 1.427   -3.274    0.871    2.403
+## 2   Hls2     1 2.074   -3.575    0.691    2.885
+## 3   Hls3     1 2.903   -3.284    1.059    2.224
+## 4   Hls4     1 2.809   -2.633    1.515    1.118
+## 5   Hls5     1 1.198   -2.883    0.184    2.699
+## 6   Hls6     1 1.818   -2.974    1.121    1.853
+## 7   Hls7     1 2.455   -2.620    1.299    1.322
+## 8   Hls8     1 0.781   -2.917    0.116    2.800
+## 9   Hls9     1 2.098   -2.106    0.891    1.215
+## 10 Hls10     1 2.630   -2.814    1.065    1.749
+## 11 Hls11     1 0.325   -2.431   -0.152    2.583
+## 12 Hls12     1 0.512   -2.830    0.001    2.830
+## 13 Hls13     1 1.162   -3.290    0.176    3.113
+## 14 Hls14     1 1.070   -2.831    0.692    2.139
+## 15 Hls15     1 0.792   -2.835    0.018    2.816
+## 16 Hls16     1 1.434   -3.063    0.472    2.590</code></pre>
+</div>
+<div id="item-difficulties-1" class="section level2">
+<h2><span class="header-section-number">6.2</span> Item Difficulties</h2>
+<p>Now we’ll get item and person characteristics just like before</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">mod2<span class="op">$</span>xsi</a></code></pre></div>
+<pre><code>##                     xsi    se.xsi
+## Hls1_Cat1  -1.846046710 0.1770841
+## Hls1_Cat2   2.298334842 0.1736858
+## Hls1_Cat3   3.830385868 0.4635448
+## Hls2_Cat1  -1.501715752 0.1640914
+## Hls2_Cat2   2.764560868 0.2004621
+## Hls2_Cat3   4.958324889 0.7804292
+## Hls3_Cat1  -0.380834628 0.1378983
+## Hls3_Cat2   3.962213547 0.3205437
+## Hls3_Cat3   5.127428610 1.1165768
+## Hls4_Cat1   0.175976124 0.1331498
+## Hls4_Cat2   4.324558567 0.3775359
+## Hls4_Cat3   3.927492901 0.8526291
+## Hls5_Cat1  -1.684131262 0.1781274
+## Hls5_Cat2   1.381933373 0.1467223
+## Hls5_Cat3   3.897482578 0.3943440
+## Hls6_Cat1  -1.155351142 0.1543659
+## Hls6_Cat2   2.939344680 0.2113184
+## Hls6_Cat3   3.671463609 0.5189345
+## Hls7_Cat1  -0.165823435 0.1358793
+## Hls7_Cat2   3.753328170 0.2949727
+## Hls7_Cat3   3.776319530 0.6885511
+## Hls8_Cat1  -2.135935885 0.1992731
+## Hls8_Cat2   0.896643565 0.1385362
+## Hls8_Cat3   3.581083599 0.3235907
+## Hls9_Cat1  -0.008019089 0.1360316
+## Hls9_Cat2   2.989853095 0.2288433
+## Hls9_Cat3   3.313295753 0.4819018
+## Hls10_Cat1 -0.183297684 0.1360561
+## Hls10_Cat2  3.694746057 0.2921816
+## Hls10_Cat3  4.379242422 0.8215605
+## Hls11_Cat1 -2.106058995 0.2097751
+## Hls11_Cat2  0.172650186 0.1377271
+## Hls11_Cat3  2.907183948 0.2353937
+## Hls12_Cat1 -2.317865929 0.2117123
+## Hls12_Cat2  0.513325662 0.1362435
+## Hls12_Cat3  3.342199604 0.2821645
+## Hls13_Cat1 -2.127336182 0.1938394
+## Hls13_Cat2  1.338677184 0.1444056
+## Hls13_Cat3  4.275574749 0.4493420
+## Hls14_Cat1 -1.761463128 0.1777770
+## Hls14_Cat2  1.762102813 0.1550751
+## Hls14_Cat3  3.208316423 0.3314447
+## Hls15_Cat1 -2.042459839 0.1969236
+## Hls15_Cat2  0.810466042 0.1380178
+## Hls15_Cat3  3.608588261 0.3230206
+## Hls16_Cat1 -1.628691156 0.1721913
+## Hls16_Cat2  1.906727817 0.1604086
+## Hls16_Cat3  4.024764112 0.4574405</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">ItemDiff2 &lt;-<span class="st"> </span>mod2<span class="op">$</span>xsi<span class="op">$</span>xsi </a>
+<a class="sourceLine" id="cb57-2" title="2">ItemDiff2</a></code></pre></div>
+<pre><code>##  [1] -1.846046710  2.298334842  3.830385868 -1.501715752  2.764560868  4.958324889 -0.380834628  3.962213547
+##  [9]  5.127428610  0.175976124  4.324558567  3.927492901 -1.684131262  1.381933373  3.897482578 -1.155351142
+## [17]  2.939344680  3.671463609 -0.165823435  3.753328170  3.776319530 -2.135935885  0.896643565  3.581083599
+## [25] -0.008019089  2.989853095  3.313295753 -0.183297684  3.694746057  4.379242422 -2.106058995  0.172650186
+## [33]  2.907183948 -2.317865929  0.513325662  3.342199604 -2.127336182  1.338677184  4.275574749 -1.761463128
+## [41]  1.762102813  3.208316423 -2.042459839  0.810466042  3.608588261 -1.628691156  1.906727817  4.024764112</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="co">#note, if you want to see this in your viewer, you can also use View().</span></a></code></pre></div>
+</div>
+<div id="person-ability-theta-estimates" class="section level2">
+<h2><span class="header-section-number">6.3</span> Person ability (theta) estimates</h2>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">WLE.ability.poly &lt;-<span class="st"> </span><span class="kw">tam.wle</span>(mod2)</a></code></pre></div>
+<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  2.6967 
+## Iteration in WLE/MLE estimation  2   | Maximal change  2.1777 
+## Iteration in WLE/MLE estimation  3   | Maximal change  0.368 
+## Iteration in WLE/MLE estimation  4   | Maximal change  0.0135 
+## Iteration in WLE/MLE estimation  5   | Maximal change  3e-04 
+## Iteration in WLE/MLE estimation  6   | Maximal change  0 
+## ----
+##  WLE Reliability= 0.9</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">person.ability.poly &lt;-<span class="st"> </span>WLE.ability.poly<span class="op">$</span>theta</a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="kw">head</span>(person.ability)</a></code></pre></div>
+<pre><code>## Object of class &#39;tam.wle&#39;
+## Call: tam.wle(tamobj = mod2)
+## 
+##   WLEs for 317 observations and 1 dimension
+## 
+##   WLE Reliability=0.9
+##   Average error variance=0.307
+##   WLE mean=-0.02
+##   WLE variance=3.071</code></pre>
+</div>
+<div id="item-fit-statistics" class="section level2">
+<h2><span class="header-section-number">6.4</span> Item fit statistics</h2>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">Fit.poly &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(mod2)</a></code></pre></div>
+<pre><code>## Item fit calculation based on 100 simulations
+## |**********|
+## |----------|</code></pre>
+<pre><code>Fit.poly$itemfit</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">kable</span>(Fit.poly<span class="op">$</span>itemfit)</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+parameter
+</th>
+<th style="text-align:right;">
+Outfit
+</th>
+<th style="text-align:right;">
+Outfit_t
+</th>
+<th style="text-align:right;">
+Outfit_p
+</th>
+<th style="text-align:right;">
+Outfit_pholm
+</th>
+<th style="text-align:right;">
+Infit
+</th>
+<th style="text-align:right;">
+Infit_t
+</th>
+<th style="text-align:right;">
+Infit_p
+</th>
+<th style="text-align:right;">
+Infit_pholm
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hls1_Cat1
+</td>
+<td style="text-align:right;">
+3.2186922
+</td>
+<td style="text-align:right;">
+11.6151942
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.0353967
+</td>
+<td style="text-align:right;">
+0.3507356
+</td>
+<td style="text-align:right;">
+0.7257867
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls1_Cat2
+</td>
+<td style="text-align:right;">
+4.6180686
+</td>
+<td style="text-align:right;">
+16.2741369
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.1253038
+</td>
+<td style="text-align:right;">
+1.2108956
+</td>
+<td style="text-align:right;">
+0.2259354
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls1_Cat3
+</td>
+<td style="text-align:right;">
+6140.1804025
+</td>
+<td style="text-align:right;">
+96.6085673
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.9692425
+</td>
+<td style="text-align:right;">
+0.0381607
+</td>
+<td style="text-align:right;">
+0.9695596
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls2_Cat1
+</td>
+<td style="text-align:right;">
+20.4626656
+</td>
+<td style="text-align:right;">
+46.3437652
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.0693224
+</td>
+<td style="text-align:right;">
+0.7250117
+</td>
+<td style="text-align:right;">
+0.4684449
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls2_Cat2
+</td>
+<td style="text-align:right;">
+0.9089431
+</td>
+<td style="text-align:right;">
+-0.6928263
+</td>
+<td style="text-align:right;">
+0.4884186
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0404390
+</td>
+<td style="text-align:right;">
+0.3393602
+</td>
+<td style="text-align:right;">
+0.7343384
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls2_Cat3
+</td>
+<td style="text-align:right;">
+0.8514924
+</td>
+<td style="text-align:right;">
+-0.1800953
+</td>
+<td style="text-align:right;">
+0.8570778
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.4087203
+</td>
+<td style="text-align:right;">
+0.7804810
+</td>
+<td style="text-align:right;">
+0.4351078
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls3_Cat1
+</td>
+<td style="text-align:right;">
+0.9237213
+</td>
+<td style="text-align:right;">
+-1.2145935
+</td>
+<td style="text-align:right;">
+0.2245212
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9574715
+</td>
+<td style="text-align:right;">
+-0.6579987
+</td>
+<td style="text-align:right;">
+0.5105390
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls3_Cat2
+</td>
+<td style="text-align:right;">
+0.8471155
+</td>
+<td style="text-align:right;">
+-0.6118635
+</td>
+<td style="text-align:right;">
+0.5406281
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9128790
+</td>
+<td style="text-align:right;">
+-0.2613998
+</td>
+<td style="text-align:right;">
+0.7937842
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls3_Cat3
+</td>
+<td style="text-align:right;">
+0.0144582
+</td>
+<td style="text-align:right;">
+-2.4079165
+</td>
+<td style="text-align:right;">
+0.0160438
+</td>
+<td style="text-align:right;">
+0.4213285
+</td>
+<td style="text-align:right;">
+0.8776589
+</td>
+<td style="text-align:right;">
+0.0825526
+</td>
+<td style="text-align:right;">
+0.9342073
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls4_Cat1
+</td>
+<td style="text-align:right;">
+0.8576455
+</td>
+<td style="text-align:right;">
+-2.7368527
+</td>
+<td style="text-align:right;">
+0.0062030
+</td>
+<td style="text-align:right;">
+0.1917081
+</td>
+<td style="text-align:right;">
+0.9254628
+</td>
+<td style="text-align:right;">
+-1.3879375
+</td>
+<td style="text-align:right;">
+0.1651561
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls4_Cat2
+</td>
+<td style="text-align:right;">
+0.6516809
+</td>
+<td style="text-align:right;">
+-1.3029835
+</td>
+<td style="text-align:right;">
+0.1925804
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.8894203
+</td>
+<td style="text-align:right;">
+-0.2680887
+</td>
+<td style="text-align:right;">
+0.7886311
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls4_Cat3
+</td>
+<td style="text-align:right;">
+0.0105870
+</td>
+<td style="text-align:right;">
+-3.4256669
+</td>
+<td style="text-align:right;">
+0.0006133
+</td>
+<td style="text-align:right;">
+0.0214652
+</td>
+<td style="text-align:right;">
+0.4261796
+</td>
+<td style="text-align:right;">
+-0.9906190
+</td>
+<td style="text-align:right;">
+0.3218717
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls5_Cat1
+</td>
+<td style="text-align:right;">
+0.8581431
+</td>
+<td style="text-align:right;">
+-1.4725571
+</td>
+<td style="text-align:right;">
+0.1408705
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.8467585
+</td>
+<td style="text-align:right;">
+-1.4628384
+</td>
+<td style="text-align:right;">
+0.1435116
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls5_Cat2
+</td>
+<td style="text-align:right;">
+1.7137169
+</td>
+<td style="text-align:right;">
+7.3061252
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.0812296
+</td>
+<td style="text-align:right;">
+1.1926837
+</td>
+<td style="text-align:right;">
+0.2329933
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls5_Cat3
+</td>
+<td style="text-align:right;">
+1.8519697
+</td>
+<td style="text-align:right;">
+1.8021894
+</td>
+<td style="text-align:right;">
+0.0715156
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0775877
+</td>
+<td style="text-align:right;">
+0.3373941
+</td>
+<td style="text-align:right;">
+0.7358198
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls6_Cat1
+</td>
+<td style="text-align:right;">
+0.9138434
+</td>
+<td style="text-align:right;">
+-1.0413804
+</td>
+<td style="text-align:right;">
+0.2976990
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.8700770
+</td>
+<td style="text-align:right;">
+-1.5559465
+</td>
+<td style="text-align:right;">
+0.1197208
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls6_Cat2
+</td>
+<td style="text-align:right;">
+1.2734188
+</td>
+<td style="text-align:right;">
+1.6764887
+</td>
+<td style="text-align:right;">
+0.0936425
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0201452
+</td>
+<td style="text-align:right;">
+0.1820914
+</td>
+<td style="text-align:right;">
+0.8555110
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls6_Cat3
+</td>
+<td style="text-align:right;">
+3.0277860
+</td>
+<td style="text-align:right;">
+2.7336943
+</td>
+<td style="text-align:right;">
+0.0062628
+</td>
+<td style="text-align:right;">
+0.1917081
+</td>
+<td style="text-align:right;">
+1.3076297
+</td>
+<td style="text-align:right;">
+0.8033809
+</td>
+<td style="text-align:right;">
+0.4217546
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls7_Cat1
+</td>
+<td style="text-align:right;">
+0.8249552
+</td>
+<td style="text-align:right;">
+-3.1047145
+</td>
+<td style="text-align:right;">
+0.0019046
+</td>
+<td style="text-align:right;">
+0.0628527
+</td>
+<td style="text-align:right;">
+0.9084476
+</td>
+<td style="text-align:right;">
+-1.5622705
+</td>
+<td style="text-align:right;">
+0.1182243
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls7_Cat2
+</td>
+<td style="text-align:right;">
+0.5344102
+</td>
+<td style="text-align:right;">
+-2.4339341
+</td>
+<td style="text-align:right;">
+0.0149357
+</td>
+<td style="text-align:right;">
+0.4182000
+</td>
+<td style="text-align:right;">
+0.8988843
+</td>
+<td style="text-align:right;">
+-0.3843071
+</td>
+<td style="text-align:right;">
+0.7007508
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls7_Cat3
+</td>
+<td style="text-align:right;">
+0.6954409
+</td>
+<td style="text-align:right;">
+-0.7467878
+</td>
+<td style="text-align:right;">
+0.4551917
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.1713426
+</td>
+<td style="text-align:right;">
+0.4637777
+</td>
+<td style="text-align:right;">
+0.6428070
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls8_Cat1
+</td>
+<td style="text-align:right;">
+0.6315477
+</td>
+<td style="text-align:right;">
+-3.4085379
+</td>
+<td style="text-align:right;">
+0.0006531
+</td>
+<td style="text-align:right;">
+0.0222061
+</td>
+<td style="text-align:right;">
+0.8528714
+</td>
+<td style="text-align:right;">
+-1.2012470
+</td>
+<td style="text-align:right;">
+0.2296554
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls8_Cat2
+</td>
+<td style="text-align:right;">
+2.2391983
+</td>
+<td style="text-align:right;">
+13.7712554
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.0742119
+</td>
+<td style="text-align:right;">
+1.2804897
+</td>
+<td style="text-align:right;">
+0.2003730
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls8_Cat3
+</td>
+<td style="text-align:right;">
+1.2425924
+</td>
+<td style="text-align:right;">
+0.7846701
+</td>
+<td style="text-align:right;">
+0.4326470
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9533787
+</td>
+<td style="text-align:right;">
+-0.1072265
+</td>
+<td style="text-align:right;">
+0.9146093
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls9_Cat1
+</td>
+<td style="text-align:right;">
+0.8717529
+</td>
+<td style="text-align:right;">
+-2.2775765
+</td>
+<td style="text-align:right;">
+0.0227518
+</td>
+<td style="text-align:right;">
+0.5232919
+</td>
+<td style="text-align:right;">
+0.9459076
+</td>
+<td style="text-align:right;">
+-0.9215971
+</td>
+<td style="text-align:right;">
+0.3567388
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls9_Cat2
+</td>
+<td style="text-align:right;">
+1.4450413
+</td>
+<td style="text-align:right;">
+2.3300380
+</td>
+<td style="text-align:right;">
+0.0198041
+</td>
+<td style="text-align:right;">
+0.4752995
+</td>
+<td style="text-align:right;">
+1.0767751
+</td>
+<td style="text-align:right;">
+0.5201718
+</td>
+<td style="text-align:right;">
+0.6029438
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls9_Cat3
+</td>
+<td style="text-align:right;">
+0.7876667
+</td>
+<td style="text-align:right;">
+-0.7888506
+</td>
+<td style="text-align:right;">
+0.4301994
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9394593
+</td>
+<td style="text-align:right;">
+-0.0467169
+</td>
+<td style="text-align:right;">
+0.9627388
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls10_Cat1
+</td>
+<td style="text-align:right;">
+1.0157983
+</td>
+<td style="text-align:right;">
+0.2607929
+</td>
+<td style="text-align:right;">
+0.7942522
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0132454
+</td>
+<td style="text-align:right;">
+0.2326640
+</td>
+<td style="text-align:right;">
+0.8160223
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls10_Cat2
+</td>
+<td style="text-align:right;">
+110.2228846
+</td>
+<td style="text-align:right;">
+40.5277975
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.1397430
+</td>
+<td style="text-align:right;">
+0.6540946
+</td>
+<td style="text-align:right;">
+0.5130509
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls10_Cat3
+</td>
+<td style="text-align:right;">
+0.5736705
+</td>
+<td style="text-align:right;">
+-0.8976394
+</td>
+<td style="text-align:right;">
+0.3693778
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0266874
+</td>
+<td style="text-align:right;">
+0.2411260
+</td>
+<td style="text-align:right;">
+0.8094574
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls11_Cat1
+</td>
+<td style="text-align:right;">
+0.8309440
+</td>
+<td style="text-align:right;">
+-1.5239892
+</td>
+<td style="text-align:right;">
+0.1275114
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.8688550
+</td>
+<td style="text-align:right;">
+-1.0146755
+</td>
+<td style="text-align:right;">
+0.3102605
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls11_Cat2
+</td>
+<td style="text-align:right;">
+0.9289853
+</td>
+<td style="text-align:right;">
+-1.2708658
+</td>
+<td style="text-align:right;">
+0.2037764
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0210020
+</td>
+<td style="text-align:right;">
+0.3708532
+</td>
+<td style="text-align:right;">
+0.7107469
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls11_Cat3
+</td>
+<td style="text-align:right;">
+2.3599645
+</td>
+<td style="text-align:right;">
+4.9469500
+</td>
+<td style="text-align:right;">
+0.0000008
+</td>
+<td style="text-align:right;">
+0.0000279
+</td>
+<td style="text-align:right;">
+1.0038789
+</td>
+<td style="text-align:right;">
+0.0739025
+</td>
+<td style="text-align:right;">
+0.9410880
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls12_Cat1
+</td>
+<td style="text-align:right;">
+0.6909345
+</td>
+<td style="text-align:right;">
+-2.8165289
+</td>
+<td style="text-align:right;">
+0.0048546
+</td>
+<td style="text-align:right;">
+0.1553462
+</td>
+<td style="text-align:right;">
+0.7329596
+</td>
+<td style="text-align:right;">
+-2.1751386
+</td>
+<td style="text-align:right;">
+0.0296197
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls12_Cat2
+</td>
+<td style="text-align:right;">
+1.0377015
+</td>
+<td style="text-align:right;">
+0.5574443
+</td>
+<td style="text-align:right;">
+0.5772239
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9915492
+</td>
+<td style="text-align:right;">
+-0.1433254
+</td>
+<td style="text-align:right;">
+0.8860332
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls12_Cat3
+</td>
+<td style="text-align:right;">
+3.7689653
+</td>
+<td style="text-align:right;">
+6.4213212
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.0436940
+</td>
+<td style="text-align:right;">
+0.2680956
+</td>
+<td style="text-align:right;">
+0.7886257
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls13_Cat1
+</td>
+<td style="text-align:right;">
+0.9530006
+</td>
+<td style="text-align:right;">
+-0.5063248
+</td>
+<td style="text-align:right;">
+0.6126286
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.7711112
+</td>
+<td style="text-align:right;">
+-2.0012642
+</td>
+<td style="text-align:right;">
+0.0453639
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls13_Cat2
+</td>
+<td style="text-align:right;">
+1.0082738
+</td>
+<td style="text-align:right;">
+0.1206027
+</td>
+<td style="text-align:right;">
+0.9040057
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0529962
+</td>
+<td style="text-align:right;">
+0.8178966
+</td>
+<td style="text-align:right;">
+0.4134162
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls13_Cat3
+</td>
+<td style="text-align:right;">
+2.6460431
+</td>
+<td style="text-align:right;">
+2.4044562
+</td>
+<td style="text-align:right;">
+0.0161965
+</td>
+<td style="text-align:right;">
+0.4213285
+</td>
+<td style="text-align:right;">
+0.9082631
+</td>
+<td style="text-align:right;">
+-0.1336913
+</td>
+<td style="text-align:right;">
+0.8936467
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls14_Cat1
+</td>
+<td style="text-align:right;">
+0.8355323
+</td>
+<td style="text-align:right;">
+-1.6304861
+</td>
+<td style="text-align:right;">
+0.1029988
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9084923
+</td>
+<td style="text-align:right;">
+-0.8375447
+</td>
+<td style="text-align:right;">
+0.4022864
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls14_Cat2
+</td>
+<td style="text-align:right;">
+2.0188687
+</td>
+<td style="text-align:right;">
+9.3645511
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.0729151
+</td>
+<td style="text-align:right;">
+0.9303580
+</td>
+<td style="text-align:right;">
+0.3521858
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls14_Cat3
+</td>
+<td style="text-align:right;">
+0.6174280
+</td>
+<td style="text-align:right;">
+-1.8850632
+</td>
+<td style="text-align:right;">
+0.0594213
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9795560
+</td>
+<td style="text-align:right;">
+-0.0055365
+</td>
+<td style="text-align:right;">
+0.9955825
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls15_Cat1
+</td>
+<td style="text-align:right;">
+0.7370669
+</td>
+<td style="text-align:right;">
+-2.4180307
+</td>
+<td style="text-align:right;">
+0.0156048
+</td>
+<td style="text-align:right;">
+0.4213285
+</td>
+<td style="text-align:right;">
+0.8121290
+</td>
+<td style="text-align:right;">
+-1.5968910
+</td>
+<td style="text-align:right;">
+0.1102900
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls15_Cat2
+</td>
+<td style="text-align:right;">
+1.1163655
+</td>
+<td style="text-align:right;">
+1.9493974
+</td>
+<td style="text-align:right;">
+0.0512480
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0746694
+</td>
+<td style="text-align:right;">
+1.3018892
+</td>
+<td style="text-align:right;">
+0.1929543
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls15_Cat3
+</td>
+<td style="text-align:right;">
+5.7440350
+</td>
+<td style="text-align:right;">
+7.2133111
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.9688082
+</td>
+<td style="text-align:right;">
+-0.0450655
+</td>
+<td style="text-align:right;">
+0.9640551
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls16_Cat1
+</td>
+<td style="text-align:right;">
+1.4943954
+</td>
+<td style="text-align:right;">
+4.0484474
+</td>
+<td style="text-align:right;">
+0.0000516
+</td>
+<td style="text-align:right;">
+0.0018561
+</td>
+<td style="text-align:right;">
+0.9558981
+</td>
+<td style="text-align:right;">
+-0.4003010
+</td>
+<td style="text-align:right;">
+0.6889348
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls16_Cat2
+</td>
+<td style="text-align:right;">
+2.0559283
+</td>
+<td style="text-align:right;">
+8.8292928
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.0580773
+</td>
+<td style="text-align:right;">
+0.6905509
+</td>
+<td style="text-align:right;">
+0.4898478
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hls16_Cat3
+</td>
+<td style="text-align:right;">
+0.2842957
+</td>
+<td style="text-align:right;">
+-2.7378550
+</td>
+<td style="text-align:right;">
+0.0061841
+</td>
+<td style="text-align:right;">
+0.1917081
+</td>
+<td style="text-align:right;">
+0.8212918
+</td>
+<td style="text-align:right;">
+-0.3937018
+</td>
+<td style="text-align:right;">
+0.6938012
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="item-characteristic-curves-but-now-as-thresholds." class="section level2">
+<h2><span class="header-section-number">6.5</span> Item characteristic curves (but now as thresholds).</h2>
+<p>There are item characteristic curves (ICCs) for each item choice</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">tthresh.poly &lt;-<span class="st"> </span><span class="kw">tam.threshold</span>(mod2)</a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="kw">plot</span>(mod2, <span class="dt">type =</span> <span class="st">&quot;items&quot;</span>)</a></code></pre></div>
+<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  2.6967 
+## Iteration in WLE/MLE estimation  2   | Maximal change  2.1777 
+## Iteration in WLE/MLE estimation  3   | Maximal change  0.368 
+## Iteration in WLE/MLE estimation  4   | Maximal change  0.0135 
+## Iteration in WLE/MLE estimation  5   | Maximal change  3e-04 
+## Iteration in WLE/MLE estimation  6   | Maximal change  0 
+## ----
+##  WLE Reliability= 0.9</code></pre>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-1.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-2.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-3.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-4.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-5.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-6.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-7.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-8.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-9.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-10.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-11.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-12.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-13.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-14.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-15.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-41-16.png" width="672" /></p>
+<pre><code>## ....................................................
+##  Plots exported in png format into folder:
+##  C:/Users/katzd/Desktop/Rprojects/Rasch_BIOME/Plots</code></pre>
+</div>
+<div id="wright-map-1" class="section level2">
+<h2><span class="header-section-number">6.6</span> Wright Map</h2>
+<p>Here’s a polytomous Wright Map</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="kw">wrightMap</span>(person.ability.poly, tthresh.poly)</a></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<pre><code>##              Cat1      Cat2     Cat3
+## Hls1  -1.86154175 2.1462708 3.998566
+## Hls2  -1.51547241 2.6820374 5.054901
+## Hls3  -0.39358521 3.7526550 5.350800
+## Hls4   0.16012573 3.7458801 4.529205
+## Hls5  -1.72787476 1.3532410 3.970184
+## Hls6  -1.17178345 2.6529236 3.976410
+## Hls7  -0.18539429 3.3007507 4.254547
+## Hls8  -2.18106079 0.8795471 3.643341
+## Hls9  -0.05612183 2.6443176 3.715851
+## Hls10 -0.20352173 3.4025574 4.694550
+## Hls11 -2.19607544 0.2026062 2.966949
+## Hls12 -2.37240601 0.5131531 3.396881
+## Hls13 -2.15725708 1.3193665 4.324860
+## Hls14 -1.78994751 1.6114197 3.388824
+## Hls15 -2.09591675 0.8077698 3.664764
+## Hls16 -1.65664673 1.8318787 4.128021</code></pre>
+</div>
+<div id="exercises" class="section level2">
+<h2><span class="header-section-number">6.7</span> Exercises:</h2>
+<ol style="list-style-type: decimal">
+<li>Find an item for which Cat 3 is actually easier than the Cat 2 of another item.</li>
+<li>Find an item that has two categories that are extremely close in severity.</li>
+<li>Look at the ICC for item 14. Describe what is happening with Cat 3.</li>
+</ol>
+</div>
+<div id="model-comparison" class="section level2">
+<h2><span class="header-section-number">6.8</span> Model Comparison</h2>
+<p>say we want to compare the two models we just ran (note, these aren’t really comparable since it’s a completely different model - not nested data)</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">logLik</span>(mod1)</a></code></pre></div>
+<pre><code>## &#39;log Lik.&#39; -7343.562 (df=16)</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">logLik</span>(mod2)</a></code></pre></div>
+<pre><code>## &#39;log Lik.&#39; -4185.626 (df=49)</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">anova</span>(mod1, mod2)</a></code></pre></div>
+<pre><code>##   Model   loglike  Deviance Npars       AIC       BIC    Chisq df  p
+## 1  mod1 -7343.562 14687.124    16 14719.124 14797.649 6315.872 33  0
+## 2  mod2 -4185.626  8371.252    49  8469.252  8653.438       NA NA NA</code></pre>
+<p>Log likelihood is the foundation of both AIC and BIC. AIC and BIC allow you to compare non-nested models while penalizing for model complexity (BIC penalizes more). In general, the model with a smaller AIC/BIC is the one that the data fit better. The two criteria sometimes disagree.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="person-abilities.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multidimensional.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Rasch_Biome.pdf", "Rasch_Biome.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+# Person Abilities
+Person abilities are also of interest. We can look at the person side of the model by computing person abilities. 
+
+1. Compute person abilities using the `tam.wle` function and assign to an object called `abil`. 
+2. Extract person abilities ($\theta_p$) from `abil` to create an object in the `environment` called `PersonAbility` which will essentially be a column vector. 
+
+**Note**: You may want more information than this at times (such as standard errors) so you may not always want to subset this way.
+
+```{r}
+
+#generates a data frame - output related to estimation
+abil <- tam.wle(mod1)
+```
+See the first few rows of Abil. Notice you get:
+
+1. `pid`: person id assigned by TAM.
+2. `N.items`: Number of items the person was given (this becomes interesting when you have linked test forms where students may not all see the same number of items)
+3. `PersonScores`: Number of items the student got right or endorsed (in the survey case).
+4. `PersonMax`: Max total that person could have gotten right/selected an option for
+5. `theta`: estimated person ability
+6. `error`: estimated measurement error
+7. `WLE.rel`: estimated person seperation reliability.
+
+```
+head(Abil)
+
+# or
+
+View(Abil)
+```
+```{r echo=FALSE}
+kable(head(Abil))
+```
+
+
+The column in the `abil` data.frame corresponding to person estimates is the `theta` column. Pull out the ability estimates, theta, column if you would like, though, this creates a list. This makes it a little easier for a few basic tasks below.
+```{r}
+
+PersonAbility <- abil$theta
+
+```
+```{r include=FALSE}
+PersonAbility[1:20]
+```
+
+```{r}
+# Only the first 6 rows, shown
+head(PersonAbility)
+```
+
+You can export those estimated abilites to a .csv to save (you can also save directly in R, if you need to). This writes `abil` as a csv file to your `output` directory that we created earlier using the `here` package. 
+
+```
+write.csv(abil, here("output", "HLSmod1_thetas.csv")
+```
+
+Descriptives for person ability
+```{r}
+hist(PersonAbility)
+mean(PersonAbility)
+sd(PersonAbility)
+```
+
+## Wright Map
+To visualize the relationship between item difficulty and person ability distributions, call the WrightMap package installed previously. We'll generate a simple WrightMap. We'll clean it up a little bit by removing some elements
+
+```{r}
+library(WrightMap)
+IRT.WrightMap(mod1)
+IRT.WrightMap(mod1, show.thr.lab=FALSE)
+```
+
+### Exercise: 
+1. Are the items appropriately targeted to the ability level of the population? 
+2. Why do you think?

@@ -1,0 +1,44 @@
+# Setting up your workspace: Rstudio Projects
+
+First, we'll set up an R project, a method for managing your work within RStudio. RStudio projects allow you to keep all folders and files associated within a given project together. The project will automatically control your working directory. 
+
+To do this:
+Create a new R studio Project: File -> New Project -> choose directory and project name
+
+### Loading necessary "packages" for managine files and cleaning data
+
+Load the `here` package and `tidyverse` package in your script to help with working directory and file paths.
+
+If you don't have them, you'll have to install them.
+
+```{r eval=FALSE}
+install.packages("tidyverse")
+install.packages("here")
+
+
+```
+
+
+To load the necessary packages so you can use them, you'll have to run the commands below in each new R session.
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(here)
+
+# check your working directory
+
+here()
+
+```
+
+
+## Setting up the working directory 
+
+To make life easier, we'll follow a general file/working directory structure. There are many ways to set up a working directory, but a simple and easy way to do this involves creating files for your data (sometimes with a subdirectory or new directory for cleaned or altered data), the scripts you'll use for running analysis, and the resultant output and plot. 
+
+So, in the same directory (aka, folder) as your new RStudio project:
+
+1. Create a folder called `scripts`
+2. Create a folder called `data`
+3. Create a folder called `output`
+4. Create a folder called `plots`
+

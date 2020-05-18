@@ -1,0 +1,364 @@
+# The Rasch Model {#Rasch}
+
+
+## Packages Necessary for running the Rasch model
+
+Install the packages below. TAM is a collection of functions to run a variety of Rasch-type models. WrightMap will help us visualize it.
+```
+install.packages("TAM")
+install.packages("WrightMap")
+```
+
+## Reading in Data
+The data for this session will be downloaded from an online repository (github). We need to read it in to your R session. This means that it is something you can now work with in R. The .csv file will be read in as something called a data frame or (dataframe). This is a type of object in R that's essentially a spreadsheet that your're used to working with.
+
+```{r include=FALSE }
+hls <- read_csv("https://raw.githubusercontent.com/danielbkatz/DBER_Rasch/master/data/dichotomous.csv")
+
+# The first column are IDs that we'll get rid of
+hls <- hls[-1]
+```
+
+
+```
+
+hls <- read.csv("hls_dic_scale.csv")
+```
+
+## See the first few rows and columns
+```{r}
+head(hls)
+```
+
+If you want to see the whole dataset, view the data frame:
+
+```
+View(hls)
+```
+
+Now we call the TAM library you installed in a prior step. This tells R to use the set of functions available in the `TAM` package.
+
+```{r}
+library(TAM)
+```
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(kableExtra)
+library(knitr)
+```
+
+## The Rasch Model
+1. Running the Rasch model via TAM estimates the model:  
+  
+$Pr(X_i=1|\theta_s, \delta_i) = \frac{exp(\theta_s-\delta_i)}{1+exp(\theta_s-\delta_i)}$.
+
+Here, $\theta_s$ denotes the estimated ability level of student `s`, $\delta_i$ is the estimated difficulty level of item `i` and both estimates are in logits. $Pr(X=1|\theta_s, \delta_i)$ can be read as the probability of a "correct response" or of a respondent endorsing the "higher" category (if the item is scored dichotomously) for a item `i` given a student's ability and item `i's` difficulty.  
+
+TAM will provide estimates for item difficulty and student ability along with a host of other data. 
+
+Item difficulties are defined as the point at which a person has a 50% chance of getting an item correct, defined in logits (log of the odds). So, if for an item a person of ability 0 logits has a 50% chance of getting a item correct, that item's difficulty is defined as 0 logits.
+
+See the figure below for a visualization of this.
+
+```{r fig.align='center', fig.retina=3, fig.width=7, message=FALSE, warning=FALSE, figh.height=7, include=FALSE, paged.print=FALSE}
+
+
+cyber_colors = c(
+`cyan` = "#711c91",
+`orange` = "#ff6410",
+`pink`=  "#fe3abc",
+`teal` = "#05f9ff",
+`blue` = "#133e7c",
+`dark` = "#05f9ff")
+
+
+cyber_cols <- function(...) {
+  cols <- c(...)
+
+  if (is.null(cols))
+    return (cyber_colors)
+
+  cyber_colors[cols]
+}
+
+
+
+
+
+cyber_palettes <- list(
+  `main`  = cyber_cols("cyan", "pink", "teal", "blue", "dark"),
+  `red` = cyber_cols("cyan", "pink"),
+  `oranges` = cyber_cols("orange", "teal")
+  )
+
+
+cyber_pal <- function(palette = "main", reverse = FALSE, ...) {
+  pal <- cyber_palettes[[palette]]
+  
+
+  if (reverse) pal <- rev(pal)
+
+  colorRampPalette(colors = pal)
+}
+cyber_pal()
+
+
+scale_color_cyber <- function(palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+  pal <- cyber_pal(palette = palette, reverse = reverse)
+
+  if (discrete) {
+    discrete_scale("colour", paste0("drsimonj_", palette), palette = pal, ...)
+  } else {
+    scale_color_gradientn(colours = pal(256), ...)
+  }
+}
+
+scale_fill_cyber <- function(palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+  pal <- cyber_pal(palette = palette, reverse = reverse)
+
+  if (discrete) {
+    discrete_scale("fill", paste0("cyber_", palette), palette = pal, ...)
+  } else {
+    scale_fill_gradientn(colours = pal(256), ...)
+  }
+}
+theme_vapor = function(base_size = 12, base_family = "") {
+  
+  theme_grey(base_size = base_size, base_family = base_family) %+replace%
+    
+    theme(
+      # Specify axis options
+      axis.line = element_blank(),  
+      axis.text.x = element_text(size = base_size*0.8, color = "white", lineheight = 0.9),  
+      axis.text.y = element_text(size = base_size*0.8, color = "white", lineheight = 0.9),  
+      axis.ticks = element_line(color = "white", size  =  0.2),  
+      axis.title.x = element_text(size = base_size, color = "white", margin = margin(0, 10, 0, 0)),  
+      axis.title.y = element_text(size = base_size, color = "white", angle = 90, margin = margin(0, 10, 0, 0)),  
+      axis.ticks.length = unit(0.3, "lines"),   
+      # Specify legend options
+      legend.background = element_rect(color = NA, fill = "#212747"),  
+      legend.key = element_rect(color = "white",  fill = "#212747"),  
+      legend.key.size = unit(1.2, "lines"),  
+      legend.key.height = NULL,  
+      legend.key.width = NULL,      
+      legend.text = element_text(size = base_size*0.8, color = "white"),  
+      legend.title = element_blank(),  
+      legend.position = "bottom",  
+      legend.text.align = NULL,  
+      legend.title.align = NULL,  
+      legend.direction = "horizontal",  
+      legend.box = NULL, 
+      # Specify panel options
+      panel.background = element_rect(fill = "#212747", color  =  NA),  
+      panel.border = element_rect(fill = NA, color = "white"),  
+      panel.grid.major = element_line(color = "#2a325b"),  
+      panel.grid.minor = element_line(color = "#2a325b"),  
+      panel.spacing = unit(0.5, "lines"),   
+      # Specify facetting options
+      strip.background = element_rect(fill = "grey30", color = "grey10"),  
+      strip.text.x = element_text(size = base_size*0.8, color = "white"),  
+      strip.text.y = element_text(size = base_size*0.8, color = "white",angle = -90),  
+      # Specify plot options
+      plot.background = element_rect(color = "#212747", fill = "#212747"),  
+      plot.title = element_text(hjust = 0, size = rel(1.5), face = "bold", color = "white"),
+      plot.subtitle = element_text(hjust = 0, size = rel(1), face = "plain", color = "white"),
+      plot.caption = element_text(hjust = 1, size = rel(1), face = "plain", color = "white"),
+      plot.margin = unit(rep(1, 4), "lines")
+      
+    )
+  
+}
+
+
+```
+```{r fig.align='center', fig.retina=3, fig.width=9, message=FALSE, warning=FALSE, figh.height=7, include=FALSE, paged.print=FALSE}
+
+# Absolute DIF Favoring Group 1 by 1 Logit
+icc_0 <- function(ability){
+ exp(ability-0)/(1+exp(ability-0))
+}
+
+p <- ggplot(data = data.frame(ability = c(-3:3)), mapping = aes(x=ability))+#ff6410
+  stat_function(fun = icc_0, geom = 'area', fill="#ff6410", alpha=.1) +
+  stat_function(fun = icc_0, geom = 'line', color="#ff6410", alpha=0.1,  size= 4)+
+  stat_function(fun = icc_0, geom = 'line', color="#ff6410", alpha=0.1,  size= 3)+
+  stat_function(fun = icc_0, geom = 'line', color="#ff6410", alpha=0.2,  size= 2)+
+  stat_function(fun = icc_0, geom = 'line', color="#ff6410", alpha=0.2,  size= 1)+
+  stat_function(fun = icc_0, geom = 'line', color="#ff6410", alpha= 1,  size= .5)+
+  
+  geom_segment(y = .5, yend=.5, x=-3, xend=.0, color = "#711c91", size = 4, alpha=.1) +
+  geom_segment(y = .5, yend=.5, x=-3, xend=.0, color = "#711c91", size = 3, alpha=.1) +
+  geom_segment(y = .5, yend=.5, x=-3, xend=.0, color = "#711c91", size = 2, alpha=.2) +
+  geom_segment(y = .5, yend=.5, x=-3, xend=.0, color = "#711c91", size = 1, alpha=.2) +
+  geom_segment(y = .5, yend=.5, x=-3, xend=.0, color = "#711c91", size =.5, alpha= 1) +
+  
+  geom_segment(y = 0, yend=.5, x=.0, xend=.0, color = "#711c91", size = 4, alpha=.1) +
+  geom_segment(y = 0, yend=.5, x=.0, xend=.0, color = "#711c91", size = 3, alpha=.1) +
+  geom_segment(y = 0, yend=.5, x=.0, xend=.0, color = "#711c91", size = 2, alpha=.2) +
+  geom_segment(y = 0, yend=.5, x=.0, xend=.0, color = "#711c91", size = 1, alpha=.2) +
+  geom_segment(y = 0, yend=.5, x=.0, xend=.0, color = "#711c91", size =.5, alpha= 1)   + 
+  xlab("Ability (logits)") +
+  ggtitle("Item Characteristic Curve for One Item") +
+  ylab("Probability of Response = 1") +
+  theme_vapor()
+  
+
+
+
+```
+
+```{r fig.align='center', fig.retina=3, fig.width = 9, message=FALSE, warning=FALSE, echo=FALSE, figh.height=7, paged.print=FALSE}
+p
+```
+
+
+
+
+## Running the Rasch model
+
+This command runs a Rasch model on the selected data frame. Here, `mod1` is an object in R that "holds" the data from our Rasch model (along with a lot of other information). It's essentially a large list. This is the main computation step, now we just select information that is stored in `mod1` or run `mod1` through further computation. 
+
+Note that the object `hls` has to contain only items and no other information. 
+```{r echo=T, results='hide'}
+mod1 <- tam(hls)
+
+```
+
+```{r}
+summary(mod1)
+```
+
+
+## Item Difficulties
+We'll extract difficulties (`xsi`) from the `mod1` object (`mod1` is like a large list). We'll access this via `indexing`. The `$` sign means, access `mod1` and extract the object `xsi` which exists in `mod1`. 
+
+Assign those values to an object in the environment called `diffic` using `<-`, the assignment operator, like before
+
+```{r}
+diffic <- mod1$xsi
+```
+
+```
+diffic
+```
+
+In the table below, we can see the item difficulties in logits in the column `xsi` and the standard error for each item `se.xsi`. One way to think of what the standard error tells us is whether item difficulties may overlap or not. 
+
+Higher `xsi` values indicate more difficult items. For instance, item Hls9 is harder than Hls8. The values are identified by constraining the mean of item difficulties to zero. 
+```{r, echo=FALSE, warning=FALSE, message="FALSE"}
+kable(diffic)
+```
+
+## Visualize
+We may want to visualize each item characteristic curve (ICC) for each item. These plots plot the expected value (blue, smooth line) given that the data fits the Rasch model, and the observed black line (a binned solution). Each plot represents a single item. They visualize the probability of a respondent getting the item correct given their ability level. For instance, for item V1, the blue line shows that a person at 1 logit (x-axis) has something like a 30% probability of getting the item correct (predicted). 
+Get Item Characteristic Curves
+```{r paged.print=TRUE}
+plot(mod1)
+```
+
+
+Note that for items V1 and V2, the black line, the observed probabilities, deviate quite a lot from the blue lines, the expected probabilities. Contrast this with item V5. For item V1, the black line seems to be steeper than the blue line, whereas for V2, the black line is quite a bit shallower. These lines hint at different types of item misfit, which we'll introduce later. Roughly, in the shallower case, we're not able to differentiate between respondents very easily - it probably means there is too much randomness. In the steep case, it might be too easy to differentiate - the item isn't informative.
+
+## Summarizing the distribution of difficulties
+
+We can visualize and summarize the distribution of item difficulties below, but there will be a better way, called a Wright Map, that we'll introduce later. 
+
+The methods below use no packages to visualize and summarize.
+```{r}
+hist(diffic$xsi, breaks=10)
+
+# If you want to see the items as a scatter plot
+plot(diffic$xsi, main="Scatter Plot of Item Difficulties", xlab="Item Number", ylab = "Difficulty in Logits", pch=9)
+axis(side=1, at = c(1:15))
+
+mean(diffic$xsi)
+sd(diffic$xsi)
+```
+
+### Exercise: 
+1. Which item is the hardest? The easiest? 
+**Hint**: try to use commands such as `max()`, `min()` as well, and see how this compares to the plot.
+
+## Item Fit
+Let's find out if the data fit the model. Use the `tam.fit` function to compute fit statistics, then display. We note that items V1 and V2 have outfits that are drastically different from the items' infit values. We also note that infit values of V1 and V2 are different from any of the other items. We note that V1 is "over fitting", it's outfit and infit values being well below 1, while V2 is "underfitting." This means that item V1 is too predictable - the amount of information is well predicted from other items which means it provides little new information above and beyond the other items. On the other hand, the underfitting V2 item has too much randomness. 
+
+However, outfit is "outlier" sensitive whereas "infit" is not. This implies that for V2 there might be a few responses that are particularly random/unexpected.
+
+```{r}
+fit <- tam.fit(mod1)
+```
+
+
+```
+View(fit$itemfit)
+```
+```{r echo=FALSE}
+kable(fit$itemfit)
+```
+
+### Exercise: 
+1. Look at the `Wright Map` and the histograms of person abilities ($\theta_p$) and item difficulties ($\delta_i$). Do you think this instrument is well-targeted for this sample? 2. How might it be optimized? 
+3. Relative to other items, which item fit our model the worst?
+
+
+
+
+### Optional: Understanding the model
+`TAM` also provides some descriptive statistics. 
+
+```{r}
+item_prop <- mod1$item
+```
+```
+item_prop
+```
+
+```{r, echo=FALSE}
+
+kable(item_prop)
+
+```
+
+Note, the total number of people who answered an item correctly is a `sufficient` statistic for calculating an item's difficulty. Said another way, the number of correct answers, or, number of people who endorse a category increases monotonically with the item difficulty (of course, this does not mean you can just replace the Rasch model with a sum score since we're using the Rasch model to test whether summing items at all is a reasonable thing to do).
+
+To see this, we can find the total number of people who endorsed the "agree" category for each `Hls` item above. The table provides the proportion who endorsed the higher category in the `M` column. For instance, item Hls1 had 15.77% of people endorse the "agree" category (1= agree, 0= disagree). In the N column, we see that 317 people answered the item in total. 
+
+
+That means that $317*.1577$ = 50 people answering the item correctly. Note, the estimated difficulty found in the column is 2.43 logits. 
+
+
+```{r}
+# Confirm that the total number of endorsements (coded 1) is 50 for Hls1: sum down the column containing all answers to Hls1 in the raw data.
+
+
+apply(hls[1], 2, sum)
+```
+However, we see that for item Hls5, 27% of people endorsed that item and the estimated mean item difficulty in `xsi.item` is 1.50 logits.
+
+
+The correlation between total number of endorsements per item and the estimated item difficulty can be computed as follows.
+
+```{r}
+
+# create a column in the item_prop object that has the total number of endorsements for each item
+item_prop <- mutate(item_prop, total_endorsed =N*M)
+
+cor(item_prop$xsi.item, item_prop$total_endorsed)
+
+```
+
+We see that the correlation between item difficulties and total endorsements per item is nearly perfect -.97. As the number of endorsements go down, the estimated difficulty of the item increase.
+
+```{r}
+ggplot(item_prop, aes(x=total_endorsed, y=xsi.item)) + 
+  geom_point() +
+  ylab("Estimated Item Difficulties (logits)") +
+  xlab("Total Number of Endorsements for an item") +
+  ggtitle("Relationship between estimated item difficulty and total endorsements")
+
+```
+
+
+
+
+
+

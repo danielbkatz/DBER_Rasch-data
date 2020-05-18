@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Person Abilities | Measuring what Matters: Introduction to Rasch Analysis</title>
+  <meta name="description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Person Abilities | Measuring what Matters: Introduction to Rasch Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Person Abilities | Measuring what Matters: Introduction to Rasch Analysis" />
+  
+  <meta name="twitter:description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  
+
+<meta name="author" content="Exercise and data: Anthony Clairmont; Assistance, web: Daniel Katz; Direction: Mike Wilton" />
+
+
+<meta name="date" content="2020-05-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="Rasch.html"/>
+<link rel="next" href="polytomous-items.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Rasch Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installing R and R-Studio</a><ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#instructions-for-installing-r"><i class="fa fa-check"></i><b>2.1</b> Instructions for installing R:</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="install.html"><a href="install.html#for-mac-do-the-following"><i class="fa fa-check"></i><b>2.1.1</b> For Mac, do the following:</a></li>
+<li class="chapter" data-level="2.1.2" data-path="install.html"><a href="install.html#for-windows-do-the-following"><i class="fa fa-check"></i><b>2.1.2</b> For Windows do the following:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#instructions-for-installing-r-studio"><i class="fa fa-check"></i><b>2.2</b> Instructions for installing R-Studio:</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html"><i class="fa fa-check"></i><b>3</b> Setting up your workspace: Rstudio Projects</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#loading-necessary-packages-for-managine-files-and-cleaning-data"><i class="fa fa-check"></i><b>3.0.1</b> Loading necessary “packages” for managine files and cleaning data</a></li>
+<li class="chapter" data-level="3.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#setting-up-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting up the working directory</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="Rasch.html"><a href="Rasch.html"><i class="fa fa-check"></i><b>4</b> The Rasch Model</a><ul>
+<li class="chapter" data-level="4.1" data-path="Rasch.html"><a href="Rasch.html#packages-necessary-for-running-the-rasch-model"><i class="fa fa-check"></i><b>4.1</b> Packages Necessary for running the Rasch model</a></li>
+<li class="chapter" data-level="4.2" data-path="Rasch.html"><a href="Rasch.html#reading-in-data"><i class="fa fa-check"></i><b>4.2</b> Reading in Data</a></li>
+<li class="chapter" data-level="4.3" data-path="Rasch.html"><a href="Rasch.html#see-the-first-few-rows-and-columns"><i class="fa fa-check"></i><b>4.3</b> See the first few rows and columns</a></li>
+<li class="chapter" data-level="4.4" data-path="Rasch.html"><a href="Rasch.html#the-rasch-model"><i class="fa fa-check"></i><b>4.4</b> The Rasch Model</a></li>
+<li class="chapter" data-level="4.5" data-path="Rasch.html"><a href="Rasch.html#running-the-rasch-model"><i class="fa fa-check"></i><b>4.5</b> Running the Rasch model</a></li>
+<li class="chapter" data-level="4.6" data-path="Rasch.html"><a href="Rasch.html#item-difficulties"><i class="fa fa-check"></i><b>4.6</b> Item Difficulties</a></li>
+<li class="chapter" data-level="4.7" data-path="Rasch.html"><a href="Rasch.html#visualize"><i class="fa fa-check"></i><b>4.7</b> Visualize</a></li>
+<li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="Rasch.html"><a href="Rasch.html#exercise"><i class="fa fa-check"></i><b>4.8.1</b> Exercise:</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="Rasch.html"><a href="Rasch.html#item-fit"><i class="fa fa-check"></i><b>4.9</b> Item Fit</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="Rasch.html"><a href="Rasch.html#exercise-1"><i class="fa fa-check"></i><b>4.9.1</b> Exercise:</a></li>
+<li class="chapter" data-level="4.9.2" data-path="Rasch.html"><a href="Rasch.html#optional-understanding-the-model"><i class="fa fa-check"></i><b>4.9.2</b> Optional: Understanding the model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>5</b> Person Abilities</a><ul>
+<li class="chapter" data-level="5.1" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>5.1</b> Wright Map</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-2"><i class="fa fa-check"></i><b>5.1.1</b> Exercise:</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>6</b> Polytomous Items</a><ul>
+<li class="chapter" data-level="6.1" data-path="polytomous-items.html"><a href="polytomous-items.html#polytymous-item-types-anything-with-a-rating-scale"><i class="fa fa-check"></i><b>6.1</b> Polytymous item types (anything with a rating Scale)</a></li>
+<li class="chapter" data-level="6.2" data-path="polytomous-items.html"><a href="polytomous-items.html#item-difficulties-1"><i class="fa fa-check"></i><b>6.2</b> Item Difficulties</a></li>
+<li class="chapter" data-level="6.3" data-path="polytomous-items.html"><a href="polytomous-items.html#person-ability-theta-estimates"><i class="fa fa-check"></i><b>6.3</b> Person ability (theta) estimates</a></li>
+<li class="chapter" data-level="6.4" data-path="polytomous-items.html"><a href="polytomous-items.html#item-fit-statistics"><i class="fa fa-check"></i><b>6.4</b> Item fit statistics</a></li>
+<li class="chapter" data-level="6.5" data-path="polytomous-items.html"><a href="polytomous-items.html#item-characteristic-curves-but-now-as-thresholds."><i class="fa fa-check"></i><b>6.5</b> Item characteristic curves (but now as thresholds).</a></li>
+<li class="chapter" data-level="6.6" data-path="polytomous-items.html"><a href="polytomous-items.html#wright-map-1"><i class="fa fa-check"></i><b>6.6</b> Wright Map</a></li>
+<li class="chapter" data-level="6.7" data-path="polytomous-items.html"><a href="polytomous-items.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises:</a></li>
+<li class="chapter" data-level="6.8" data-path="polytomous-items.html"><a href="polytomous-items.html#model-comparison"><i class="fa fa-check"></i><b>6.8</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="multidimensional.html"><a href="multidimensional.html"><i class="fa fa-check"></i><b>7</b> Multidimensional Rasch Model</a><ul>
+<li class="chapter" data-level="7.1" data-path="multidimensional.html"><a href="multidimensional.html#we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix"><i class="fa fa-check"></i><b>7.1</b> we start by assigning the items to a dimension using a Q-matrix</a></li>
+<li class="chapter" data-level="7.2" data-path="multidimensional.html"><a href="multidimensional.html#run-the-multidimensional-rasch-model"><i class="fa fa-check"></i><b>7.2</b> Run the multidimensional Rasch model</a></li>
+<li class="chapter" data-level="7.3" data-path="multidimensional.html"><a href="multidimensional.html#theta-and-delta"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></a><ul>
+<li class="chapter" data-level="7.3.1" data-path="multidimensional.html"><a href="multidimensional.html#wright-map-2"><i class="fa fa-check"></i><b>7.3.1</b> Wright Map</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="multidimensional.html"><a href="multidimensional.html#exercises-1"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Measuring what Matters: Introduction to Rasch Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="person-abilities" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Person Abilities</h1>
+<p>Person abilities are also of interest. We can look at the person side of the model by computing person abilities.</p>
+<ol style="list-style-type: decimal">
+<li>Compute person abilities using the <code>tam.wle</code> function and assign to an object called <code>abil</code>.</li>
+<li>Extract person abilities (<span class="math inline">\(\theta_p\)</span>) from <code>abil</code> to create an object in the <code>environment</code> called <code>PersonAbility</code> which will essentially be a column vector.</li>
+</ol>
+<p><strong>Note</strong>: You may want more information than this at times (such as standard errors) so you may not always want to subset this way.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="co">#generates a data frame - output related to estimation</span></a>
+<a class="sourceLine" id="cb34-2" title="2">abil &lt;-<span class="st"> </span><span class="kw">tam.wle</span>(mod1)</a></code></pre></div>
+<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  1.2824 
+## Iteration in WLE/MLE estimation  2   | Maximal change  0.2808 
+## Iteration in WLE/MLE estimation  3   | Maximal change  0.01 
+## Iteration in WLE/MLE estimation  4   | Maximal change  0.0012 
+## Iteration in WLE/MLE estimation  5   | Maximal change  1e-04 
+## Iteration in WLE/MLE estimation  6   | Maximal change  0 
+## ----
+##  WLE Reliability= 0.666</code></pre>
+<p>See the first few rows of Abil. Notice you get:</p>
+<ol style="list-style-type: decimal">
+<li><code>pid</code>: person id assigned by TAM.</li>
+<li><code>N.items</code>: Number of items the person was given (this becomes interesting when you have linked test forms where students may not all see the same number of items)</li>
+<li><code>PersonScores</code>: Number of items the student got right or endorsed (in the survey case).</li>
+<li><code>PersonMax</code>: Max total that person could have gotten right/selected an option for</li>
+<li><code>theta</code>: estimated person ability</li>
+<li><code>error</code>: estimated measurement error</li>
+<li><code>WLE.rel</code>: estimated person seperation reliability.</li>
+</ol>
+<pre><code>head(Abil)
+
+# or
+
+View(Abil)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+pid
+</th>
+<th style="text-align:right;">
+N.items
+</th>
+<th style="text-align:right;">
+PersonScores
+</th>
+<th style="text-align:right;">
+PersonMax
+</th>
+<th style="text-align:right;">
+theta
+</th>
+<th style="text-align:right;">
+error
+</th>
+<th style="text-align:right;">
+WLE.rel
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1015
+</td>
+<td style="text-align:right;">
+-2.468706
+</td>
+<td style="text-align:right;">
+0.0837156
+</td>
+<td style="text-align:right;">
+0.9878739
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1015
+</td>
+<td style="text-align:right;">
+-2.468706
+</td>
+<td style="text-align:right;">
+0.0837156
+</td>
+<td style="text-align:right;">
+0.9878739
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+1015
+</td>
+<td style="text-align:right;">
+-2.450439
+</td>
+<td style="text-align:right;">
+0.0702358
+</td>
+<td style="text-align:right;">
+0.9878739
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+1015
+</td>
+<td style="text-align:right;">
+-2.562571
+</td>
+<td style="text-align:right;">
+0.1394911
+</td>
+<td style="text-align:right;">
+0.9878739
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+1015
+</td>
+<td style="text-align:right;">
+-2.436597
+</td>
+<td style="text-align:right;">
+0.0638603
+</td>
+<td style="text-align:right;">
+0.9878739
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+1015
+</td>
+<td style="text-align:right;">
+-2.454845
+</td>
+<td style="text-align:right;">
+0.0732704
+</td>
+<td style="text-align:right;">
+0.9878739
+</td>
+</tr>
+</tbody>
+</table>
+<p>The column in the <code>abil</code> data.frame corresponding to person estimates is the <code>theta</code> column. Pull out the ability estimates, theta, column if you would like, though, this creates a list. This makes it a little easier for a few basic tasks below.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">PersonAbility &lt;-<span class="st"> </span>abil<span class="op">$</span>theta</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co"># Only the first 6 rows, shown</span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="kw">head</span>(PersonAbility)</a></code></pre></div>
+<pre><code>## [1]  0.9846072  0.5861029  1.3941069 -0.6435504  2.2922517 -0.2146746</code></pre>
+<p>You can export those estimated abilites to a .csv to save (you can also save directly in R, if you need to). This writes <code>abil</code> as a csv file to your <code>output</code> directory that we created earlier using the <code>here</code> package.</p>
+<pre><code>write.csv(abil, here(&quot;output&quot;, &quot;HLSmod1_thetas.csv&quot;)</code></pre>
+<p>Descriptives for person ability</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">hist</span>(PersonAbility)</a></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">mean</span>(PersonAbility)</a></code></pre></div>
+<pre><code>## [1] 0.001822466</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">sd</span>(PersonAbility)</a></code></pre></div>
+<pre><code>## [1] 1.205116</code></pre>
+<div id="wright-map" class="section level2">
+<h2><span class="header-section-number">5.1</span> Wright Map</h2>
+<p>To visualize the relationship between item difficulty and person ability distributions, call the WrightMap package installed previously. We’ll generate a simple WrightMap. We’ll clean it up a little bit by removing some elements</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">library</span>(WrightMap)</a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="kw">IRT.WrightMap</span>(mod1)</a></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">IRT.WrightMap</span>(mod1, <span class="dt">show.thr.lab=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
+<div id="exercise-2" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Exercise:</h3>
+<ol style="list-style-type: decimal">
+<li>Are the items appropriately targeted to the ability level of the population?</li>
+<li>Why do you think?</li>
+</ol>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Rasch.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="polytomous-items.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Rasch_Biome.pdf", "Rasch_Biome.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
