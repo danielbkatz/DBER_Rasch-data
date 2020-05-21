@@ -4,27 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis</title>
-  <meta name="description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  <title>Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R</title>
+  <meta name="description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis" />
+  <meta property="og:title" content="Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  <meta property="og:description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis" />
+  <meta name="twitter:title" content="Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R" />
   
-  <meta name="twitter:description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  <meta name="twitter:description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
   
 
-<meta name="author" content="Exercise and data: Anthony Clairmont; Assistance, web: Daniel Katz; Direction: Mike Wilton" />
 
 
-<meta name="date" content="2020-05-18" />
+<meta name="date" content="2020-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,14 +153,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a><ul>
 <li class="chapter" data-level="4.8.1" data-path="Rasch.html"><a href="Rasch.html#exercise"><i class="fa fa-check"></i><b>4.8.1</b> Exercise:</a></li>
 </ul></li>
-<li class="chapter" data-level="4.9" data-path="Rasch.html"><a href="Rasch.html#item-fit"><i class="fa fa-check"></i><b>4.9</b> Item Fit</a><ul>
-<li class="chapter" data-level="4.9.1" data-path="Rasch.html"><a href="Rasch.html#exercise-1"><i class="fa fa-check"></i><b>4.9.1</b> Exercise:</a></li>
-<li class="chapter" data-level="4.9.2" data-path="Rasch.html"><a href="Rasch.html#optional-understanding-the-model"><i class="fa fa-check"></i><b>4.9.2</b> Optional: Understanding the model</a></li>
-</ul></li>
+<li class="chapter" data-level="4.9" data-path="Rasch.html"><a href="Rasch.html#item-fit"><i class="fa fa-check"></i><b>4.9</b> Item Fit</a></li>
+<li class="chapter" data-level="4.10" data-path="Rasch.html"><a href="Rasch.html#optional-understanding-the-model-more-deeply"><i class="fa fa-check"></i><b>4.10</b> Optional: Understanding the model more deeply</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>5</b> Person Abilities</a><ul>
 <li class="chapter" data-level="5.1" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>5.1</b> Wright Map</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-2"><i class="fa fa-check"></i><b>5.1.1</b> Exercise:</a></li>
+<li class="chapter" data-level="5.1.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-1"><i class="fa fa-check"></i><b>5.1.1</b> Exercise:</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>6</b> Polytomous Items</a><ul>
@@ -195,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Measuring what Matters: Introduction to Rasch Analysis</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Measuring what Matters: Introduction to Rasch Analysis in R</a>
           </h1>
         </div>
 
@@ -209,15 +206,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix" class="section level2">
 <h2><span class="header-section-number">7.1</span> we start by assigning the items to a dimension using a Q-matrix</h2>
 <p>If we want to have two dimensions, we’ll create a matrix with two columns. A 1 or 0 denotes whether that item belongs to dimension 1 or 2 (or both!)</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1">Q &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data=</span><span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">15</span>, <span class="dt">ncol=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb79-2" title="2"></a>
-<a class="sourceLine" id="cb79-3" title="3">Q[<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">1</span>] &lt;-<span class="dv">1</span></a>
-<a class="sourceLine" id="cb79-4" title="4">Q[<span class="dv">8</span><span class="op">:</span><span class="dv">15</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb79-5" title="5"></a>
-<a class="sourceLine" id="cb79-6" title="6"></a>
-<a class="sourceLine" id="cb79-7" title="7"></a>
-<a class="sourceLine" id="cb79-8" title="8"></a>
-<a class="sourceLine" id="cb79-9" title="9">Q</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">Q &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data=</span><span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">15</span>, <span class="dt">ncol=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb86-2" title="2"></a>
+<a class="sourceLine" id="cb86-3" title="3">Q[<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">1</span>] &lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb86-4" title="4">Q[<span class="dv">8</span><span class="op">:</span><span class="dv">15</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb86-5" title="5"></a>
+<a class="sourceLine" id="cb86-6" title="6"></a>
+<a class="sourceLine" id="cb86-7" title="7"></a>
+<a class="sourceLine" id="cb86-8" title="8"></a>
+<a class="sourceLine" id="cb86-9" title="9">Q</a></code></pre></div>
 <pre><code>##       [,1] [,2]
 ##  [1,]    1    0
 ##  [2,]    1    0
@@ -238,107 +235,108 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="run-the-multidimensional-rasch-model" class="section level2">
 <h2><span class="header-section-number">7.2</span> Run the multidimensional Rasch model</h2>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1">multi &lt;-<span class="st"> </span>TAM<span class="op">::</span><span class="kw">tam.mml</span>(<span class="dt">resp=</span>hls, <span class="dt">Q=</span>Q)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">multi &lt;-<span class="st"> </span>TAM<span class="op">::</span><span class="kw">tam.mml</span>(<span class="dt">resp=</span>hls, <span class="dt">Q=</span>Q)</a></code></pre></div>
 </div>
 <div id="theta-and-delta" class="section level2">
 <h2><span class="header-section-number">7.3</span> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></h2>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">persons.multi &lt;-<span class="st"> </span><span class="kw">tam.wle</span>(multi)</a></code></pre></div>
-<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  2.105 
-## Iteration in WLE/MLE estimation  2   | Maximal change  0.7201 
-## Iteration in WLE/MLE estimation  3   | Maximal change  0.0844 
-## Iteration in WLE/MLE estimation  4   | Maximal change  0.0235 
-## Iteration in WLE/MLE estimation  5   | Maximal change  0.0077 
-## Iteration in WLE/MLE estimation  6   | Maximal change  0.0026 
-## Iteration in WLE/MLE estimation  7   | Maximal change  9e-04 
-## Iteration in WLE/MLE estimation  8   | Maximal change  3e-04 
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1">persons.multi &lt;-<span class="st"> </span><span class="kw">tam.wle</span>(multi)</a></code></pre></div>
+<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  1.7954 
+## Iteration in WLE/MLE estimation  2   | Maximal change  0.4884 
+## Iteration in WLE/MLE estimation  3   | Maximal change  0.0825 
+## Iteration in WLE/MLE estimation  4   | Maximal change  0.0297 
+## Iteration in WLE/MLE estimation  5   | Maximal change  0.0098 
+## Iteration in WLE/MLE estimation  6   | Maximal change  0.0033 
+## Iteration in WLE/MLE estimation  7   | Maximal change  0.0011 
+## Iteration in WLE/MLE estimation  8   | Maximal change  4e-04 
 ## Iteration in WLE/MLE estimation  9   | Maximal change  1e-04 
+## Iteration in WLE/MLE estimation  10   | Maximal change  0 
 ## 
 ## -------
-## WLE Reliability (Dimension1)=0.185 
-## WLE Reliability (Dimension2)=0.492</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">WLEestimates.multi &lt;-<span class="st"> </span>persons.multi<span class="op">$</span>theta</a>
-<a class="sourceLine" id="cb84-2" title="2">thresholds.multi &lt;-<span class="st"> </span><span class="kw">tam.threshold</span>(multi)</a></code></pre></div>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="co">#Fit and reliabilities</span></a>
-<a class="sourceLine" id="cb85-2" title="2">Fit.multi &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(multi)</a></code></pre></div>
+## WLE Reliability (Dimension1)=0.324 
+## WLE Reliability (Dimension2)=0.477</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">WLEestimates.multi &lt;-<span class="st"> </span>persons.multi<span class="op">$</span>theta</a>
+<a class="sourceLine" id="cb91-2" title="2">thresholds.multi &lt;-<span class="st"> </span><span class="kw">tam.threshold</span>(multi)</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="co">#Fit and reliabilities</span></a>
+<a class="sourceLine" id="cb92-2" title="2">Fit.multi &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(multi)</a></code></pre></div>
 <pre><code>## Item fit calculation based on 15 simulations
 ## |**********|
 ## |----------|</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">Fit.multi<span class="op">$</span>itemfit</a></code></pre></div>
-<pre><code>##    parameter    Outfit    Outfit_t     Outfit_p Outfit_pholm     Infit      Infit_t      Infit_p Infit_pholm
-## 1         V1 0.6456717 -7.99489181 1.296877e-15 1.815628e-14 0.8324660 -3.484057660 0.0004938731 0.007408096
-## 2         V2 3.4831046 16.13112416 1.541881e-58 2.312822e-57 1.2293208  2.260337977 0.0238002827 0.333203958
-## 3         V3 1.0062745  0.12261163 9.024146e-01 1.000000e+00 1.0220834  0.432899685 0.6650876490 1.000000000
-## 4         V4 0.9426341 -1.06099844 2.886906e-01 1.000000e+00 0.9704881 -0.525793161 0.5990319267 1.000000000
-## 5         V5 1.0225818  0.60772972 5.433667e-01 1.000000e+00 1.0256471  0.707675030 0.4791470870 1.000000000
-## 6         V6 0.9978663 -0.08506242 9.322118e-01 1.000000e+00 1.0002128  0.008377704 0.9933156376 1.000000000
-## 7         V7 0.9511051 -1.85954941 6.294930e-02 8.183409e-01 0.9691692 -1.163037377 0.2448143379 1.000000000
-## 8         V8 0.9727336 -1.03555420 3.004102e-01 1.000000e+00 0.9765406 -0.883446868 0.3769948775 1.000000000
-## 9         V9 0.9686430 -1.16906639 2.423769e-01 1.000000e+00 0.9749467 -0.927282022 0.3537801259 1.000000000
-## 10       V10 1.0279607  0.30468958 7.606026e-01 1.000000e+00 1.0087145  0.123623629 0.9016132825 1.000000000
-## 11       V11 0.9519141 -0.70713196 4.794845e-01 1.000000e+00 1.0006288  0.028448997 0.9773040462 1.000000000
-## 12       V12 1.0478752  1.14245376 2.532655e-01 1.000000e+00 1.0167644  0.416813610 0.6768147468 1.000000000
-## 13       V13 0.8797721 -1.18389446 2.364548e-01 1.000000e+00 1.0121026  0.145550485 0.8842762592 1.000000000
-## 14       V14 0.9845654 -0.54934128 5.827713e-01 1.000000e+00 0.9842492 -0.548242353 0.5835255043 1.000000000
-## 15       V15 0.9738287 -0.98651166 3.238821e-01 1.000000e+00 0.9796662 -0.761627819 0.4462821664 1.000000000</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1">multi<span class="op">$</span>EAP.rel <span class="co">#EAP reliabilities</span></a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">Fit.multi<span class="op">$</span>itemfit</a></code></pre></div>
+<pre><code>##    parameter    Outfit     Outfit_t      Outfit_p  Outfit_pholm     Infit     Infit_t      Infit_p  Infit_pholm
+## 1         V1 0.7689153 -10.48342389  1.029478e-25  1.441269e-24 0.8142955 -8.26952660 1.344920e-16 1.882888e-15
+## 2         V2 2.3367398  22.29057477 4.560994e-110 6.841491e-109 1.4494439  8.98963086 2.480622e-19 3.720933e-18
+## 3         V3 0.9597641  -1.68324720  9.232725e-02  1.000000e+00 0.9644486 -1.48073356 1.386776e-01 1.000000e+00
+## 4         V4 0.9509837  -1.92549176  5.416787e-02  6.500144e-01 0.9634872 -1.42547829 1.540190e-01 1.000000e+00
+## 5         V5 0.9525797  -1.36416606  1.725153e-01  1.000000e+00 0.9782820 -0.61196714 5.405595e-01 1.000000e+00
+## 6         V6 0.8023461  -2.36247724  1.815326e-02  2.359923e-01 0.9575921 -0.45593701 6.484353e-01 1.000000e+00
+## 7         V7 0.9234506  -1.52587060  1.270421e-01  1.000000e+00 0.9577779 -0.82124642 4.115059e-01 1.000000e+00
+## 8         V8 1.0065580   0.14226580  8.868701e-01  1.000000e+00 1.0075111  0.17992979 8.572077e-01 1.000000e+00
+## 9         V9 0.9236514  -1.44378437  1.487996e-01  1.000000e+00 0.9803859 -0.34852665 7.274447e-01 1.000000e+00
+## 10       V10 1.0292413   0.37667676  7.064138e-01  1.000000e+00 1.0032793  0.06639648 9.470622e-01 1.000000e+00
+## 11       V11 1.0052741   0.07665319  9.388994e-01  1.000000e+00 0.9883233 -0.17347193 8.622805e-01 1.000000e+00
+## 12       V12 0.8764374  -1.39915589  1.617662e-01  1.000000e+00 0.9727528 -0.27540517 7.830050e-01 1.000000e+00
+## 13       V13 0.9771652  -0.80842507  4.188459e-01  1.000000e+00 0.9869458 -0.45242954 6.509596e-01 1.000000e+00
+## 14       V14 0.9647311  -0.99855504  3.180103e-01  1.000000e+00 0.9872144 -0.35818385 7.202057e-01 1.000000e+00
+## 15       V15 0.9645056  -1.42502166  1.541509e-01  1.000000e+00 0.9663553 -1.33371946 1.822958e-01 1.000000e+00</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">multi<span class="op">$</span>EAP.rel <span class="co">#EAP reliabilities</span></a></code></pre></div>
 <pre><code>##      Dim1      Dim2 
-## 0.6738227 0.6814934</code></pre>
+## 0.6354260 0.6416989</code></pre>
 <div id="wright-map-2" class="section level3">
 <h3><span class="header-section-number">7.3.1</span> Wright Map</h3>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">MDthetas.multi &lt;-</a>
-<a class="sourceLine" id="cb91-2" title="2"><span class="st">  </span><span class="kw">cbind</span>(persons.multi<span class="op">$</span>theta.Dim01,persons.multi<span class="op">$</span>theta.Dim02) <span class="co">#one line</span></a>
-<a class="sourceLine" id="cb91-3" title="3"><span class="kw">wrightMap</span>(MDthetas.multi, thresholds.multi) <span class="co">#second line</span></a></code></pre></div>
-<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">MDthetas.multi &lt;-</a>
+<a class="sourceLine" id="cb98-2" title="2"><span class="st">  </span><span class="kw">cbind</span>(persons.multi<span class="op">$</span>theta.Dim01,persons.multi<span class="op">$</span>theta.Dim02) <span class="co">#one line</span></a>
+<a class="sourceLine" id="cb98-3" title="3"><span class="kw">wrightMap</span>(MDthetas.multi, thresholds.multi) <span class="co">#second line</span></a></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <pre><code>##           Cat1
-## V1   1.7928772
-## V2   2.9363708
-## V3   1.8478088
-## V4   1.9375305
-## V5   1.1390076
-## V6  -0.3249207
-## V7   0.2915955
-## V8   0.1009827
-## V9   0.3188782
-## V10 -2.7882385
-## V11  2.3348694
-## V12 -1.3975525
-## V13 -3.1209412
-## V14 -0.5602112
-## V15 -0.2038879</code></pre>
+## V1  -0.2026062
+## V2  -1.4881897
+## V3  -0.2690735
+## V4   0.4807434
+## V5   1.1186829
+## V6   2.7043762
+## V7  -1.7503967
+## V8  -1.5145569
+## V9   1.8913879
+## V10 -2.4903259
+## V11  2.1169739
+## V12  2.7898865
+## V13 -0.6662292
+## V14  1.1333313
+## V15 -0.2837219</code></pre>
 <p>Compare the first unidimensional model to the multidimensional one</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">logLik</span>(mod1)</a></code></pre></div>
-<pre><code>## &#39;log Lik.&#39; -7343.562 (df=16)</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="kw">logLik</span>(multi)</a></code></pre></div>
-<pre><code>## &#39;log Lik.&#39; -7334.79 (df=18)</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="kw">anova</span>(mod1, multi)</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">logLik</span>(mod1)</a></code></pre></div>
+<pre><code>## &#39;log Lik.&#39; -7494.028 (df=16)</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">logLik</span>(multi)</a></code></pre></div>
+<pre><code>## &#39;log Lik.&#39; -7485.782 (df=18)</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">anova</span>(mod1, multi)</a></code></pre></div>
 <pre><code>##   Model   loglike Deviance Npars      AIC      BIC    Chisq df       p
-## 1  mod1 -7343.562 14687.12    16 14719.12 14797.65 17.54463  2 0.00015
-## 2 multi -7334.790 14669.58    18 14705.58 14793.92       NA NA      NA</code></pre>
+## 1  mod1 -7494.028 14988.06    16 15020.06 15098.58 16.49191  2 0.00026
+## 2 multi -7485.782 14971.56    18 15007.56 15095.90       NA NA      NA</code></pre>
 <p>Alternatively, you can use <code>IRT.compareModels</code></p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1">compare &lt;-<span class="st"> </span>CDM<span class="op">::</span><span class="kw">IRT.compareModels</span>(mod1, multi)</a>
-<a class="sourceLine" id="cb99-2" title="2">compare</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">compare &lt;-<span class="st"> </span>CDM<span class="op">::</span><span class="kw">IRT.compareModels</span>(mod1, multi)</a>
+<a class="sourceLine" id="cb106-2" title="2">compare</a></code></pre></div>
 <pre><code>## $IC
 ##   Model   loglike Deviance Npars Nobs      AIC      BIC     AIC3     AICc     CAIC
-## 1  mod1 -7343.562 14687.12    16 1000 14719.12 14797.65 14735.12 14719.68 14813.65
-## 2 multi -7334.790 14669.58    18 1000 14705.58 14793.92 14723.58 14706.28 14811.92
+## 1  mod1 -7494.028 14988.06    16 1000 15020.06 15098.58 15036.06 15020.61 15114.58
+## 2 multi -7485.782 14971.56    18 1000 15007.56 15095.90 15025.56 15008.26 15113.90
 ## 
 ## $LRtest
 ##   Model1 Model2     Chi2 df            p
-## 1   mod1  multi 17.54463  2 0.0001549648
+## 1   mod1  multi 16.49191  2 0.0002623175
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;IRT.compareModels&quot;</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">summary</span>(compare)</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1"><span class="kw">summary</span>(compare)</a></code></pre></div>
 <pre><code>## Absolute and relative model fit
 ## 
 ##   Model   loglike Deviance Npars Nobs      AIC      BIC     AIC3     AICc     CAIC
-## 1  mod1 -7343.562 14687.12    16 1000 14719.12 14797.65 14735.12 14719.68 14813.65
-## 2 multi -7334.790 14669.58    18 1000 14705.58 14793.92 14723.58 14706.28 14811.92
+## 1  mod1 -7494.028 14988.06    16 1000 15020.06 15098.58 15036.06 15020.61 15114.58
+## 2 multi -7485.782 14971.56    18 1000 15007.56 15095.90 15025.56 15008.26 15113.90
 ## 
 ## Likelihood ratio tests - model comparison 
 ## 
 ##   Model1 Model2    Chi2 df     p
-## 1   mod1  multi 17.5446  2 2e-04</code></pre>
+## 1   mod1  multi 16.4919  2 3e-04</code></pre>
 <p>We see that model <code>multi</code> fits slightly better. However, the log likelihood difference test shows the difference is statististically significant.</p>
 <table>
 <thead>
@@ -369,13 +367,13 @@ mod1
 multi
 </td>
 <td style="text-align:right;">
-17.54463
+16.49191
 </td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
-0.000155
+0.0002623
 </td>
 </tr>
 </tbody>

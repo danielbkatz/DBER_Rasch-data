@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Rasch Modelling"
-author: "Anthony Clairmont, Daniel Katz, Mike Wilton"
+#author: "Anthony Clairmont, Daniel Katz, Mike Wilton"
 output:
   bookdown::gitbook:
     lib_dir: assets

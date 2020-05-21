@@ -4,27 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 The Rasch Model | Measuring what Matters: Introduction to Rasch Analysis</title>
-  <meta name="description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  <title>Chapter 4 The Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R</title>
+  <meta name="description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 The Rasch Model | Measuring what Matters: Introduction to Rasch Analysis" />
+  <meta property="og:title" content="Chapter 4 The Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  <meta property="og:description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 The Rasch Model | Measuring what Matters: Introduction to Rasch Analysis" />
+  <meta name="twitter:title" content="Chapter 4 The Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R" />
   
-  <meta name="twitter:description" content="This book is meant to be used as a guide for DBER participants in the Rasch workshop" />
+  <meta name="twitter:description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
   
 
-<meta name="author" content="Exercise and data: Anthony Clairmont; Assistance, web: Daniel Katz; Direction: Mike Wilton" />
 
 
-<meta name="date" content="2020-05-18" />
+<meta name="date" content="2020-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,14 +153,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a><ul>
 <li class="chapter" data-level="4.8.1" data-path="Rasch.html"><a href="Rasch.html#exercise"><i class="fa fa-check"></i><b>4.8.1</b> Exercise:</a></li>
 </ul></li>
-<li class="chapter" data-level="4.9" data-path="Rasch.html"><a href="Rasch.html#item-fit"><i class="fa fa-check"></i><b>4.9</b> Item Fit</a><ul>
-<li class="chapter" data-level="4.9.1" data-path="Rasch.html"><a href="Rasch.html#exercise-1"><i class="fa fa-check"></i><b>4.9.1</b> Exercise:</a></li>
-<li class="chapter" data-level="4.9.2" data-path="Rasch.html"><a href="Rasch.html#optional-understanding-the-model"><i class="fa fa-check"></i><b>4.9.2</b> Optional: Understanding the model</a></li>
-</ul></li>
+<li class="chapter" data-level="4.9" data-path="Rasch.html"><a href="Rasch.html#item-fit"><i class="fa fa-check"></i><b>4.9</b> Item Fit</a></li>
+<li class="chapter" data-level="4.10" data-path="Rasch.html"><a href="Rasch.html#optional-understanding-the-model-more-deeply"><i class="fa fa-check"></i><b>4.10</b> Optional: Understanding the model more deeply</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>5</b> Person Abilities</a><ul>
 <li class="chapter" data-level="5.1" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>5.1</b> Wright Map</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-2"><i class="fa fa-check"></i><b>5.1.1</b> Exercise:</a></li>
+<li class="chapter" data-level="5.1.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-1"><i class="fa fa-check"></i><b>5.1.1</b> Exercise:</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>6</b> Polytomous Items</a><ul>
@@ -195,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Measuring what Matters: Introduction to Rasch Analysis</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Measuring what Matters: Introduction to Rasch Analysis in R</a>
           </h1>
         </div>
 
@@ -207,32 +204,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 4</span> The Rasch Model</h1>
 <div id="packages-necessary-for-running-the-rasch-model" class="section level2">
 <h2><span class="header-section-number">4.1</span> Packages Necessary for running the Rasch model</h2>
-<p>Install the packages below. TAM is a collection of functions to run a variety of Rasch-type models. WrightMap will help us visualize it.</p>
+<p>Install the packages below. TAM is a collection of functions to run a variety of Rasch-type models. Wright Map will help us visualize it.</p>
 <pre><code>install.packages(&quot;TAM&quot;)
 install.packages(&quot;WrightMap&quot;)</code></pre>
 </div>
 <div id="reading-in-data" class="section level2">
 <h2><span class="header-section-number">4.2</span> Reading in Data</h2>
-<p>The data for this session will be downloaded from an online repository (github). We need to read it in to your R session. This means that it is something you can now work with in R. The .csv file will be read in as something called a data frame or (dataframe). This is a type of object in R that’s essentially a spreadsheet that your’re used to working with.</p>
+<p>The data for this session will be downloaded from an online repository (github). We need to read it in to your R session. This means that it we need to effectively “import it” into R as something that you can now work with. The .csv file will be read in as something called a data frame or (dataframe). This is a type of object in R that’s like a spreadsheet that your’re used to working with.</p>
 <pre><code>
 hls &lt;- read.csv(&quot;hls_dic_scale.csv&quot;)</code></pre>
 </div>
 <div id="see-the-first-few-rows-and-columns" class="section level2">
 <h2><span class="header-section-number">4.3</span> See the first few rows and columns</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">head</span>(hls)</a></code></pre></div>
+<p>Using <code>str(hls)</code> we see that there are 1000 respondents with 15 items. Each <code>V1...V15</code> represents an item.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">str</span>(hls)</a></code></pre></div>
+<pre><code>## tibble [1,000 x 15] (S3: tbl_df/tbl/data.frame)
+##  $ V1 : num [1:1000] 1 1 1 1 1 1 0 0 0 1 ...
+##  $ V2 : num [1:1000] 1 0 0 1 1 0 1 1 1 1 ...
+##  $ V3 : num [1:1000] 0 0 0 0 0 0 1 1 0 1 ...
+##  $ V4 : num [1:1000] 0 0 1 0 0 1 0 1 0 0 ...
+##  $ V5 : num [1:1000] 0 1 1 0 0 1 0 0 0 1 ...
+##  $ V6 : num [1:1000] 0 0 0 0 0 0 0 0 0 0 ...
+##  $ V7 : num [1:1000] 0 1 1 1 1 1 1 1 1 0 ...
+##  $ V8 : num [1:1000] 1 1 0 1 1 1 1 0 1 1 ...
+##  $ V9 : num [1:1000] 0 1 0 0 1 0 0 0 0 0 ...
+##  $ V10: num [1:1000] 1 1 1 0 1 1 1 1 1 1 ...
+##  $ V11: num [1:1000] 0 0 0 0 0 0 0 1 0 1 ...
+##  $ V12: num [1:1000] 0 0 0 0 0 0 0 0 0 0 ...
+##  $ V13: num [1:1000] 0 1 1 0 1 1 1 0 0 1 ...
+##  $ V14: num [1:1000] 0 1 1 1 0 1 0 1 0 0 ...
+##  $ V15: num [1:1000] 1 1 1 0 1 1 0 0 0 1 ...</code></pre>
+<p>We can see the first few rows with <code>head(hls)</code>. This shows us what the dataframe looks like.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">head</span>(hls)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 15
 ##      V1    V2    V3    V4    V5    V6    V7    V8    V9   V10   V11   V12   V13   V14   V15
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0     0     0     0     0     1     1     1     1     1     0     1     1     1     1
-## 2     0     0     0     0     0     1     1     1     0     1     0     1     1     1     1
-## 3     0     0     0     1     0     1     1     1     1     1     0     1     1     1     1
-## 4     0     0     0     0     0     1     0     0     0     1     0     0     1     1     1
-## 5     1     0     0     1     1     1     1     1     0     1     1     1     1     1     1
-## 6     0     0     0     0     0     0     1     1     1     1     0     0     1     1     0</code></pre>
-<p>If you want to see the whole dataset, view the data frame:</p>
+## 1     1     1     0     0     0     0     0     1     0     1     0     0     0     0     1
+## 2     1     0     0     0     1     0     1     1     1     1     0     0     1     1     1
+## 3     1     0     0     1     1     0     1     0     0     1     0     0     1     1     1
+## 4     1     1     0     0     0     0     1     1     0     0     0     0     0     1     0
+## 5     1     1     0     0     0     0     1     1     1     1     0     0     1     0     1
+## 6     1     0     0     1     1     0     1     1     0     1     0     0     1     1     1</code></pre>
+<p>If you want to see the whole dataframe:</p>
 <pre><code>View(hls)</code></pre>
-<p>Now we call the TAM library you installed in a prior step. This tells R to use the set of functions available in the <code>TAM</code> package.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">library</span>(TAM)</a></code></pre></div>
+<p>Now we call the TAM package you installed in a prior step to use the functions that come with the <code>TAM</code> package.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">library</span>(TAM)</a></code></pre></div>
 </div>
 <div id="the-rasch-model" class="section level2">
 <h2><span class="header-section-number">4.4</span> The Rasch Model</h2>
@@ -248,17 +264,18 @@ hls &lt;- read.csv(&quot;hls_dic_scale.csv&quot;)</code></pre>
 </div>
 <div id="running-the-rasch-model" class="section level2">
 <h2><span class="header-section-number">4.5</span> Running the Rasch model</h2>
-<p>This command runs a Rasch model on the selected data frame. Here, <code>mod1</code> is an object in R that “holds” the data from our Rasch model (along with a lot of other information). It’s essentially a large list. This is the main computation step, now we just select information that is stored in <code>mod1</code> or run <code>mod1</code> through further computation.</p>
+<p>We now run the Rasch model on the selected dataframe. Here, we store the estimates of the parameters described above in <code>mod1</code>. <code>mod1</code> will also contain other information such as model fit criteria, descriptive statistics, and even information about how long it took for the model to converge. It’s essentially a large list.</p>
+<p>This is the main computation step, now we just select information that is stored in <code>mod1</code> or run <code>mod1</code> through further computation.</p>
 <p>Note that the object <code>hls</code> has to contain only items and no other information.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">tam</span>(hls)</a></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">summary</span>(mod1)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">tam</span>(hls)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">summary</span>(mod1)</a></code></pre></div>
 <pre><code>## ------------------------------------------------------------
 ## TAM 3.5-19 (2020-05-05 22:45:39) 
 ## R version 3.5.2 (2018-12-20) x86_64, mingw32 | nodename=LAPTOP-K7402PLE | login=katzd 
 ## 
-## Date of Analysis: 2020-05-18 13:53:18 
-## Time difference of 0.03900194 secs
-## Computation time: 0.03900194 
+## Date of Analysis: 2020-05-19 10:51:40 
+## Time difference of 0.596998 secs
+## Computation time: 0.596998 
 ## 
 ## Multidimensional Item Response Model in TAM 
 ## 
@@ -267,11 +284,11 @@ hls &lt;- read.csv(&quot;hls_dic_scale.csv&quot;)</code></pre>
 ## tam.mml(resp = resp)
 ## 
 ## ------------------------------------------------------------
-## Number of iterations = 17 
+## Number of iterations = 13 
 ## Numeric integration with 21 integration points
 ## 
-## Deviance = 14687.12 
-## Log likelihood = -7343.56 
+## Deviance = 14988.06 
+## Log likelihood = -7494.03 
 ## Number of persons = 1000 
 ## Number of persons used = 1000 
 ## Number of items = 15 
@@ -281,25 +298,25 @@ hls &lt;- read.csv(&quot;hls_dic_scale.csv&quot;)</code></pre>
 ##     Regression parameters = 0 
 ##     Variance/covariance parameters = 1 
 ## 
-## AIC = 14719  | penalty=32    | AIC=-2*LL + 2*p 
-## AIC3 = 14735  | penalty=48    | AIC3=-2*LL + 3*p 
-## BIC = 14798  | penalty=110.52    | BIC=-2*LL + log(n)*p 
-## aBIC = 14747  | penalty=59.64    | aBIC=-2*LL + log((n-2)/24)*p  (adjusted BIC) 
-## CAIC = 14814  | penalty=126.52    | CAIC=-2*LL + [log(n)+1]*p  (consistent AIC) 
-## AICc = 14720  | penalty=32.55    | AICc=-2*LL + 2*p + 2*p*(p+1)/(n-p-1)  (bias corrected AIC) 
-## GHP = 0.49064     | GHP=( -LL + p ) / (#Persons * #Items)  (Gilula-Haberman log penalty) 
+## AIC = 15020  | penalty=32    | AIC=-2*LL + 2*p 
+## AIC3 = 15036  | penalty=48    | AIC3=-2*LL + 3*p 
+## BIC = 15099  | penalty=110.52    | BIC=-2*LL + log(n)*p 
+## aBIC = 15048  | penalty=59.64    | aBIC=-2*LL + log((n-2)/24)*p  (adjusted BIC) 
+## CAIC = 15115  | penalty=126.52    | CAIC=-2*LL + [log(n)+1]*p  (consistent AIC) 
+## AICc = 15021  | penalty=32.55    | AICc=-2*LL + 2*p + 2*p*(p+1)/(n-p-1)  (bias corrected AIC) 
+## GHP = 0.50067     | GHP=( -LL + p ) / (#Persons * #Items)  (Gilula-Haberman log penalty) 
 ## 
 ## ------------------------------------------------------------
 ## EAP Reliability
-## [1] 0.691
+## [1] 0.653
 ## ------------------------------------------------------------
 ## Covariances and Variances
 ##       [,1]
-## [1,] 1.028
+## [1,] 0.832
 ## ------------------------------------------------------------
 ## Correlations and Standard Deviations (in the diagonal)
 ##       [,1]
-## [1,] 1.014
+## [1,] 0.912
 ## ------------------------------------------------------------
 ## Regression Coefficients
 ##      [,1]
@@ -307,48 +324,47 @@ hls &lt;- read.csv(&quot;hls_dic_scale.csv&quot;)</code></pre>
 ## ------------------------------------------------------------
 ## Item Parameters -A*Xsi
 ##    item    N     M xsi.item AXsi_.Cat1 B.Cat1.Dim1
-## 1    V1 1000 0.182    1.793      1.793           1
-## 2    V2 1000 0.074    2.936      2.936           1
-## 3    V3 1000 0.175    1.848      1.848           1
-## 4    V4 1000 0.164    1.938      1.938           1
-## 5    V5 1000 0.280    1.139      1.139           1
-## 6    V6 1000 0.566   -0.325     -0.325           1
-## 7    V7 1000 0.440    0.292      0.292           1
-## 8    V8 1000 0.479    0.100      0.100           1
-## 9    V9 1000 0.435    0.316      0.316           1
-## 10  V10 1000 0.915   -2.769     -2.769           1
-## 11  V11 1000 0.123    2.317      2.317           1
-## 12  V12 1000 0.760   -1.386     -1.386           1
-## 13  V13 1000 0.936   -3.100     -3.100           1
-## 14  V14 1000 0.612   -0.555     -0.555           1
-## 15  V15 1000 0.541   -0.202     -0.202           1
+## 1    V1 1000 0.543   -0.204     -0.204           1
+## 2    V2 1000 0.783   -1.494     -1.494           1
+## 3    V3 1000 0.557   -0.270     -0.270           1
+## 4    V4 1000 0.399    0.483      0.483           1
+## 5    V5 1000 0.277    1.123      1.123           1
+## 6    V6 1000 0.084    2.714      2.714           1
+## 7    V7 1000 0.820   -1.757     -1.757           1
+## 8    V8 1000 0.783   -1.494     -1.494           1
+## 9    V9 1000 0.166    1.867      1.867           1
+## 10  V10 1000 0.896   -2.460     -2.460           1
+## 11  V11 1000 0.140    2.090      2.090           1
+## 12  V12 1000 0.081    2.757      2.757           1
+## 13  V13 1000 0.636   -0.657     -0.657           1
+## 14  V14 1000 0.278    1.118      1.118           1
+## 15  V15 1000 0.559   -0.280     -0.280           1
 ## 
 ## Item Parameters in IRT parameterization
 ##    item alpha   beta
-## 1    V1     1  1.793
-## 2    V2     1  2.936
-## 3    V3     1  1.848
-## 4    V4     1  1.938
-## 5    V5     1  1.139
-## 6    V6     1 -0.325
-## 7    V7     1  0.292
-## 8    V8     1  0.100
-## 9    V9     1  0.316
-## 10  V10     1 -2.769
-## 11  V11     1  2.317
-## 12  V12     1 -1.386
-## 13  V13     1 -3.100
-## 14  V14     1 -0.555
-## 15  V15     1 -0.202</code></pre>
+## 1    V1     1 -0.204
+## 2    V2     1 -1.494
+## 3    V3     1 -0.270
+## 4    V4     1  0.483
+## 5    V5     1  1.123
+## 6    V6     1  2.714
+## 7    V7     1 -1.757
+## 8    V8     1 -1.494
+## 9    V9     1  1.867
+## 10  V10     1 -2.460
+## 11  V11     1  2.090
+## 12  V12     1  2.757
+## 13  V13     1 -0.657
+## 14  V14     1  1.118
+## 15  V15     1 -0.280</code></pre>
 </div>
 <div id="item-difficulties" class="section level2">
 <h2><span class="header-section-number">4.6</span> Item Difficulties</h2>
 <p>We’ll extract difficulties (<code>xsi</code>) from the <code>mod1</code> object (<code>mod1</code> is like a large list). We’ll access this via <code>indexing</code>. The <code>$</code> sign means, access <code>mod1</code> and extract the object <code>xsi</code> which exists in <code>mod1</code>.</p>
-<p>Assign those values to an object in the environment called <code>diffic</code> using <code>&lt;-</code>, the assignment operator, like before</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">diffic &lt;-<span class="st"> </span>mod1<span class="op">$</span>xsi</a></code></pre></div>
-<pre><code>diffic</code></pre>
+<p>Assign those values to an object in the environment called <code>diffic</code> using <code>&lt;-</code>, the assignment operator, like before.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">diffic &lt;-<span class="st"> </span>mod1<span class="op">$</span>xsi</a></code></pre></div>
 <p>In the table below, we can see the item difficulties in logits in the column <code>xsi</code> and the standard error for each item <code>se.xsi</code>. One way to think of what the standard error tells us is whether item difficulties may overlap or not.</p>
-Higher <code>xsi</code> values indicate more difficult items. For instance, item Hls9 is harder than Hls8. The values are identified by constraining the mean of item difficulties to zero.
+Higher <code>xsi</code> values indicate more difficult items. For instance, item V9 is harder than V8. The values are identified by constraining the mean of item difficulties to zero.
 <table>
 <thead>
 <tr>
@@ -368,10 +384,10 @@ se.xsi
 V1
 </td>
 <td style="text-align:right;">
-1.7931307
+-0.2036664
 </td>
 <td style="text-align:right;">
-0.0879607
+0.0689484
 </td>
 </tr>
 <tr>
@@ -379,10 +395,10 @@ V1
 V2
 </td>
 <td style="text-align:right;">
-2.9362293
+-1.4943976
 </td>
 <td style="text-align:right;">
-0.1257291
+0.0817429
 </td>
 </tr>
 <tr>
@@ -390,10 +406,10 @@ V2
 V3
 </td>
 <td style="text-align:right;">
-1.8480436
+-0.2703805
 </td>
 <td style="text-align:right;">
-0.0891891
+0.0691222
 </td>
 </tr>
 <tr>
@@ -401,10 +417,10 @@ V3
 V4
 </td>
 <td style="text-align:right;">
-1.9375978
+0.4827133
 </td>
 <td style="text-align:right;">
-0.0913004
+0.0700034
 </td>
 </tr>
 <tr>
@@ -412,10 +428,10 @@ V4
 V5
 </td>
 <td style="text-align:right;">
-1.1392412
+1.1233668
 </td>
 <td style="text-align:right;">
-0.0767937
+0.0758845
 </td>
 </tr>
 <tr>
@@ -423,10 +439,10 @@ V5
 V6
 </td>
 <td style="text-align:right;">
--0.3249306
+2.7140642
 </td>
 <td style="text-align:right;">
-0.0703122
+0.1180693
 </td>
 </tr>
 <tr>
@@ -434,10 +450,10 @@ V6
 V7
 </td>
 <td style="text-align:right;">
-0.2917034
+-1.7574342
 </td>
 <td style="text-align:right;">
-0.0702564
+0.0871632
 </td>
 </tr>
 <tr>
@@ -445,10 +461,10 @@ V7
 V8
 </td>
 <td style="text-align:right;">
-0.1004752
+-1.4943976
 </td>
 <td style="text-align:right;">
-0.0698539
+0.0817429
 </td>
 </tr>
 <tr>
@@ -456,10 +472,10 @@ V8
 V9
 </td>
 <td style="text-align:right;">
-0.3164109
+1.8666294
 </td>
 <td style="text-align:right;">
-0.0703361
+0.0897760
 </td>
 </tr>
 <tr>
@@ -467,10 +483,10 @@ V9
 V10
 </td>
 <td style="text-align:right;">
--2.7690071
+-2.4598593
 </td>
 <td style="text-align:right;">
-0.1183709
+0.1078585
 </td>
 </tr>
 <tr>
@@ -478,10 +494,10 @@ V10
 V11
 </td>
 <td style="text-align:right;">
-2.3171095
+2.0897563
 </td>
 <td style="text-align:right;">
-0.1018562
+0.0957532
 </td>
 </tr>
 <tr>
@@ -489,10 +505,10 @@ V11
 V12
 </td>
 <td style="text-align:right;">
--1.3863076
+2.7565413
 </td>
 <td style="text-align:right;">
-0.0801577
+0.1199308
 </td>
 </tr>
 <tr>
@@ -500,10 +516,10 @@ V12
 V13
 </td>
 <td style="text-align:right;">
--3.1003020
+-0.6571436
 </td>
 <td style="text-align:right;">
-0.1338193
+0.0711147
 </td>
 </tr>
 <tr>
@@ -511,10 +527,10 @@ V13
 V14
 </td>
 <td style="text-align:right;">
--0.5553981
+1.1176141
 </td>
 <td style="text-align:right;">
-0.0713517
+0.0758087
 </td>
 </tr>
 <tr>
@@ -522,10 +538,10 @@ V14
 V15
 </td>
 <td style="text-align:right;">
--0.2019536
+-0.2799402
 </td>
 <td style="text-align:right;">
-0.0699871
+0.0691512
 </td>
 </tr>
 </tbody>
@@ -533,37 +549,38 @@ V15
 </div>
 <div id="visualize" class="section level2">
 <h2><span class="header-section-number">4.7</span> Visualize</h2>
-<p>We may want to visualize each item characteristic curve (ICC) for each item. These plots plot the expected value (blue, smooth line) given that the data fits the Rasch model, and the observed black line (a binned solution). Each plot represents a single item. They visualize the probability of a respondent getting the item correct given their ability level. For instance, for item V1, the blue line shows that a person at 1 logit (x-axis) has something like a 30% probability of getting the item correct (predicted).
+<p>We may want to visualize each item characteristic curve (ICC) for each item. These plots plot the expected value (blue, smooth line) given that the data fits the Rasch model, and the observed black line (a binned solution). Each plot represents a single item. They visualize the probability of a respondent getting the item correct given their ability level. For instance, for item V1, the blue line shows that a person at 1 logit (x-axis) has something like a 95% probability of getting the item correct (predicted).
 Get Item Characteristic Curves</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">plot</span>(mod1)</a></code></pre></div>
-<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  1.2824 
-## Iteration in WLE/MLE estimation  2   | Maximal change  0.2808 
-## Iteration in WLE/MLE estimation  3   | Maximal change  0.01 
-## Iteration in WLE/MLE estimation  4   | Maximal change  0.0012 
-## Iteration in WLE/MLE estimation  5   | Maximal change  1e-04 
-## Iteration in WLE/MLE estimation  6   | Maximal change  0 
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">plot</span>(mod1)</a></code></pre></div>
+<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  1.3794 
+## Iteration in WLE/MLE estimation  2   | Maximal change  0.6184 
+## Iteration in WLE/MLE estimation  3   | Maximal change  0.0828 
+## Iteration in WLE/MLE estimation  4   | Maximal change  0.0111 
+## Iteration in WLE/MLE estimation  5   | Maximal change  0.0019 
+## Iteration in WLE/MLE estimation  6   | Maximal change  3e-04 
+## Iteration in WLE/MLE estimation  7   | Maximal change  1e-04 
 ## ----
-##  WLE Reliability= 0.666</code></pre>
+##  WLE Reliability= 0.631</code></pre>
 <p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-1.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-2.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-3.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-4.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-5.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-6.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-7.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-8.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-9.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-10.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-11.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-12.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-13.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-14.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-16-15.png" width="672" /></p>
 <pre><code>## ....................................................
 ##  Plots exported in png format into folder:
-##  C:/Users/katzd/Desktop/Rprojects/Rasch_BIOME/Plots</code></pre>
+##  C:/Users/katzd/Desktop/Rprojects/Rasch_BIOME/DBER_Rasch-data/Plots</code></pre>
 <p>Note that for items V1 and V2, the black line, the observed probabilities, deviate quite a lot from the blue lines, the expected probabilities. Contrast this with item V5. For item V1, the black line seems to be steeper than the blue line, whereas for V2, the black line is quite a bit shallower. These lines hint at different types of item misfit, which we’ll introduce later. Roughly, in the shallower case, we’re not able to differentiate between respondents very easily - it probably means there is too much randomness. In the steep case, it might be too easy to differentiate - the item isn’t informative.</p>
 </div>
 <div id="summarizing-the-distribution-of-difficulties" class="section level2">
 <h2><span class="header-section-number">4.8</span> Summarizing the distribution of difficulties</h2>
 <p>We can visualize and summarize the distribution of item difficulties below, but there will be a better way, called a Wright Map, that we’ll introduce later.</p>
 <p>The methods below use no packages to visualize and summarize.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">hist</span>(diffic<span class="op">$</span>xsi, <span class="dt">breaks=</span><span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">hist</span>(diffic<span class="op">$</span>xsi, <span class="dt">breaks=</span><span class="dv">10</span>)</a></code></pre></div>
 <p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># If you want to see the items as a scatter plot</span></a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="kw">plot</span>(diffic<span class="op">$</span>xsi, <span class="dt">main=</span><span class="st">&quot;Scatter Plot of Item Difficulties&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Item Number&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Difficulty in Logits&quot;</span>, <span class="dt">pch=</span><span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb19-3" title="3"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># If you want to see the items as a scatter plot</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">plot</span>(diffic<span class="op">$</span>xsi, <span class="dt">main=</span><span class="st">&quot;Scatter Plot of Item Difficulties&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Item Number&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Difficulty in Logits&quot;</span>, <span class="dt">pch=</span><span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))</a></code></pre></div>
 <p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">mean</span>(diffic<span class="op">$</span>xsi)</a></code></pre></div>
-<pre><code>## [1] 0.2894695</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">sd</span>(diffic<span class="op">$</span>xsi)</a></code></pre></div>
-<pre><code>## [1] 1.778192</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">mean</span>(diffic<span class="op">$</span>xsi)</a></code></pre></div>
+<pre><code>## [1] 0.2355644</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">sd</span>(diffic<span class="op">$</span>xsi)</a></code></pre></div>
+<pre><code>## [1] 1.668156</code></pre>
 <div id="exercise" class="section level3">
 <h3><span class="header-section-number">4.8.1</span> Exercise:</h3>
 <ol style="list-style-type: decimal">
@@ -574,8 +591,9 @@ Get Item Characteristic Curves</p>
 </div>
 <div id="item-fit" class="section level2">
 <h2><span class="header-section-number">4.9</span> Item Fit</h2>
-<p>Let’s find out if the data fit the model. Use the <code>tam.fit</code> function to compute fit statistics, then display.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">fit &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(mod1)</a></code></pre></div>
+<p>Let’s find out if the data fit the model. Use the <code>tam.fit</code> function to compute fit statistics, then display. We note that items V1 and V2 have outfits that are drastically different from the items’ infit values. We also note that infit values of V1 and V2 are different from any of the other items. We note that V1 is “over fitting”, it’s outfit and infit values being well below 1, while V2 is “underfitting.” This means that item V1 is too predictable - the amount of information is well predicted from other items which means it provides little new information above and beyond the other items. On the other hand, the underfitting V2 item has too much randomness.</p>
+<p>However, outfit is “outlier” sensitive whereas “infit” is not. This implies that for V2 there might be a few responses that are particularly random/unexpected.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">fit &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(mod1)</a></code></pre></div>
 <pre><code>## Item fit calculation based on 15 simulations
 ## |**********|
 ## |----------|</code></pre>
@@ -618,28 +636,28 @@ Infit_pholm
 V1
 </td>
 <td style="text-align:right;">
-0.6388020
+0.7669447
 </td>
 <td style="text-align:right;">
--8.1238879
-</td>
-<td style="text-align:right;">
-0.0000000
+-10.3942739
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-0.8332914
+0.0000000
 </td>
 <td style="text-align:right;">
--3.4438172
+0.8127966
 </td>
 <td style="text-align:right;">
-0.0005736
+-8.1952747
 </td>
 <td style="text-align:right;">
-0.0086034
+0.0000000
+</td>
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
@@ -647,28 +665,28 @@ V1
 V2
 </td>
 <td style="text-align:right;">
-3.5650284
+2.3929488
 </td>
 <td style="text-align:right;">
-16.4285879
-</td>
-<td style="text-align:right;">
-0.0000000
+23.0859552
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.2330542
+0.0000000
 </td>
 <td style="text-align:right;">
-2.2818995
+1.4667762
 </td>
 <td style="text-align:right;">
-0.0224953
+9.3301329
 </td>
 <td style="text-align:right;">
-0.3149338
+0.0000000
+</td>
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
@@ -676,28 +694,28 @@ V2
 V3
 </td>
 <td style="text-align:right;">
-1.0375764
+0.9702286
 </td>
 <td style="text-align:right;">
-0.6972261
+-1.2184631
 </td>
 <td style="text-align:right;">
-0.4856613
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-1.0351031
-</td>
-<td style="text-align:right;">
-0.6725832
-</td>
-<td style="text-align:right;">
-0.5012125
+0.2230481
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9747790
+</td>
+<td style="text-align:right;">
+-1.0253891
+</td>
+<td style="text-align:right;">
+0.3051796
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -705,28 +723,28 @@ V3
 V4
 </td>
 <td style="text-align:right;">
-0.9381931
+0.9485483
 </td>
 <td style="text-align:right;">
--1.1272402
+-1.9937232
 </td>
 <td style="text-align:right;">
-0.2596410
+0.0461823
 </td>
 <td style="text-align:right;">
-1.0000000
+0.5541877
 </td>
 <td style="text-align:right;">
-0.9692738
+0.9645319
 </td>
 <td style="text-align:right;">
--0.5468828
+-1.3636983
 </td>
 <td style="text-align:right;">
-0.5844592
+0.1726625
 </td>
 <td style="text-align:right;">
-1.0000000
+1
 </td>
 </tr>
 <tr>
@@ -734,28 +752,28 @@ V4
 V5
 </td>
 <td style="text-align:right;">
-1.0380682
+0.9627818
 </td>
 <td style="text-align:right;">
-1.0351397
+-1.0638527
 </td>
 <td style="text-align:right;">
-0.3006037
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-1.0337433
-</td>
-<td style="text-align:right;">
-0.9242960
-</td>
-<td style="text-align:right;">
-0.3553322
+0.2873954
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9807184
+</td>
+<td style="text-align:right;">
+-0.5421342
+</td>
+<td style="text-align:right;">
+0.5877261
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -763,28 +781,28 @@ V5
 V6
 </td>
 <td style="text-align:right;">
-0.9978116
+0.8081372
 </td>
 <td style="text-align:right;">
--0.0873572
+-2.2795260
 </td>
 <td style="text-align:right;">
-0.9303876
+0.0226358
 </td>
 <td style="text-align:right;">
-1.0000000
+0.2942656
 </td>
 <td style="text-align:right;">
-1.0006512
+0.9704122
 </td>
 <td style="text-align:right;">
-0.0274816
+-0.3081639
 </td>
 <td style="text-align:right;">
-0.9780756
+0.7579576
 </td>
 <td style="text-align:right;">
-1.0000000
+1
 </td>
 </tr>
 <tr>
@@ -792,28 +810,28 @@ V6
 V7
 </td>
 <td style="text-align:right;">
-0.9509068
+0.9167328
 </td>
 <td style="text-align:right;">
--1.8824956
+-1.6704985
 </td>
 <td style="text-align:right;">
-0.0597688
-</td>
-<td style="text-align:right;">
-0.7769939
-</td>
-<td style="text-align:right;">
-0.9651132
-</td>
-<td style="text-align:right;">
--1.3277963
-</td>
-<td style="text-align:right;">
-0.1842454
+0.0948208
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9541245
+</td>
+<td style="text-align:right;">
+-0.8983136
+</td>
+<td style="text-align:right;">
+0.3690184
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -821,28 +839,28 @@ V7
 V8
 </td>
 <td style="text-align:right;">
-0.9707081
+0.9870995
 </td>
 <td style="text-align:right;">
--1.1478423
+-0.2923790
 </td>
 <td style="text-align:right;">
-0.2510337
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-0.9747175
-</td>
-<td style="text-align:right;">
--0.9843880
-</td>
-<td style="text-align:right;">
-0.3249248
+0.7699968
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9951263
+</td>
+<td style="text-align:right;">
+-0.1012133
+</td>
+<td style="text-align:right;">
+0.9193811
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -850,28 +868,28 @@ V8
 V9
 </td>
 <td style="text-align:right;">
-0.9749483
+0.9154150
 </td>
 <td style="text-align:right;">
--0.9454659
+-1.5885230
 </td>
 <td style="text-align:right;">
-0.3444211
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-0.9776520
-</td>
-<td style="text-align:right;">
--0.8373488
-</td>
-<td style="text-align:right;">
-0.4023965
+0.1121681
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9747039
+</td>
+<td style="text-align:right;">
+-0.4520391
+</td>
+<td style="text-align:right;">
+0.6512408
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -879,28 +897,28 @@ V9
 V10
 </td>
 <td style="text-align:right;">
-1.0016383
+0.9883037
 </td>
 <td style="text-align:right;">
-0.0190476
+-0.1426354
 </td>
 <td style="text-align:right;">
-0.9848031
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-1.0040901
-</td>
-<td style="text-align:right;">
-0.0734994
-</td>
-<td style="text-align:right;">
-0.9414088
+0.8865782
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9848466
+</td>
+<td style="text-align:right;">
+-0.1763003
+</td>
+<td style="text-align:right;">
+0.8600581
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -908,28 +926,28 @@ V10
 V11
 </td>
 <td style="text-align:right;">
-0.9766121
+1.0068112
 </td>
 <td style="text-align:right;">
--0.3416369
+0.1124230
 </td>
 <td style="text-align:right;">
-0.7326242
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-0.9980222
-</td>
-<td style="text-align:right;">
--0.0085110
-</td>
-<td style="text-align:right;">
-0.9932093
+0.9104881
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9925811
+</td>
+<td style="text-align:right;">
+-0.1035408
+</td>
+<td style="text-align:right;">
+0.9175338
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -937,28 +955,28 @@ V11
 V12
 </td>
 <td style="text-align:right;">
-1.0496531
+0.8676547
 </td>
 <td style="text-align:right;">
-1.1883366
+-1.5147423
 </td>
 <td style="text-align:right;">
-0.2347008
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-1.0206799
-</td>
-<td style="text-align:right;">
-0.5145835
-</td>
-<td style="text-align:right;">
-0.6068441
+0.1298377
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9690969
+</td>
+<td style="text-align:right;">
+-0.3170988
+</td>
+<td style="text-align:right;">
+0.7511687
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -966,28 +984,28 @@ V12
 V13
 </td>
 <td style="text-align:right;">
-0.8522494
+0.9772372
 </td>
 <td style="text-align:right;">
--1.4662375
+-0.8194615
 </td>
 <td style="text-align:right;">
-0.1425836
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-1.0063827
-</td>
-<td style="text-align:right;">
-0.0924136
-</td>
-<td style="text-align:right;">
-0.9263695
+0.4125232
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9837977
+</td>
+<td style="text-align:right;">
+-0.5777881
+</td>
+<td style="text-align:right;">
+0.5634072
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -995,28 +1013,28 @@ V13
 V14
 </td>
 <td style="text-align:right;">
-0.9600876
+0.9778966
 </td>
 <td style="text-align:right;">
--1.4375323
+-0.6251861
 </td>
 <td style="text-align:right;">
-0.1505668
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-0.9740967
-</td>
-<td style="text-align:right;">
--0.9261135
-</td>
-<td style="text-align:right;">
-0.3543870
+0.5318489
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9922670
+</td>
+<td style="text-align:right;">
+-0.2106280
+</td>
+<td style="text-align:right;">
+0.8331776
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -1024,43 +1042,37 @@ V14
 V15
 </td>
 <td style="text-align:right;">
-0.9798498
+0.9586176
 </td>
 <td style="text-align:right;">
--0.7803277
+-1.6903723
 </td>
 <td style="text-align:right;">
-0.4351980
-</td>
-<td style="text-align:right;">
-1.0000000
-</td>
-<td style="text-align:right;">
-0.9818834
-</td>
-<td style="text-align:right;">
--0.6974359
-</td>
-<td style="text-align:right;">
-0.4855301
+0.0909568
 </td>
 <td style="text-align:right;">
 1.0000000
+</td>
+<td style="text-align:right;">
+0.9636556
+</td>
+<td style="text-align:right;">
+-1.4794838
+</td>
+<td style="text-align:right;">
+0.1390111
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 </tbody>
 </table>
-<div id="exercise-1" class="section level3">
-<h3><span class="header-section-number">4.9.1</span> Exercise:</h3>
-<ol style="list-style-type: decimal">
-<li>Look at the <code>Wright Map</code> and the histograms of person abilities (<span class="math inline">\(\theta_p\)</span>) and item difficulties (<span class="math inline">\(\delta_i\)</span>). Do you think this instrument is well-targeted for this sample? 2. How might it be optimized?</li>
-<li>Relative to other items, which item fit our model the worst?</li>
-</ol>
 </div>
-<div id="optional-understanding-the-model" class="section level3">
-<h3><span class="header-section-number">4.9.2</span> Optional: Understanding the model</h3>
+<div id="optional-understanding-the-model-more-deeply" class="section level2">
+<h2><span class="header-section-number">4.10</span> Optional: Understanding the model more deeply</h2>
 <p><code>TAM</code> also provides some descriptive statistics.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">item_prop &lt;-<span class="st"> </span>mod1<span class="op">$</span>item</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">item_prop &lt;-<span class="st"> </span>mod1<span class="op">$</span>item</a></code></pre></div>
 <pre><code>item_prop</code></pre>
 <table>
 <thead>
@@ -1099,13 +1111,13 @@ V1
 1000
 </td>
 <td style="text-align:right;">
-0.182
+0.543
 </td>
 <td style="text-align:right;">
-1.7930554
+-0.2036849
 </td>
 <td style="text-align:right;">
-1.7930554
+-0.2036849
 </td>
 <td style="text-align:right;">
 1
@@ -1122,13 +1134,13 @@ V2
 1000
 </td>
 <td style="text-align:right;">
-0.074
+0.783
 </td>
 <td style="text-align:right;">
-2.9361446
+-1.4944316
 </td>
 <td style="text-align:right;">
-2.9361446
+-1.4944316
 </td>
 <td style="text-align:right;">
 1
@@ -1145,13 +1157,13 @@ V3
 1000
 </td>
 <td style="text-align:right;">
-0.175
+0.557
 </td>
 <td style="text-align:right;">
-1.8479678
+-0.2703998
 </td>
 <td style="text-align:right;">
-1.8479678
+-0.2703998
 </td>
 <td style="text-align:right;">
 1
@@ -1168,13 +1180,13 @@ V4
 1000
 </td>
 <td style="text-align:right;">
-0.164
+0.399
 </td>
 <td style="text-align:right;">
-1.9375212
+0.4827036
 </td>
 <td style="text-align:right;">
-1.9375212
+0.4827036
 </td>
 <td style="text-align:right;">
 1
@@ -1191,13 +1203,13 @@ V5
 1000
 </td>
 <td style="text-align:right;">
-0.280
+0.277
 </td>
 <td style="text-align:right;">
-1.1391729
+1.1233649
 </td>
 <td style="text-align:right;">
-1.1391729
+1.1233649
 </td>
 <td style="text-align:right;">
 1
@@ -1214,13 +1226,13 @@ V6
 1000
 </td>
 <td style="text-align:right;">
-0.566
+0.084
 </td>
 <td style="text-align:right;">
--0.3249806
+2.7140773
 </td>
 <td style="text-align:right;">
--0.3249806
+2.7140773
 </td>
 <td style="text-align:right;">
 1
@@ -1237,13 +1249,13 @@ V7
 1000
 </td>
 <td style="text-align:right;">
-0.440
+0.820
 </td>
 <td style="text-align:right;">
-0.2916454
+-1.7574709
 </td>
 <td style="text-align:right;">
-0.2916454
+-1.7574709
 </td>
 <td style="text-align:right;">
 1
@@ -1260,13 +1272,13 @@ V8
 1000
 </td>
 <td style="text-align:right;">
-0.479
+0.783
 </td>
 <td style="text-align:right;">
-0.1004197
+-1.4944316
 </td>
 <td style="text-align:right;">
-0.1004197
+-1.4944316
 </td>
 <td style="text-align:right;">
 1
@@ -1283,13 +1295,13 @@ V9
 1000
 </td>
 <td style="text-align:right;">
-0.435
+0.166
 </td>
 <td style="text-align:right;">
-0.3163527
+1.8666354
 </td>
 <td style="text-align:right;">
-0.3163527
+1.8666354
 </td>
 <td style="text-align:right;">
 1
@@ -1306,13 +1318,13 @@ V10
 1000
 </td>
 <td style="text-align:right;">
-0.915
+0.896
 </td>
 <td style="text-align:right;">
--2.7690302
+-2.4599022
 </td>
 <td style="text-align:right;">
--2.7690302
+-2.4599022
 </td>
 <td style="text-align:right;">
 1
@@ -1329,13 +1341,13 @@ V11
 1000
 </td>
 <td style="text-align:right;">
-0.123
+0.140
 </td>
 <td style="text-align:right;">
-2.3170294
+2.0897645
 </td>
 <td style="text-align:right;">
-2.3170294
+2.0897645
 </td>
 <td style="text-align:right;">
 1
@@ -1352,13 +1364,13 @@ V12
 1000
 </td>
 <td style="text-align:right;">
-0.760
+0.081
 </td>
 <td style="text-align:right;">
--1.3863445
+2.7565547
 </td>
 <td style="text-align:right;">
--1.3863445
+2.7565547
 </td>
 <td style="text-align:right;">
 1
@@ -1375,13 +1387,13 @@ V13
 1000
 </td>
 <td style="text-align:right;">
-0.936
+0.636
 </td>
 <td style="text-align:right;">
--3.1003226
+-0.6571679
 </td>
 <td style="text-align:right;">
--3.1003226
+-0.6571679
 </td>
 <td style="text-align:right;">
 1
@@ -1398,13 +1410,13 @@ V14
 1000
 </td>
 <td style="text-align:right;">
-0.612
+0.278
 </td>
 <td style="text-align:right;">
--0.5554452
+1.1176121
 </td>
 <td style="text-align:right;">
--0.5554452
+1.1176121
 </td>
 <td style="text-align:right;">
 1
@@ -1421,13 +1433,13 @@ V15
 1000
 </td>
 <td style="text-align:right;">
-0.541
+0.559
 </td>
 <td style="text-align:right;">
--0.2020052
+-0.2799597
 </td>
 <td style="text-align:right;">
--0.2020052
+-0.2799597
 </td>
 <td style="text-align:right;">
 1
@@ -1435,31 +1447,661 @@ V15
 </tr>
 </tbody>
 </table>
-<p>Note, the total number of people who answered an item correctly is a <code>sufficient</code> statistic for calculating an item’s difficulty. Said another way, the number of correct answers, or, number of people who endorse a category increases monotonically with the item difficulty (of course, this does not mean you can just replace the Rasch model with a sum score since we’re using the Rasch model to test whether summing items at all is a reasonable thing to do).</p>
-<p>To see this, we can find the total number of people who endorsed the “agree” category for each <code>Hls</code> item above. The table provides the proportion who endorsed the higher category in the <code>M</code> column. For instance, item Hls1 had 15.77% of people endorse the “agree” category (1= agree, 0= disagree). In the N column, we see that 317 people answered the item in total.</p>
-<p>That means that <span class="math inline">\(317*.1577\)</span> = 50 people answering the item correctly. Note, the estimated difficulty found in the column is 2.43 logits.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co"># Confirm that the total number of endorsements (coded 1) is 50 for Hls1: sum down the column containing all answers to Hls1 in the raw data.</span></a>
-<a class="sourceLine" id="cb29-2" title="2"></a>
-<a class="sourceLine" id="cb29-3" title="3"></a>
-<a class="sourceLine" id="cb29-4" title="4"><span class="kw">apply</span>(hls[<span class="dv">1</span>], <span class="dv">2</span>, sum)</a></code></pre></div>
+<p>Note, the total number of people who answered an item correctly is a <code>sufficient statistic</code> for calculating an item’s difficulty. Said another way, the number of correct answers, or, number of people who endorse a category increases monotonically with the item difficulty (of course, this does not mean you can just replace the Rasch model with a sum score since we’re using the Rasch model to test whether summing items at all is a reasonable thing to do).</p>
+<p>To see this, we can find the total number of people who endorsed the “agree” category for each item above. The table provides the proportion who endorsed the higher category in the <code>M</code> column. For instance, item V1 had 54.3% of people endorse the “agree” category (1= agree, 0= disagree). In the N column, we see that 1000 people answered the item in total.</p>
+<p>That means that <span class="math inline">\(1000*.543\)</span> = 543 people answering the item correctly. Note, the estimated difficulty found in the column is -.203 logits.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Confirm that the total number of endorsements (coded 1) is 543 for item V1: sum down the column containing all answers to Hls1 in the raw data.</span></a>
+<a class="sourceLine" id="cb30-2" title="2"></a>
+<a class="sourceLine" id="cb30-3" title="3"></a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="kw">apply</span>(hls[<span class="dv">1</span>], <span class="dv">2</span>, sum)</a></code></pre></div>
 <pre><code>##  V1 
-## 182</code></pre>
-<p>However, we see that for item Hls5, 27% of people endorsed that item and the estimated mean item difficulty in <code>xsi.item</code> is 1.50 logits.</p>
+## 543</code></pre>
+<p>However, we see that for item V5, 28% of people endorsed that item and the estimated mean item difficulty in <code>xsi.item</code> is 1.12 logits.</p>
 <p>The correlation between total number of endorsements per item and the estimated item difficulty can be computed as follows.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># create a column in the item_prop object that has the total number of endorsements for each item</span></a>
-<a class="sourceLine" id="cb31-2" title="2">item_prop &lt;-<span class="st"> </span><span class="kw">mutate</span>(item_prop, <span class="dt">total_endorsed =</span>N<span class="op">*</span>M)</a>
-<a class="sourceLine" id="cb31-3" title="3"></a>
-<a class="sourceLine" id="cb31-4" title="4"><span class="kw">cor</span>(item_prop<span class="op">$</span>xsi.item, item_prop<span class="op">$</span>total_endorsed)</a></code></pre></div>
-<pre><code>## [1] -0.994751</code></pre>
-<p>We see that the correlation between item difficulties and total endorsements per item is nearly perfect -.97. As the number of endorsements go down, the estimated difficulty of the item increase.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">ggplot</span>(item_prop, <span class="kw">aes</span>(<span class="dt">x=</span>total_endorsed, <span class="dt">y=</span>xsi.item)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Estimated Item Difficulties (logits)&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Total Number of Endorsements for an item&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb33-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Relationship between estimated item difficulty and total endorsements&quot;</span>)</a></code></pre></div>
-<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># create a column in the item_prop object that has the total number of endorsements for each item</span></a>
+<a class="sourceLine" id="cb32-2" title="2">item_prop &lt;-<span class="st"> </span><span class="kw">mutate</span>(item_prop, <span class="dt">total_endorsed =</span>N<span class="op">*</span>M)</a>
+<a class="sourceLine" id="cb32-3" title="3"></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="kw">cor</span>(item_prop<span class="op">$</span>xsi.item, item_prop<span class="op">$</span>total_endorsed)</a></code></pre></div>
+<pre><code>## [1] -0.9955398</code></pre>
+<p>We see that the correlation between item difficulties and total endorsements per item is nearly perfect -.99554 (aka, nearly 1). As the number of endorsements go down, the estimated “difficulty” of the item increase.</p>
+<p>What happens if we remove the underfitting item (V2) which occupies the second position in the dataframe? We notice that the fit statistics “shift up.” This shows how Rasch mean square fit statistics are related to each other. The item with the most randomness is removed, so items are relatively “more random” comapred to each other.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="co">#check item difficulties</span></a>
+<a class="sourceLine" id="cb34-2" title="2">diffic2 &lt;-<span class="st"> </span>mod2<span class="op">$</span>xsi</a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="kw">kable</span>(diffic2)</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+xsi
+</th>
+<th style="text-align:right;">
+se.xsi
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+V1
+</td>
+<td style="text-align:right;">
+-0.2190547
+</td>
+<td style="text-align:right;">
+0.0719075
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V3
+</td>
+<td style="text-align:right;">
+-0.2916158
+</td>
+<td style="text-align:right;">
+0.0720863
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V4
+</td>
+<td style="text-align:right;">
+0.5269506
+</td>
+<td style="text-align:right;">
+0.0729194
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V5
+</td>
+<td style="text-align:right;">
+1.2199237
+</td>
+<td style="text-align:right;">
+0.0787718
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V6
+</td>
+<td style="text-align:right;">
+2.9110436
+</td>
+<td style="text-align:right;">
+0.1208199
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V7
+</td>
+<td style="text-align:right;">
+-1.9003808
+</td>
+<td style="text-align:right;">
+0.0902456
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V8
+</td>
+<td style="text-align:right;">
+-1.6178133
+</td>
+<td style="text-align:right;">
+0.0848089
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V9
+</td>
+<td style="text-align:right;">
+2.0162113
+</td>
+<td style="text-align:right;">
+0.0926259
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V10
+</td>
+<td style="text-align:right;">
+-2.6486074
+</td>
+<td style="text-align:right;">
+0.1109432
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V11
+</td>
+<td style="text-align:right;">
+2.2532430
+</td>
+<td style="text-align:right;">
+0.0985856
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V12
+</td>
+<td style="text-align:right;">
+2.9555067
+</td>
+<td style="text-align:right;">
+0.1226735
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V13
+</td>
+<td style="text-align:right;">
+-0.7120166
+</td>
+<td style="text-align:right;">
+0.0741102
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V14
+</td>
+<td style="text-align:right;">
+1.2137246
+</td>
+<td style="text-align:right;">
+0.0786962
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V15
+</td>
+<td style="text-align:right;">
+-0.3020129
+</td>
+<td style="text-align:right;">
+0.0721160
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># Check item fit</span></a>
+<a class="sourceLine" id="cb35-2" title="2">fit2 &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(mod2)</a></code></pre></div>
+<pre><code>## Item fit calculation based on 15 simulations
+## |**********|
+## |----------|</code></pre>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-26">Table 4.1: </span>Item fit statistics when the underfitting item is removed
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+parameter
+</th>
+<th style="text-align:right;">
+Outfit
+</th>
+<th style="text-align:right;">
+Outfit_t
+</th>
+<th style="text-align:right;">
+Outfit_p
+</th>
+<th style="text-align:right;">
+Outfit_pholm
+</th>
+<th style="text-align:right;">
+Infit
+</th>
+<th style="text-align:right;">
+Infit_t
+</th>
+<th style="text-align:right;">
+Infit_p
+</th>
+<th style="text-align:right;">
+Infit_pholm
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+V1
+</td>
+<td style="text-align:right;">
+0.7004960
+</td>
+<td style="text-align:right;">
+-11.5392770
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.7769383
+</td>
+<td style="text-align:right;">
+-8.3166826
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V3
+</td>
+<td style="text-align:right;">
+1.0419122
+</td>
+<td style="text-align:right;">
+1.4091051
+</td>
+<td style="text-align:right;">
+0.1588041
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0237367
+</td>
+<td style="text-align:right;">
+0.8074070
+</td>
+<td style="text-align:right;">
+0.4194320
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V4
+</td>
+<td style="text-align:right;">
+1.0132640
+</td>
+<td style="text-align:right;">
+0.4353877
+</td>
+<td style="text-align:right;">
+0.6632810
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0107592
+</td>
+<td style="text-align:right;">
+0.3627955
+</td>
+<td style="text-align:right;">
+0.7167576
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V5
+</td>
+<td style="text-align:right;">
+1.0628771
+</td>
+<td style="text-align:right;">
+1.6128536
+</td>
+<td style="text-align:right;">
+0.1067763
+</td>
+<td style="text-align:right;">
+0.8542105
+</td>
+<td style="text-align:right;">
+1.0268300
+</td>
+<td style="text-align:right;">
+0.7099432
+</td>
+<td style="text-align:right;">
+0.4777394
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V6
+</td>
+<td style="text-align:right;">
+0.8244831
+</td>
+<td style="text-align:right;">
+-2.1221896
+</td>
+<td style="text-align:right;">
+0.0338218
+</td>
+<td style="text-align:right;">
+0.3720400
+</td>
+<td style="text-align:right;">
+0.9802194
+</td>
+<td style="text-align:right;">
+-0.2045923
+</td>
+<td style="text-align:right;">
+0.8378907
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V7
+</td>
+<td style="text-align:right;">
+0.9956839
+</td>
+<td style="text-align:right;">
+-0.0842244
+</td>
+<td style="text-align:right;">
+0.9328781
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9902163
+</td>
+<td style="text-align:right;">
+-0.1764203
+</td>
+<td style="text-align:right;">
+0.8599637
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V8
+</td>
+<td style="text-align:right;">
+1.1153974
+</td>
+<td style="text-align:right;">
+2.4444691
+</td>
+<td style="text-align:right;">
+0.0145066
+</td>
+<td style="text-align:right;">
+0.1885852
+</td>
+<td style="text-align:right;">
+1.0465136
+</td>
+<td style="text-align:right;">
+1.0186779
+</td>
+<td style="text-align:right;">
+0.3083559
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V9
+</td>
+<td style="text-align:right;">
+0.9827192
+</td>
+<td style="text-align:right;">
+-0.3395291
+</td>
+<td style="text-align:right;">
+0.7342112
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0123142
+</td>
+<td style="text-align:right;">
+0.2363601
+</td>
+<td style="text-align:right;">
+0.8131533
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V10
+</td>
+<td style="text-align:right;">
+1.1469949
+</td>
+<td style="text-align:right;">
+1.8297402
+</td>
+<td style="text-align:right;">
+0.0672888
+</td>
+<td style="text-align:right;">
+0.6728880
+</td>
+<td style="text-align:right;">
+1.0336032
+</td>
+<td style="text-align:right;">
+0.4572013
+</td>
+<td style="text-align:right;">
+0.6475264
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V11
+</td>
+<td style="text-align:right;">
+1.1473426
+</td>
+<td style="text-align:right;">
+2.2713861
+</td>
+<td style="text-align:right;">
+0.0231236
+</td>
+<td style="text-align:right;">
+0.2774834
+</td>
+<td style="text-align:right;">
+1.0268270
+</td>
+<td style="text-align:right;">
+0.4480666
+</td>
+<td style="text-align:right;">
+0.6541051
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V12
+</td>
+<td style="text-align:right;">
+0.9434359
+</td>
+<td style="text-align:right;">
+-0.6476966
+</td>
+<td style="text-align:right;">
+0.5171812
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+0.9853558
+</td>
+<td style="text-align:right;">
+-0.1378900
+</td>
+<td style="text-align:right;">
+0.8903274
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V13
+</td>
+<td style="text-align:right;">
+1.0553148
+</td>
+<td style="text-align:right;">
+1.6930127
+</td>
+<td style="text-align:right;">
+0.0904530
+</td>
+<td style="text-align:right;">
+0.8140774
+</td>
+<td style="text-align:right;">
+1.0398899
+</td>
+<td style="text-align:right;">
+1.2349704
+</td>
+<td style="text-align:right;">
+0.2168415
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V14
+</td>
+<td style="text-align:right;">
+1.0428463
+</td>
+<td style="text-align:right;">
+1.1201062
+</td>
+<td style="text-align:right;">
+0.2626685
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0327186
+</td>
+<td style="text-align:right;">
+0.8664534
+</td>
+<td style="text-align:right;">
+0.3862416
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V15
+</td>
+<td style="text-align:right;">
+1.0251849
+</td>
+<td style="text-align:right;">
+0.8444249
+</td>
+<td style="text-align:right;">
+0.3984320
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+<td style="text-align:right;">
+1.0047452
+</td>
+<td style="text-align:right;">
+0.1628766
+</td>
+<td style="text-align:right;">
+0.8706156
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># Check correlations</span></a>
+<a class="sourceLine" id="cb37-2" title="2">item_prop2 &lt;-<span class="st"> </span>mod2<span class="op">$</span>item</a>
+<a class="sourceLine" id="cb37-3" title="3"></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="co"># Get the total number endorsing an item</span></a>
+<a class="sourceLine" id="cb37-5" title="5">item_prop2 &lt;-<span class="st"> </span><span class="kw">mutate</span>(item_prop2, <span class="dt">total_endorsed =</span>N<span class="op">*</span>M)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co">#correlation between new item difficulties of the new data frame and the number of respondents who endorsed an item</span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="kw">cor</span>(item_prop2<span class="op">$</span>xsi.item, item_prop2<span class="op">$</span>total_endorsed)</a></code></pre></div>
+<pre><code>## [1] -0.9957619</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">ggplot</span>(item_prop, <span class="kw">aes</span>(<span class="dt">x=</span>total_endorsed, <span class="dt">y=</span>xsi.item)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb40-3" title="3"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Estimated Item Difficulties (logits)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb40-4" title="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Total Number of Endorsements for an item&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb40-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Relationship between estimated item difficulty and total endorsements&quot;</span>)</a></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 
-</div>
 </div>
 </div>
             </section>
