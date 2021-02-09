@@ -4,26 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R</title>
-  <meta name="description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <title>Chapter 9 Multidimensional Rasch Model | Introduction to Rasch Modelling</title>
+  <meta name="description" content="This book is a guide for getting started using the Rasch model" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R" />
+  <meta property="og:title" content="Chapter 9 Multidimensional Rasch Model | Introduction to Rasch Modelling" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
+  <meta property="og:description" content="This book is a guide for getting started using the Rasch model" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Multidimensional Rasch Model | Measuring what Matters: Introduction to Rasch Analysis in R" />
+  <meta name="twitter:title" content="Chapter 9 Multidimensional Rasch Model | Introduction to Rasch Modelling" />
   
-  <meta name="twitter:description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
+  <meta name="twitter:description" content="This book is a guide for getting started using the Rasch model" />
   
 
+<meta name="author" content="Daniel Katz, Anthony Clairmont, Mike Wilton" />
 
 
-<meta name="date" content="2020-05-19" />
+<meta name="date" content="2021-02-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,6 +33,7 @@
   
 <link rel="prev" href="polytomous-items.html"/>
 <link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,25 +54,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -114,7 +118,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -127,62 +130,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Rasch Example</a></li>
-
-<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installing R and R-Studio</a><ul>
-<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#instructions-for-installing-r"><i class="fa fa-check"></i><b>2.1</b> Instructions for installing R:</a><ul>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installing R and R-Studio</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#instructions-for-installing-r"><i class="fa fa-check"></i><b>2.1</b> Instructions for installing R:</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="install.html"><a href="install.html#for-mac-do-the-following"><i class="fa fa-check"></i><b>2.1.1</b> For Mac, do the following:</a></li>
 <li class="chapter" data-level="2.1.2" data-path="install.html"><a href="install.html#for-windows-do-the-following"><i class="fa fa-check"></i><b>2.1.2</b> For Windows do the following:</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#instructions-for-installing-r-studio"><i class="fa fa-check"></i><b>2.2</b> Instructions for installing R-Studio:</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html"><i class="fa fa-check"></i><b>3</b> Setting up your workspace: Rstudio Projects</a><ul>
+<li class="chapter" data-level="3" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html"><i class="fa fa-check"></i><b>3</b> Setting up your workspace: Rstudio Projects</a>
+<ul>
 <li class="chapter" data-level="3.0.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#loading-necessary-packages-for-managine-files-and-cleaning-data"><i class="fa fa-check"></i><b>3.0.1</b> Loading necessary “packages” for managine files and cleaning data</a></li>
 <li class="chapter" data-level="3.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#setting-up-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting up the working directory</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="Rasch.html"><a href="Rasch.html"><i class="fa fa-check"></i><b>4</b> The Rasch Model</a><ul>
-<li class="chapter" data-level="4.1" data-path="Rasch.html"><a href="Rasch.html#packages-necessary-for-running-the-rasch-model"><i class="fa fa-check"></i><b>4.1</b> Packages Necessary for running the Rasch model</a></li>
-<li class="chapter" data-level="4.2" data-path="Rasch.html"><a href="Rasch.html#reading-in-data"><i class="fa fa-check"></i><b>4.2</b> Reading in Data</a></li>
-<li class="chapter" data-level="4.3" data-path="Rasch.html"><a href="Rasch.html#see-the-first-few-rows-and-columns"><i class="fa fa-check"></i><b>4.3</b> See the first few rows and columns</a></li>
-<li class="chapter" data-level="4.4" data-path="Rasch.html"><a href="Rasch.html#the-rasch-model"><i class="fa fa-check"></i><b>4.4</b> The Rasch Model</a></li>
+<li class="chapter" data-level="4" data-path="Rasch.html"><a href="Rasch.html"><i class="fa fa-check"></i><b>4</b> The Rasch Model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="Rasch.html"><a href="Rasch.html#basics"><i class="fa fa-check"></i><b>4.1</b> Basics</a></li>
+<li class="chapter" data-level="4.2" data-path="Rasch.html"><a href="Rasch.html#packages-necessary-for-running-the-rasch-model"><i class="fa fa-check"></i><b>4.2</b> Packages Necessary for running the Rasch model</a></li>
+<li class="chapter" data-level="4.3" data-path="Rasch.html"><a href="Rasch.html#reading-in-data"><i class="fa fa-check"></i><b>4.3</b> Reading in Data</a></li>
+<li class="chapter" data-level="4.4" data-path="Rasch.html"><a href="Rasch.html#check-out-the-data-set"><i class="fa fa-check"></i><b>4.4</b> Check out the data set</a></li>
 <li class="chapter" data-level="4.5" data-path="Rasch.html"><a href="Rasch.html#running-the-rasch-model"><i class="fa fa-check"></i><b>4.5</b> Running the Rasch model</a></li>
 <li class="chapter" data-level="4.6" data-path="Rasch.html"><a href="Rasch.html#item-difficulties"><i class="fa fa-check"></i><b>4.6</b> Item Difficulties</a></li>
-<li class="chapter" data-level="4.7" data-path="Rasch.html"><a href="Rasch.html#visualize"><i class="fa fa-check"></i><b>4.7</b> Visualize</a></li>
-<li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a><ul>
+<li class="chapter" data-level="4.7" data-path="Rasch.html"><a href="Rasch.html#visualize---get-item-characteristic-curves"><i class="fa fa-check"></i><b>4.7</b> Visualize - Get Item Characteristic Curves</a></li>
+<li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a>
+<ul>
 <li class="chapter" data-level="4.8.1" data-path="Rasch.html"><a href="Rasch.html#exercise"><i class="fa fa-check"></i><b>4.8.1</b> Exercise:</a></li>
 </ul></li>
-<li class="chapter" data-level="4.9" data-path="Rasch.html"><a href="Rasch.html#item-fit"><i class="fa fa-check"></i><b>4.9</b> Item Fit</a></li>
-<li class="chapter" data-level="4.10" data-path="Rasch.html"><a href="Rasch.html#optional-understanding-the-model-more-deeply"><i class="fa fa-check"></i><b>4.10</b> Optional: Understanding the model more deeply</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>5</b> Person Abilities</a><ul>
-<li class="chapter" data-level="5.1" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>5.1</b> Wright Map</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-1"><i class="fa fa-check"></i><b>5.1.1</b> Exercise:</a></li>
+<li class="chapter" data-level="5" data-path="item-fit.html"><a href="item-fit.html"><i class="fa fa-check"></i><b>5</b> Item Fit</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="item-fit.html"><a href="item-fit.html#exercise-1"><i class="fa fa-check"></i><b>5.0.1</b> Exercise:</a></li>
+<li class="chapter" data-level="5.1" data-path="item-fit.html"><a href="item-fit.html#optional---visualizing-item-fit"><i class="fa fa-check"></i><b>5.1</b> Optional - Visualizing Item Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="optional-understanding-the-model.html"><a href="optional-understanding-the-model.html"><i class="fa fa-check"></i><b>6</b> Optional: Understanding the model</a></li>
+<li class="chapter" data-level="7" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>7</b> Person Abilities</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="person-abilities.html"><a href="person-abilities.html#quick-descriptives-for-person-ability---well-use-wrightmap-to-bring-this-all-together"><i class="fa fa-check"></i><b>7.1</b> Quick descriptives for person ability - we’ll use WrightMap to bring this all together</a></li>
+<li class="chapter" data-level="7.2" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>7.2</b> Wright Map</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-2"><i class="fa fa-check"></i><b>7.2.1</b> Exercise:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>6</b> Polytomous Items</a><ul>
-<li class="chapter" data-level="6.1" data-path="polytomous-items.html"><a href="polytomous-items.html#polytymous-item-types-anything-with-a-rating-scale"><i class="fa fa-check"></i><b>6.1</b> Polytymous item types (anything with a rating Scale)</a></li>
-<li class="chapter" data-level="6.2" data-path="polytomous-items.html"><a href="polytomous-items.html#item-difficulties-1"><i class="fa fa-check"></i><b>6.2</b> Item Difficulties</a></li>
-<li class="chapter" data-level="6.3" data-path="polytomous-items.html"><a href="polytomous-items.html#person-ability-theta-estimates"><i class="fa fa-check"></i><b>6.3</b> Person ability (theta) estimates</a></li>
-<li class="chapter" data-level="6.4" data-path="polytomous-items.html"><a href="polytomous-items.html#item-fit-statistics"><i class="fa fa-check"></i><b>6.4</b> Item fit statistics</a></li>
-<li class="chapter" data-level="6.5" data-path="polytomous-items.html"><a href="polytomous-items.html#item-characteristic-curves-but-now-as-thresholds."><i class="fa fa-check"></i><b>6.5</b> Item characteristic curves (but now as thresholds).</a></li>
-<li class="chapter" data-level="6.6" data-path="polytomous-items.html"><a href="polytomous-items.html#wright-map-1"><i class="fa fa-check"></i><b>6.6</b> Wright Map</a></li>
-<li class="chapter" data-level="6.7" data-path="polytomous-items.html"><a href="polytomous-items.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises:</a></li>
-<li class="chapter" data-level="6.8" data-path="polytomous-items.html"><a href="polytomous-items.html#model-comparison"><i class="fa fa-check"></i><b>6.8</b> Model Comparison</a></li>
+<li class="chapter" data-level="8" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>8</b> Polytomous Items</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="polytomous-items.html"><a href="polytomous-items.html#polytymous-item-types-anything-with-a-rating-scale"><i class="fa fa-check"></i><b>8.1</b> Polytymous item types (anything with a rating Scale)</a></li>
+<li class="chapter" data-level="8.2" data-path="polytomous-items.html"><a href="polytomous-items.html#item-difficulties-1"><i class="fa fa-check"></i><b>8.2</b> Item Difficulties</a></li>
+<li class="chapter" data-level="8.3" data-path="polytomous-items.html"><a href="polytomous-items.html#person-ability-theta-estimates"><i class="fa fa-check"></i><b>8.3</b> Person ability (theta) estimates</a></li>
+<li class="chapter" data-level="8.4" data-path="polytomous-items.html"><a href="polytomous-items.html#item-fit-statistics"><i class="fa fa-check"></i><b>8.4</b> Item fit statistics</a></li>
+<li class="chapter" data-level="8.5" data-path="polytomous-items.html"><a href="polytomous-items.html#item-characteristic-curves-but-now-as-thresholds."><i class="fa fa-check"></i><b>8.5</b> Item characteristic curves (but now as thresholds).</a></li>
+<li class="chapter" data-level="8.6" data-path="polytomous-items.html"><a href="polytomous-items.html#wright-map-1"><i class="fa fa-check"></i><b>8.6</b> Wright Map</a></li>
+<li class="chapter" data-level="8.7" data-path="polytomous-items.html"><a href="polytomous-items.html#exercises"><i class="fa fa-check"></i><b>8.7</b> Exercises:</a></li>
+<li class="chapter" data-level="8.8" data-path="polytomous-items.html"><a href="polytomous-items.html#model-comparison"><i class="fa fa-check"></i><b>8.8</b> Model Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="multidimensional.html"><a href="multidimensional.html"><i class="fa fa-check"></i><b>7</b> Multidimensional Rasch Model</a><ul>
-<li class="chapter" data-level="7.1" data-path="multidimensional.html"><a href="multidimensional.html#we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix"><i class="fa fa-check"></i><b>7.1</b> we start by assigning the items to a dimension using a Q-matrix</a></li>
-<li class="chapter" data-level="7.2" data-path="multidimensional.html"><a href="multidimensional.html#run-the-multidimensional-rasch-model"><i class="fa fa-check"></i><b>7.2</b> Run the multidimensional Rasch model</a></li>
-<li class="chapter" data-level="7.3" data-path="multidimensional.html"><a href="multidimensional.html#theta-and-delta"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></a><ul>
-<li class="chapter" data-level="7.3.1" data-path="multidimensional.html"><a href="multidimensional.html#wright-map-2"><i class="fa fa-check"></i><b>7.3.1</b> Wright Map</a></li>
+<li class="chapter" data-level="9" data-path="multidimensional.html"><a href="multidimensional.html"><i class="fa fa-check"></i><b>9</b> Multidimensional Rasch Model</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="multidimensional.html"><a href="multidimensional.html#we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix"><i class="fa fa-check"></i><b>9.1</b> we start by assigning the items to a dimension using a Q-matrix</a></li>
+<li class="chapter" data-level="9.2" data-path="multidimensional.html"><a href="multidimensional.html#run-the-multidimensional-rasch-model"><i class="fa fa-check"></i><b>9.2</b> Run the multidimensional Rasch model</a></li>
+<li class="chapter" data-level="9.3" data-path="multidimensional.html"><a href="multidimensional.html#theta-and-delta"><i class="fa fa-check"></i><b>9.3</b> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="multidimensional.html"><a href="multidimensional.html#wright-map-2"><i class="fa fa-check"></i><b>9.3.1</b> Wright Map</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="multidimensional.html"><a href="multidimensional.html#exercises-1"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+<li class="chapter" data-level="9.4" data-path="multidimensional.html"><a href="multidimensional.html#exercises-1"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -192,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Measuring what Matters: Introduction to Rasch Analysis in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Rasch Modelling</a>
           </h1>
         </div>
 
@@ -200,21 +212,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multidimensional" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> Multidimensional Rasch Model</h1>
+<div id="multidimensional" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Multidimensional Rasch Model</h1>
 <p>What if we envision something that’s multidimensional? We can model that with TAM. IN fact, this is one of TAM’s great strengths. Do read package documentation, though. As the number of dimensions grows, you’ll have to use particular estimation methods else the model will take to long to run.</p>
-<div id="we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix" class="section level2">
-<h2><span class="header-section-number">7.1</span> we start by assigning the items to a dimension using a Q-matrix</h2>
+<div id="we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> we start by assigning the items to a dimension using a Q-matrix</h2>
 <p>If we want to have two dimensions, we’ll create a matrix with two columns. A 1 or 0 denotes whether that item belongs to dimension 1 or 2 (or both!)</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">Q &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data=</span><span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">15</span>, <span class="dt">ncol=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb86-2" title="2"></a>
-<a class="sourceLine" id="cb86-3" title="3">Q[<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">1</span>] &lt;-<span class="dv">1</span></a>
-<a class="sourceLine" id="cb86-4" title="4">Q[<span class="dv">8</span><span class="op">:</span><span class="dv">15</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb86-5" title="5"></a>
-<a class="sourceLine" id="cb86-6" title="6"></a>
-<a class="sourceLine" id="cb86-7" title="7"></a>
-<a class="sourceLine" id="cb86-8" title="8"></a>
-<a class="sourceLine" id="cb86-9" title="9">Q</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="multidimensional.html#cb102-1" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data=</span><span class="dv">0</span>, <span class="at">nrow=</span><span class="dv">15</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb102-2"><a href="multidimensional.html#cb102-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-3"><a href="multidimensional.html#cb102-3" aria-hidden="true" tabindex="-1"></a>Q[<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb102-4"><a href="multidimensional.html#cb102-4" aria-hidden="true" tabindex="-1"></a>Q[<span class="dv">8</span><span class="sc">:</span><span class="dv">15</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb102-5"><a href="multidimensional.html#cb102-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-6"><a href="multidimensional.html#cb102-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-7"><a href="multidimensional.html#cb102-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-8"><a href="multidimensional.html#cb102-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-9"><a href="multidimensional.html#cb102-9" aria-hidden="true" tabindex="-1"></a>Q</span></code></pre></div>
 <pre><code>##       [,1] [,2]
 ##  [1,]    1    0
 ##  [2,]    1    0
@@ -233,110 +245,150 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [15,]    0    1</code></pre>
 <p>click on the “Q” object in the environment pane to see what we just made</p>
 </div>
-<div id="run-the-multidimensional-rasch-model" class="section level2">
-<h2><span class="header-section-number">7.2</span> Run the multidimensional Rasch model</h2>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">multi &lt;-<span class="st"> </span>TAM<span class="op">::</span><span class="kw">tam.mml</span>(<span class="dt">resp=</span>hls, <span class="dt">Q=</span>Q)</a></code></pre></div>
+<div id="run-the-multidimensional-rasch-model" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Run the multidimensional Rasch model</h2>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="multidimensional.html#cb104-1" aria-hidden="true" tabindex="-1"></a>multi <span class="ot">&lt;-</span> TAM<span class="sc">::</span><span class="fu">tam.mml</span>(<span class="at">resp=</span>hls, <span class="at">Q=</span>Q)</span></code></pre></div>
 </div>
-<div id="theta-and-delta" class="section level2">
-<h2><span class="header-section-number">7.3</span> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></h2>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1">persons.multi &lt;-<span class="st"> </span><span class="kw">tam.wle</span>(multi)</a></code></pre></div>
-<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  1.7954 
-## Iteration in WLE/MLE estimation  2   | Maximal change  0.4884 
-## Iteration in WLE/MLE estimation  3   | Maximal change  0.0825 
-## Iteration in WLE/MLE estimation  4   | Maximal change  0.0297 
-## Iteration in WLE/MLE estimation  5   | Maximal change  0.0098 
-## Iteration in WLE/MLE estimation  6   | Maximal change  0.0033 
-## Iteration in WLE/MLE estimation  7   | Maximal change  0.0011 
-## Iteration in WLE/MLE estimation  8   | Maximal change  4e-04 
+<div id="theta-and-delta" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></h2>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="multidimensional.html#cb105-1" aria-hidden="true" tabindex="-1"></a>persons.multi <span class="ot">&lt;-</span> <span class="fu">tam.wle</span>(multi)</span></code></pre></div>
+<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  2.105 
+## Iteration in WLE/MLE estimation  2   | Maximal change  0.7201 
+## Iteration in WLE/MLE estimation  3   | Maximal change  0.0844 
+## Iteration in WLE/MLE estimation  4   | Maximal change  0.0235 
+## Iteration in WLE/MLE estimation  5   | Maximal change  0.0077 
+## Iteration in WLE/MLE estimation  6   | Maximal change  0.0026 
+## Iteration in WLE/MLE estimation  7   | Maximal change  9e-04 
+## Iteration in WLE/MLE estimation  8   | Maximal change  3e-04 
 ## Iteration in WLE/MLE estimation  9   | Maximal change  1e-04 
-## Iteration in WLE/MLE estimation  10   | Maximal change  0 
 ## 
 ## -------
-## WLE Reliability (Dimension1)=0.324 
-## WLE Reliability (Dimension2)=0.477</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">WLEestimates.multi &lt;-<span class="st"> </span>persons.multi<span class="op">$</span>theta</a>
-<a class="sourceLine" id="cb91-2" title="2">thresholds.multi &lt;-<span class="st"> </span><span class="kw">tam.threshold</span>(multi)</a></code></pre></div>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="co">#Fit and reliabilities</span></a>
-<a class="sourceLine" id="cb92-2" title="2">Fit.multi &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(multi)</a></code></pre></div>
+## WLE Reliability (Dimension1)=0.185 
+## WLE Reliability (Dimension2)=0.492</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="multidimensional.html#cb107-1" aria-hidden="true" tabindex="-1"></a>WLEestimates.multi <span class="ot">&lt;-</span> persons.multi<span class="sc">$</span>theta</span>
+<span id="cb107-2"><a href="multidimensional.html#cb107-2" aria-hidden="true" tabindex="-1"></a>thresholds.multi <span class="ot">&lt;-</span> <span class="fu">tam.threshold</span>(multi)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="multidimensional.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Fit and reliabilities</span></span>
+<span id="cb108-2"><a href="multidimensional.html#cb108-2" aria-hidden="true" tabindex="-1"></a>Fit.multi <span class="ot">&lt;-</span> <span class="fu">tam.fit</span>(multi)</span></code></pre></div>
 <pre><code>## Item fit calculation based on 15 simulations
 ## |**********|
 ## |----------|</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">Fit.multi<span class="op">$</span>itemfit</a></code></pre></div>
-<pre><code>##    parameter    Outfit     Outfit_t      Outfit_p  Outfit_pholm     Infit     Infit_t      Infit_p  Infit_pholm
-## 1         V1 0.7689153 -10.48342389  1.029478e-25  1.441269e-24 0.8142955 -8.26952660 1.344920e-16 1.882888e-15
-## 2         V2 2.3367398  22.29057477 4.560994e-110 6.841491e-109 1.4494439  8.98963086 2.480622e-19 3.720933e-18
-## 3         V3 0.9597641  -1.68324720  9.232725e-02  1.000000e+00 0.9644486 -1.48073356 1.386776e-01 1.000000e+00
-## 4         V4 0.9509837  -1.92549176  5.416787e-02  6.500144e-01 0.9634872 -1.42547829 1.540190e-01 1.000000e+00
-## 5         V5 0.9525797  -1.36416606  1.725153e-01  1.000000e+00 0.9782820 -0.61196714 5.405595e-01 1.000000e+00
-## 6         V6 0.8023461  -2.36247724  1.815326e-02  2.359923e-01 0.9575921 -0.45593701 6.484353e-01 1.000000e+00
-## 7         V7 0.9234506  -1.52587060  1.270421e-01  1.000000e+00 0.9577779 -0.82124642 4.115059e-01 1.000000e+00
-## 8         V8 1.0065580   0.14226580  8.868701e-01  1.000000e+00 1.0075111  0.17992979 8.572077e-01 1.000000e+00
-## 9         V9 0.9236514  -1.44378437  1.487996e-01  1.000000e+00 0.9803859 -0.34852665 7.274447e-01 1.000000e+00
-## 10       V10 1.0292413   0.37667676  7.064138e-01  1.000000e+00 1.0032793  0.06639648 9.470622e-01 1.000000e+00
-## 11       V11 1.0052741   0.07665319  9.388994e-01  1.000000e+00 0.9883233 -0.17347193 8.622805e-01 1.000000e+00
-## 12       V12 0.8764374  -1.39915589  1.617662e-01  1.000000e+00 0.9727528 -0.27540517 7.830050e-01 1.000000e+00
-## 13       V13 0.9771652  -0.80842507  4.188459e-01  1.000000e+00 0.9869458 -0.45242954 6.509596e-01 1.000000e+00
-## 14       V14 0.9647311  -0.99855504  3.180103e-01  1.000000e+00 0.9872144 -0.35818385 7.202057e-01 1.000000e+00
-## 15       V15 0.9645056  -1.42502166  1.541509e-01  1.000000e+00 0.9663553 -1.33371946 1.822958e-01 1.000000e+00</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">multi<span class="op">$</span>EAP.rel <span class="co">#EAP reliabilities</span></a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="multidimensional.html#cb110-1" aria-hidden="true" tabindex="-1"></a>Fit.multi<span class="sc">$</span>itemfit</span></code></pre></div>
+<pre><code>##    parameter    Outfit     Outfit_t     Outfit_p
+## 1         V1 0.6503953 -7.854720952 4.006632e-15
+## 2         V2 3.5475079 16.387472657 2.350146e-60
+## 3         V3 0.9924203 -0.145806134 8.840744e-01
+## 4         V4 0.9218151 -1.450584978 1.468955e-01
+## 5         V5 1.0588821  1.587291853 1.124466e-01
+## 6         V6 1.0000697 -0.005972345 9.952348e-01
+## 7         V7 0.9471085 -2.045168318 4.083827e-02
+## 8         V8 0.9785016 -0.822190475 4.109685e-01
+## 9         V9 0.9740342 -0.959299497 3.374079e-01
+## 10       V10 0.9931842 -0.062566795 9.501115e-01
+## 11       V11 0.9490646 -0.767344318 4.428768e-01
+## 12       V12 1.0727473  1.728975390 8.381350e-02
+## 13       V13 0.8656433 -1.337445055 1.810774e-01
+## 14       V14 0.9606526 -1.393567761 1.634482e-01
+## 15       V15 0.9944805 -0.199341841 8.419954e-01
+##    Outfit_pholm     Infit     Infit_t      Infit_p
+## 1  5.609284e-14 0.8405798 -3.29937253 0.0009690122
+## 2  3.525219e-59 1.2318780  2.27768149 0.0227455616
+## 3  1.000000e+00 1.0300686  0.57481189 0.5654185279
+## 4  1.000000e+00 0.9657896 -0.61297177 0.5398950058
+## 5  1.000000e+00 1.0326685  0.90086779 0.3676586180
+## 6  1.000000e+00 0.9995675 -0.01688957 0.9865247136
+## 7  5.308975e-01 0.9644397 -1.36219431 0.1731365704
+## 8  1.000000e+00 0.9773168 -0.86395642 0.3876118295
+## 9  1.000000e+00 0.9783519 -0.79479123 0.4267349558
+## 10 1.000000e+00 1.0114311  0.15657393 0.8755806477
+## 11 1.000000e+00 0.9893019 -0.13789814 0.8903209227
+## 12 1.000000e+00 1.0260076  0.64071905 0.5217052354
+## 13 1.000000e+00 1.0031593  0.06241159 0.9502350619
+## 14 1.000000e+00 0.9693493 -1.07776217 0.2811399056
+## 15 1.000000e+00 0.9879209 -0.44817134 0.6540295460
+##    Infit_pholm
+## 1   0.01453518
+## 2   0.31843786
+## 3   1.00000000
+## 4   1.00000000
+## 5   1.00000000
+## 6   1.00000000
+## 7   1.00000000
+## 8   1.00000000
+## 9   1.00000000
+## 10  1.00000000
+## 11  1.00000000
+## 12  1.00000000
+## 13  1.00000000
+## 14  1.00000000
+## 15  1.00000000</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="multidimensional.html#cb112-1" aria-hidden="true" tabindex="-1"></a>multi<span class="sc">$</span>EAP.rel <span class="co">#EAP reliabilities</span></span></code></pre></div>
 <pre><code>##      Dim1      Dim2 
-## 0.6354260 0.6416989</code></pre>
-<div id="wright-map-2" class="section level3">
-<h3><span class="header-section-number">7.3.1</span> Wright Map</h3>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">MDthetas.multi &lt;-</a>
-<a class="sourceLine" id="cb98-2" title="2"><span class="st">  </span><span class="kw">cbind</span>(persons.multi<span class="op">$</span>theta.Dim01,persons.multi<span class="op">$</span>theta.Dim02) <span class="co">#one line</span></a>
-<a class="sourceLine" id="cb98-3" title="3"><span class="kw">wrightMap</span>(MDthetas.multi, thresholds.multi) <span class="co">#second line</span></a></code></pre></div>
-<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+## 0.6738227 0.6814934</code></pre>
+<div id="wright-map-2" class="section level3" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Wright Map</h3>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="multidimensional.html#cb114-1" aria-hidden="true" tabindex="-1"></a>MDthetas.multi <span class="ot">&lt;-</span></span>
+<span id="cb114-2"><a href="multidimensional.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(persons.multi<span class="sc">$</span>theta.Dim01,persons.multi<span class="sc">$</span>theta.Dim02) <span class="co">#one line</span></span>
+<span id="cb114-3"><a href="multidimensional.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wrightMap</span>(MDthetas.multi, thresholds.multi) <span class="co">#second line</span></span></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <pre><code>##           Cat1
-## V1  -0.2026062
-## V2  -1.4881897
-## V3  -0.2690735
-## V4   0.4807434
-## V5   1.1186829
-## V6   2.7043762
-## V7  -1.7503967
-## V8  -1.5145569
-## V9   1.8913879
-## V10 -2.4903259
-## V11  2.1169739
-## V12  2.7898865
-## V13 -0.6662292
-## V14  1.1333313
-## V15 -0.2837219</code></pre>
+## V1   1.7928772
+## V2   2.9363708
+## V3   1.8478088
+## V4   1.9375305
+## V5   1.1390076
+## V6  -0.3249207
+## V7   0.2915955
+## V8   0.1009827
+## V9   0.3188782
+## V10 -2.7882385
+## V11  2.3348694
+## V12 -1.3975525
+## V13 -3.1209412
+## V14 -0.5602112
+## V15 -0.2038879</code></pre>
 <p>Compare the first unidimensional model to the multidimensional one</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">logLik</span>(mod1)</a></code></pre></div>
-<pre><code>## &#39;log Lik.&#39; -7494.028 (df=16)</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">logLik</span>(multi)</a></code></pre></div>
-<pre><code>## &#39;log Lik.&#39; -7485.782 (df=18)</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">anova</span>(mod1, multi)</a></code></pre></div>
-<pre><code>##   Model   loglike Deviance Npars      AIC      BIC    Chisq df       p
-## 1  mod1 -7494.028 14988.06    16 15020.06 15098.58 16.49191  2 0.00026
-## 2 multi -7485.782 14971.56    18 15007.56 15095.90       NA NA      NA</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="multidimensional.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(mod1)</span></code></pre></div>
+<pre><code>## &#39;log Lik.&#39; -7343.562 (df=16)</code></pre>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="multidimensional.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(multi)</span></code></pre></div>
+<pre><code>## &#39;log Lik.&#39; -7334.79 (df=18)</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="multidimensional.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod1, multi)</span></code></pre></div>
+<pre><code>##   Model   loglike Deviance Npars      AIC      BIC    Chisq
+## 1  mod1 -7343.562 14687.12    16 14719.12 14797.65 17.54463
+## 2 multi -7334.790 14669.58    18 14705.58 14793.92       NA
+##   df       p
+## 1  2 0.00015
+## 2 NA      NA</code></pre>
 <p>Alternatively, you can use <code>IRT.compareModels</code></p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">compare &lt;-<span class="st"> </span>CDM<span class="op">::</span><span class="kw">IRT.compareModels</span>(mod1, multi)</a>
-<a class="sourceLine" id="cb106-2" title="2">compare</a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="multidimensional.html#cb122-1" aria-hidden="true" tabindex="-1"></a>compare <span class="ot">&lt;-</span> CDM<span class="sc">::</span><span class="fu">IRT.compareModels</span>(mod1, multi)</span>
+<span id="cb122-2"><a href="multidimensional.html#cb122-2" aria-hidden="true" tabindex="-1"></a>compare</span></code></pre></div>
 <pre><code>## $IC
-##   Model   loglike Deviance Npars Nobs      AIC      BIC     AIC3     AICc     CAIC
-## 1  mod1 -7494.028 14988.06    16 1000 15020.06 15098.58 15036.06 15020.61 15114.58
-## 2 multi -7485.782 14971.56    18 1000 15007.56 15095.90 15025.56 15008.26 15113.90
+##   Model   loglike Deviance Npars Nobs      AIC      BIC
+## 1  mod1 -7343.562 14687.12    16 1000 14719.12 14797.65
+## 2 multi -7334.790 14669.58    18 1000 14705.58 14793.92
+##       AIC3     AICc     CAIC
+## 1 14735.12 14719.68 14813.65
+## 2 14723.58 14706.28 14811.92
 ## 
 ## $LRtest
 ##   Model1 Model2     Chi2 df            p
-## 1   mod1  multi 16.49191  2 0.0002623175
+## 1   mod1  multi 17.54463  2 0.0001549648
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;IRT.compareModels&quot;</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1"><span class="kw">summary</span>(compare)</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="multidimensional.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(compare)</span></code></pre></div>
 <pre><code>## Absolute and relative model fit
 ## 
-##   Model   loglike Deviance Npars Nobs      AIC      BIC     AIC3     AICc     CAIC
-## 1  mod1 -7494.028 14988.06    16 1000 15020.06 15098.58 15036.06 15020.61 15114.58
-## 2 multi -7485.782 14971.56    18 1000 15007.56 15095.90 15025.56 15008.26 15113.90
+##   Model   loglike Deviance Npars Nobs      AIC      BIC
+## 1  mod1 -7343.562 14687.12    16 1000 14719.12 14797.65
+## 2 multi -7334.790 14669.58    18 1000 14705.58 14793.92
+##       AIC3     AICc     CAIC
+## 1 14735.12 14719.68 14813.65
+## 2 14723.58 14706.28 14811.92
 ## 
 ## Likelihood ratio tests - model comparison 
 ## 
 ##   Model1 Model2    Chi2 df     p
-## 1   mod1  multi 16.4919  2 3e-04</code></pre>
+## 1   mod1  multi 17.5446  2 2e-04</code></pre>
 <p>We see that model <code>multi</code> fits slightly better. However, the log likelihood difference test shows the difference is statististically significant.</p>
 <table>
 <thead>
@@ -367,13 +419,13 @@ mod1
 multi
 </td>
 <td style="text-align:right;">
-16.49191
+17.54463
 </td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
-0.0002623
+0.000155
 </td>
 </tr>
 </tbody>
@@ -381,8 +433,8 @@ multi
 <pre><code>compare$LRtest</code></pre>
 </div>
 </div>
-<div id="exercises-1" class="section level2">
-<h2><span class="header-section-number">7.4</span> Exercises</h2>
+<div id="exercises-1" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> Exercises</h2>
 <ol style="list-style-type: decimal">
 <li>what evidence points towards multidimensionality?</li>
 <li>compare the multidimensional model to the PCM model</li>
@@ -438,7 +490,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Rasch_Biome.pdf", "Rasch_Biome.epub"],
+"download": ["Rasch_Biome.pdf"],
 "toc": {
 "collapse": "subsection"
 }

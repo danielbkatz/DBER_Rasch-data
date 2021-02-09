@@ -1,63 +1,8 @@
+
 # The Rasch Model {#Rasch}
 
+## Basics 
 
-## Packages Necessary for running the Rasch model
-
-Install the packages below. TAM is a collection of functions to run a variety of Rasch-type models. Wright Map will help us visualize it.
-```
-install.packages("TAM")
-install.packages("WrightMap")
-```
-
-## Reading in Data
-The data for this session will be downloaded from an online repository (github). We need to read it in to your R session. This means that it we need to effectively "import it" into R as something that you can now work with. The .csv file will be read in as something called a data frame or (dataframe). This is a type of object in R that's like a spreadsheet that your're used to working with.
-
-```{r include=FALSE }
-
-hls <- read_csv("https://raw.githubusercontent.com/danielbkatz/DBER_Rasch-data/master/data/dichotomous.csv")
-
-# The first column are IDs that we'll get rid of
-hls <- hls[-1]
-```
-
-
-```
-
-hls <- read.csv("hls_dic_scale.csv")
-```
-
-## See the first few rows and columns
-
-Using `str(hls)` we see that there are 1000 respondents with 15 items. Each `V1...V15` represents an item.
-
-```{r}
-
-str(hls)
-```
-We can see the first few rows with `head(hls)`. This shows us what the dataframe looks like.
-
-```{r}
-
-head(hls)
-```
-
-If you want to see the whole dataframe:
-
-```
-View(hls)
-```
-
-Now we call the TAM package you installed in a prior step to use the functions that come with the `TAM` package.
-
-```{r}
-library(TAM)
-```
-```{r message=FALSE, warning=FALSE, include=FALSE}
-library(kableExtra)
-library(knitr)
-```
-
-## The Rasch Model
 1. Running the Rasch model via TAM estimates the model:  
   
 $Pr(X_i=1|\theta_s, \delta_i) = \frac{exp(\theta_s-\delta_i)}{1+exp(\theta_s-\delta_i)}$.
@@ -181,7 +126,8 @@ theme_vapor = function(base_size = 12, base_family = "") {
 
 
 ```
-```{r fig.align='center', fig.retina=3, fig.width=9, message=FALSE, warning=FALSE, figh.height=7, include=FALSE, paged.print=FALSE}
+
+```{r fig.retina=3, fig.width=9, message=FALSE, warning=FALSE, figh.height=7, include=FALSE, paged.print=FALSE}
 
 # Absolute DIF Favoring Group 1 by 1 Logit
 icc_0 <- function(ability){
@@ -217,8 +163,89 @@ p <- ggplot(data = data.frame(ability = c(-3:3)), mapping = aes(x=ability))+#ff6
 
 ```
 
-```{r fig.align='center', fig.retina=3, fig.width = 9, message=FALSE, warning=FALSE, echo=FALSE, figh.height=7, paged.print=FALSE}
+```{r message=FALSE, warning=FALSE, echo=FALSE}
 p
+```
+
+
+
+
+## Packages Necessary for running the Rasch model
+
+
+```{r, include=FALSE}
+options(width = 60)
+local({
+  hook_output <- knitr::knit_hooks$get('output')
+  knitr::knit_hooks$set(output = function(x, options) {
+    if (!is.null(options$max.height)) options$attr.output <- c(
+      options$attr.output,
+      sprintf('style="max-height: %s;"', options$max.height)
+    )
+    hook_output(x, options)
+  })
+})
+```
+
+Install the packages below. TAM is a collection of functions to run a variety of Rasch-type models. WrightMap will help us visualize model estimated item difficulties and model estimated person abilities. We can use the Wright map to help us answer questions such as, "do our items match our population of interest such that we have items that garner information about students at all ranges of the ability distribution?" or "do we have too many easy or hard items and not enough items in the middle of the ability range (are the items well targeted)?". 
+Let's get into it.
+
+If you need to install `TAM` or the `WrightMap` package, note the quotes and capitalizations:
+
+```
+install.packages("TAM")
+install.packages("WrightMap")
+```
+We need to load the packages.Additionally, we'll use some packages from the `tidyverse`
+```{r}
+library(TAM)
+library(WrightMap)
+
+library(tidyverse)
+```
+
+
+## Reading in Data
+The data for this session will be downloaded from an online repository (github). We need to read it in to your R session. This means that it is something you can now work with in R. The .csv file will be read in as something called a data frame or (dataframe). This is a type of object in R that's essentially a spreadsheet that your're used to working with.
+
+```{r}
+hls <- read_csv("https://raw.githubusercontent.com/danielbkatz/DBER_Rasch/master/data/dichotomous.csv")
+
+# The first column are IDs that we'll get rid of
+hls <- hls[-1]
+
+```
+
+If you would like to download the data first, and are reading it in locally,
+
+```{r eval=FALSE}
+hls <- read.csv("data/hls_dic_scale.csv")
+```
+
+## Check out the data set
+
+Let's explore `hls` just a little. It has 15 columns (the items, and 1000 rows, the people). Each item is titled "V1...vN." There is no missing data.
+
+```{r, max.height='200px'}
+dim(hls)
+
+str(hls)
+
+head(hls)
+```
+
+If you want to see the whole dataset, view the data frame:
+
+```{r eval= FALSE}
+View(hls)
+```
+
+
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(kableExtra)
+library(knitr)
 ```
 
 
@@ -226,46 +253,54 @@ p
 
 ## Running the Rasch model
 
-We now run the Rasch model on the selected dataframe. Here, we store the estimates of the parameters described above in `mod1`. `mod1` will also contain other information such as model fit criteria, descriptive statistics, and even information about how long it took for the model to converge. It's essentially a large list. 
+This command runs a Rasch model on the selected data frame. Here, `mod1` is an object in R that "holds" the data from our Rasch model (along with a lot of other information). It's essentially a large list. This is the main computation step, now we just select information that is stored in `mod1` or run `mod1` through further computation. 
 
-This is the main computation step, now we just select information that is stored in `mod1` or run `mod1` through further computation. 
+Note that the dataframe `hls` has to contain only items and no other information. 
+```{r echo=T, max.height='200px'}
 
-Note that the object `hls` has to contain only items and no other information. 
-```{r echo=T, results='hide'}
 mod1 <- tam(hls)
 
 ```
 
-```{r}
+
+If we want to see some basic results from mod1, we can use `summary`
+```{r, max.height='400px'}
 summary(mod1)
 ```
 
 
 ## Item Difficulties
-We'll extract difficulties (`xsi`) from the `mod1` object (`mod1` is like a large list). We'll access this via `indexing`. The `$` sign means, access `mod1` and extract the object `xsi` which exists in `mod1`. 
+We'll extract difficulties (`xsi`) from the `mod1` object (`mod1` is like a large list, and we can index it like we do with vectors, dataframes, etc). List objects can be indexed with double brackets (i.e. to get the first object in a list called `list`, then we can go with: `list[[1]]` or by name, `list[["name"]]` or `list` name). List objects can be vectors, dataframes, arrays, or another list (among other things). In TAM, the mod1 object created involves all of these things. 
 
-Assign those values to an object in the environment called `diffic` using `<-`, the assignment operator, like before.
+We'll access item difficulties via `indexing` with the `$`. In other words, access `mod1` and extract the object `xsi` which exists in `mod1` as a datframe.
+
+Assign those values to an object in the environment called `diffic` using `<-`, the assignment operator, like before
+
 ```{r}
 diffic <- mod1$xsi
+```
 
+```{r, max.height='200px'}
+diffic
 ```
 
 In the table below, we can see the item difficulties in logits in the column `xsi` and the standard error for each item `se.xsi`. One way to think of what the standard error tells us is whether item difficulties may overlap or not. 
 
-Higher `xsi` values indicate more difficult items. For instance, item V9 is harder than V8. The values are identified by constraining the mean of item difficulties to zero. 
+Higher `xsi` values indicate more difficult items. For instance, item Hls9 is harder than Hls8. The values are identified by constraining the mean of item difficulties to zero. 
 ```{r, echo=FALSE, warning=FALSE, message="FALSE"}
 kable(diffic)
 ```
 
-## Visualize
-We may want to visualize each item characteristic curve (ICC) for each item. These plots plot the expected value (blue, smooth line) given that the data fits the Rasch model, and the observed black line (a binned solution). Each plot represents a single item. They visualize the probability of a respondent getting the item correct given their ability level. For instance, for item V1, the blue line shows that a person at 1 logit (x-axis) has something like a 95% probability of getting the item correct (predicted). 
-Get Item Characteristic Curves
-```{r paged.print=TRUE}
+## Visualize - Get Item Characteristic Curves
+We may want to visualize each item characteristic curve (ICC) for each item. These plots plot the expected value (blue, smooth line) given that the data fits the Rasch model, and the observed black line (a binned solution). Each plot represents a single item. They visualize the probability of a respondent getting the item correct given their ability level. For instance, for item V1, the blue line shows that a person at 1 logit (x-axis) has something like a 30% probability of getting the item correct (predicted). 
+
+```{r paged.print=TRUE,  max.height='200px'}
 plot(mod1)
 ```
 
 
 Note that for items V1 and V2, the black line, the observed probabilities, deviate quite a lot from the blue lines, the expected probabilities. Contrast this with item V5. For item V1, the black line seems to be steeper than the blue line, whereas for V2, the black line is quite a bit shallower. These lines hint at different types of item misfit, which we'll introduce later. Roughly, in the shallower case, we're not able to differentiate between respondents very easily - it probably means there is too much randomness. In the steep case, it might be too easy to differentiate - the item isn't informative.
+
 
 ## Summarizing the distribution of difficulties
 
@@ -278,22 +313,50 @@ hist(diffic$xsi, breaks=10)
 # If you want to see the items as a scatter plot
 plot(diffic$xsi, main="Scatter Plot of Item Difficulties", xlab="Item Number", ylab = "Difficulty in Logits", pch=9)
 axis(side=1, at = c(1:15))
+```
+
+Let's make that difficulty plot look a bit nicer - but we can't really
+```{r}
+# create a histogram to get a sense - since we only have 15 items, it's not that useful
+ggplot(diffic, aes(x = xsi)) +
+  geom_histogram(bins=15) +
+  ggtitle("Distribution of Item Difficulties")
+
+```
+
+What might be more useful is looking at item difficulties vs their standard errors. Luckily, in this dataset, items were ordered from easiest to hardest. We see that items with larger standard errors are the hard items and the easiest items. This is because we have fewer students in the tails of the distribution - thus less information for each item - hence larger standard errors. 
+
+We'll get into this more later!
+```{r}
+
+ggplot(diffic, aes(x = xsi, y=se.xsi)) + geom_point() +
+  ggtitle("Item difficulties and their standard error") +
+  xlab("Estimated Item Difficulties") +
+  ylab("Estimated Item Standard Errors")
+```
+
+Another way we can get an idea of dispersion - the empirical item means and standard deviations.
+```{r}
 
 mean(diffic$xsi)
 sd(diffic$xsi)
+
 ```
 
 ### Exercise: 
 1. Which item is the hardest? The easiest? 
-**Hint**: try to use commands such as `max()`, `min()` as well, and see how this compares to the plot.
+2. Which item has the lowest standard error - what is it's difficulty - don't use the plot.
 
-## Item Fit
+# Item Fit
+
 Let's find out if the data fit the model. Use the `tam.fit` function to compute fit statistics, then display. We note that items V1 and V2 have outfits that are drastically different from the items' infit values. We also note that infit values of V1 and V2 are different from any of the other items. We note that V1 is "over fitting", it's outfit and infit values being well below 1, while V2 is "underfitting." This means that item V1 is too predictable - the amount of information is well predicted from other items which means it provides little new information above and beyond the other items. On the other hand, the underfitting V2 item has too much randomness. 
 
 However, outfit is "outlier" sensitive whereas "infit" is not. This implies that for V2 there might be a few responses that are particularly random/unexpected.
 
 ```{r}
 fit <- tam.fit(mod1)
+
+str(fit)
 ```
 
 
@@ -304,9 +367,52 @@ View(fit$itemfit)
 kable(fit$itemfit)
 ```
 
+### Exercise: 
+1. Which items fit best? Which items fit worst?
+2. How many, if any items, are outside the traditional bounds of mean-square item fit [.75, 1.33]?
+
+## Optional - Visualizing Item Fit
+
+If you'd like, we can use default `WrightMap` functionality to plot item fit statistics. In the `fit` object, `itemfit` is a dataframe containing various fit statistics. We'll plot infit with a lowerbound of .75 (in mean-square error units) and an upper bound of 1.33
+
+The nice thing is that you can create unique fitbounds for each item (such that it's sensitive to sample size). However, if we want all the same fit values, we have to just repeat the fit value (in our case, there are 15 items).
+
+```{r}
+infit <- fit$itemfit$Infit
+
+upper_bound <- rep(x = 1.33, times =15) # this repeats 1.33 fifteen times
+lower_bound <- rep(x = .75, times = 15) 
+
+# running fitgraph
 
 
-## Optional: Understanding the model more deeply
+fitgraph(fitEst = infit, fitLB = lower_bound, fitUB = upper_bound, itemLabels = names(hls))
+
+# what about outfit?
+outfit <- fit$itemfit$Outfit
+
+
+fitgraph(fitEst = outfit, fitLB = lower_bound, fitUB = upper_bound, itemLabels = names(hls))
+
+
+```
+If you wanted to do this with ggplot - play with the code to try to change the fit limits or plot outfit instead of infit. 
+
+```{r}
+# put the fit data in a dataframe
+fit_stats <- fit$itemfit
+
+fit_stats %>%
+  ggplot(aes(x=parameter, y = infit)) + 
+  geom_point() + 
+  geom_hline(yintercept = 1.2) +
+  geom_hline(yintercept = .8) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 15)) + 
+  ggtitle("Item Fit Statistics for Lab 3 Data")
+
+```
+
+# Optional: Understanding the model
 `TAM` also provides some descriptive statistics. 
 
 ```{r}
@@ -322,21 +428,21 @@ kable(item_prop)
 
 ```
 
-Note, the total number of people who answered an item correctly is a `sufficient statistic` for calculating an item's difficulty. Said another way, the number of correct answers, or, number of people who endorse a category increases monotonically with the item difficulty (of course, this does not mean you can just replace the Rasch model with a sum score since we're using the Rasch model to test whether summing items at all is a reasonable thing to do).
+Note, the total number of people who answered an item correctly is a `sufficient` statistic for calculating an item's difficulty. Said another way, the number of correct answers, or, number of people who endorse a category increases monotonically with the item difficulty (of course, this does not mean you can just replace the Rasch model with a sum score since we're using the Rasch model to test whether summing items at all is a reasonable thing to do).
 
-To see this, we can find the total number of people who endorsed the "agree" category for each item above. The table provides the proportion who endorsed the higher category in the `M` column. For instance, item V1 had 54.3% of people endorse the "agree" category (1= agree, 0= disagree). In the N column, we see that 1000 people answered the item in total. 
+To see this, we can find the total number of people who endorsed the "agree" category for each `Hls` item above. The table provides the proportion who endorsed the higher category in the `M` column. For instance, item Hls1 had 15.77% of people endorse the "agree" category (1= agree, 0= disagree). In the N column, we see that 317 people answered the item in total. 
 
 
-That means that $1000*.543$ = 543 people answering the item correctly. Note, the estimated difficulty found in the column is -.203 logits. 
+That means that $317*.1577$ = 50 people answering the item correctly. Note, the estimated difficulty found in the column is 2.43 logits. 
 
 
 ```{r}
-# Confirm that the total number of endorsements (coded 1) is 543 for item V1: sum down the column containing all answers to Hls1 in the raw data.
+# Confirm that the total number of endorsements (coded 1) is 50 for Hls1: sum down the column containing all answers to Hls1 in the raw data.
 
 
 apply(hls[1], 2, sum)
 ```
-However, we see that for item V5, 28% of people endorsed that item and the estimated mean item difficulty in `xsi.item` is 1.12 logits.
+However, we see that for item Hls5, 27% of people endorsed that item and the estimated mean item difficulty in `xsi.item` is 1.50 logits.
 
 
 The correlation between total number of endorsements per item and the estimated item difficulty can be computed as follows.
@@ -350,53 +456,7 @@ cor(item_prop$xsi.item, item_prop$total_endorsed)
 
 ```
 
-We see that the correlation between item difficulties and total endorsements per item is nearly perfect -.99554 (aka, nearly 1). As the number of endorsements go down, the estimated "difficulty" of the item increase.
-
-
-What happens if we remove the underfitting item (V2) which occupies the second position in the dataframe? We notice that the fit statistics "shift up." This shows how Rasch mean square fit statistics are related to each other. The item with the most randomness is removed, so items are relatively "more random" comapred to each other. 
-```{r message=FALSE, warning=FALSE, include=FALSE}
-
-# remove item
-hls_red <- hls[-2]
-
-#re-estimate Rasch model
-mod2 <- tam.mml(hls_red)
-```
-```{r}
-#check item difficulties
-diffic2 <- mod2$xsi
-kable(diffic2)
-
-
-# Check item fit
-fit2 <- tam.fit(mod2)
-```
-
-```{r echo=FALSE}
-
-kable(format = "html", fit2$itemfit,   caption = "Item fit statistics when the underfitting item is removed")
-```
-
-```{r}
-
-# Check correlations
-item_prop2 <- mod2$item
-
-# Get the total number endorsing an item
-item_prop2 <- mutate(item_prop2, total_endorsed =N*M)
-
-
-```
-
-```{r}
-
-#correlation between new item difficulties of the new data frame and the number of respondents who endorsed an item
-cor(item_prop2$xsi.item, item_prop2$total_endorsed)
-
-
-```
-
-
+We see that the correlation between item difficulties and total endorsements per item is nearly perfect -.97. As the number of endorsements go down, the estimated difficulty of the item increase.
 
 ```{r}
 ggplot(item_prop, aes(x=total_endorsed, y=xsi.item)) + 
@@ -406,9 +466,4 @@ ggplot(item_prop, aes(x=total_endorsed, y=xsi.item)) +
   ggtitle("Relationship between estimated item difficulty and total endorsements")
 
 ```
-
-
-
-
-
 
