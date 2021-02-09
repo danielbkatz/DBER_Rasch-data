@@ -5,20 +5,40 @@
 
 library(kableExtra)
 library(knitr)
-
+library(tidyverse)
+library(TAM)
 ```
+
+```{r, include=FALSE}
+options(width = 60)
+local({
+  hook_output <- knitr::knit_hooks$get('output')
+  knitr::knit_hooks$set(output = function(x, options) {
+    if (!is.null(options$max.height)) options$attr.output <- c(
+      options$attr.output,
+      sprintf('style="max-height: %s;"', options$max.height)
+    )
+    hook_output(x, options)
+  })
+})
+```
+
 ## Polytymous item types (anything with a rating Scale)
 We can use the Rasch Partial Credit Model (PCM) to look at polytomous data too. We’ll start by bringing in the polytomous items from the survey. Note that TAM needs the bottom category to be coded as 0, so you may need to recode.
 
 ```{r include=FALSE}
-hls2 <- read.csv("C:/Users/katzd/Downloads/hls_poly_scale.csv")
+hls2 <- read.csv("data/hls_poly_scale.csv")
 ```
 
 ```
 hls2 <- read.csv("hls_poly_scale.csv")
 ```
+
+We see these items are coded with four categories. And the categories are fairly sparse in the 4 fourth category (coded 3, since indexed starting with 0). This may be motivation to collapse categories. 
 ```{r}
 head(hls2)
+
+apply(hls2, 2, table)
 ```
 
 ```
@@ -32,35 +52,99 @@ TAM will automatically run the PCM when our data is polytomous. There are other 
 mod2 <- tam(hls2)
 ```
 
-```{r paged.print=TRUE}
+```{r paged.print=TRUE,  max.height='200px'}
 summary(mod2)
 ```
 
 
 ## Item Difficulties
-Now we'll get item and person characteristics just like before
+Now we'll get item and person characteristics just like before.
 
-```{r}
-mod2$xsi
-ItemDiff2 <- mod2$xsi$xsi 
-ItemDiff2
+
+TAM also uses the delta-tau paramaterization of the partial credit model as default. The problem is, we may be curious about the thresholds (cumulative), the overall item difficulty, and steps. TAM provides this all but it's not straightforward.
+
+
+```{r max.height='200px'}
+
+# Deltas
+
+
+xsi <- mod2$xsi
+
+# get thresholds - Thurstone Thresholds get the cumulative values
+tthresh <- tam.threshold(mod2)
+
+# Delta-tau parameters
+delta_tau <- mod2$item_irt
+
+# we have to do some addition...
+
+
+xsi
+delta_tau
+mod2$item #PCM2 type parameteris
 
 #note, if you want to see this in your viewer, you can also use View().
 ```
 
+Going between the different parameterizations:
+First, look at `xsi` Hls1 categories. As a reminder, the item has 4 categories, thus three thresholds. We see, that: `r xsi[1:3, 1]` gives us deltas/steps for the first the three steps of `Hls1`.
+
+Now, look at the first row of delta_tau. The value `r delta_tau[1, 3]` gives us the item difficulty. The tau values, are`r delta_tau[1, 4:6]`  Believe it or not, this gives us the same information as `xsi` above. How, so?
+
+```{r, paged.print=TRUE,  max.height='200px'}
+delta_tau <- delta_tau %>%
+  mutate(HLS_cat1 = beta + tau.Cat1,
+         HLS_cat2 = beta + tau.Cat2,
+         HLS_cat3 = beta + tau.Cat3)
+
+delta_tau
+
+```
+
+Note, now, that, that the delta_tau "item difficulty" (or `beta`) + `tau` gets you back to the estimates of `xsi`
+
+This is the difference between two different parameterization in the PCM model. One parametrization is:
+$$P(X_{si} = x) = \frac{exp[\sum_{k=0}^x(\theta_s-\delta_{ik})]}{\sum_{h=0}^{m_i}exp[\sum_{k=0}^h(\theta_s-\delta_{ik})]}$$.
+
+
+
+This is roughly what you're seeing for the `xsi` estimates. Here, `k` indexes item category, $\delta$ is the item, `s` indexes student. 
+
+The other parameterization, delta_tau, helps us nicely transition to the Rating Scale model, showing that the Rating Scale Model is a special case of the PCM.
+
+$$P(X_{si} = x) = \frac{exp[\sum_{k=0}^x(\theta_s-\delta_{i}+\tau_{ik})]}{\sum_{h=0}^{m_i}exp[\sum_{k=0}^h(\theta_s-\delta_{i} + \tau_{ik})]}$$.
+ 
+
+Here, $\delta_i$ is the item, and $\tau$ is the item category. In the PCM, the \tau is item specific, it's the "jump" of the category from the overall item difficulty.
+
+In the rating scale model, the delta_tau parameterization is used, but each \tau is the same, or, at leas, each deviance amount is the same. 
+
+The parameterization in `mod2` item lets you go between different parameterizations if you so choose. For instance, `mod2$item` gives you an `xsi.item` column that is the item difficulty in the `PCM2` parameterizations. The `AXsi_.Cat#` items are the sums of the `xsi` delta/step parameters up to that step.
+
+
+
 
 ## Person ability (theta) estimates
 
-```{r}
+
+
+```{r paged.print=TRUE,  max.height='200px'}
 WLE.ability.poly <- tam.wle(mod2)
 person.ability.poly <- WLE.ability.poly$theta
-head(person.ability)
+head(person.ability.poly)
 
 
 ```
 
 ## Item fit statistics
-```{r}
+
+
+The rest of the workflow from here now is pretty similar with a few different challenges
+
+We need to get infit and outfit (mean square) for each item. Only now it'll be by item category.
+
+```{r, paged.print=TRUE,  max.height='200px'}
 Fit.poly <- tam.fit(mod2)
 ```
 
@@ -70,6 +154,7 @@ Fit.poly$itemfit
 ```{r}
 kable(Fit.poly$itemfit)
 ```
+
 ## Item characteristic curves (but now as thresholds). 
 There are item characteristic curves (ICCs) for each item choice
 

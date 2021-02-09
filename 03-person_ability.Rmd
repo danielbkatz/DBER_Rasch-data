@@ -2,6 +2,7 @@
 Person abilities are also of interest. We can look at the person side of the model by computing person abilities. 
 
 1. Compute person abilities using the `tam.wle` function and assign to an object called `abil`. 
+
 2. Extract person abilities ($\theta_p$) from `abil` to create an object in the `environment` called `PersonAbility` which will essentially be a column vector. 
 
 **Note**: You may want more information than this at times (such as standard errors) so you may not always want to subset this way.
@@ -29,7 +30,7 @@ head(Abil)
 View(Abil)
 ```
 ```{r echo=FALSE}
-kable(head(Abil))
+kable(head(abil))
 ```
 
 
@@ -54,7 +55,8 @@ You can export those estimated abilites to a .csv to save (you can also save dir
 write.csv(abil, here("output", "HLSmod1_thetas.csv")
 ```
 
-Descriptives for person ability
+
+## Quick descriptives for person ability - we'll use WrightMap to bring this all together
 ```{r}
 hist(PersonAbility)
 mean(PersonAbility)

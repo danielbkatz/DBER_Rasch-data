@@ -2,10 +2,12 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
+      collapse: subsection
+      scroll_highlight: yes
       before: |
         <li><a href="./">A Minimal Rasch Example</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>l
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:

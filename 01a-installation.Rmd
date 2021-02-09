@@ -7,7 +7,7 @@ Create a new R studio Project: File -> New Project -> choose directory and proje
 
 ### Loading necessary "packages" for managine files and cleaning data
 
-Load the `here` package and `tidyverse` package in your script to help with working directory and file paths.
+Load the `here` package and `tidyverse` package in your script to help with working directory and file paths. We'll use this a little. 
 
 If you don't have them, you'll have to install them.
 
