@@ -4,26 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Polytomous Items | Measuring what Matters: Introduction to Rasch Analysis in R</title>
-  <meta name="description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <title>Chapter 8 Polytomous Items | Introduction to Rasch Modelling</title>
+  <meta name="description" content="This book is a guide for getting started using the Rasch model" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Polytomous Items | Measuring what Matters: Introduction to Rasch Analysis in R" />
+  <meta property="og:title" content="Chapter 8 Polytomous Items | Introduction to Rasch Modelling" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
+  <meta property="og:description" content="This book is a guide for getting started using the Rasch model" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Polytomous Items | Measuring what Matters: Introduction to Rasch Analysis in R" />
+  <meta name="twitter:title" content="Chapter 8 Polytomous Items | Introduction to Rasch Modelling" />
   
-  <meta name="twitter:description" content="This book is meant to be used as a guide for getting started using the Rasch model" />
+  <meta name="twitter:description" content="This book is a guide for getting started using the Rasch model" />
   
 
+<meta name="author" content="Daniel Katz, Anthony Clairmont, Mike Wilton" />
 
 
-<meta name="date" content="2020-05-19" />
+<meta name="date" content="2021-02-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,6 +33,7 @@
   
 <link rel="prev" href="person-abilities.html"/>
 <link rel="next" href="multidimensional.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,25 +54,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -114,7 +118,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -127,62 +130,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Rasch Example</a></li>
-
-<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installing R and R-Studio</a><ul>
-<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#instructions-for-installing-r"><i class="fa fa-check"></i><b>2.1</b> Instructions for installing R:</a><ul>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installing R and R-Studio</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#instructions-for-installing-r"><i class="fa fa-check"></i><b>2.1</b> Instructions for installing R:</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="install.html"><a href="install.html#for-mac-do-the-following"><i class="fa fa-check"></i><b>2.1.1</b> For Mac, do the following:</a></li>
 <li class="chapter" data-level="2.1.2" data-path="install.html"><a href="install.html#for-windows-do-the-following"><i class="fa fa-check"></i><b>2.1.2</b> For Windows do the following:</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#instructions-for-installing-r-studio"><i class="fa fa-check"></i><b>2.2</b> Instructions for installing R-Studio:</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html"><i class="fa fa-check"></i><b>3</b> Setting up your workspace: Rstudio Projects</a><ul>
+<li class="chapter" data-level="3" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html"><i class="fa fa-check"></i><b>3</b> Setting up your workspace: Rstudio Projects</a>
+<ul>
 <li class="chapter" data-level="3.0.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#loading-necessary-packages-for-managine-files-and-cleaning-data"><i class="fa fa-check"></i><b>3.0.1</b> Loading necessary “packages” for managine files and cleaning data</a></li>
 <li class="chapter" data-level="3.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#setting-up-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting up the working directory</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="Rasch.html"><a href="Rasch.html"><i class="fa fa-check"></i><b>4</b> The Rasch Model</a><ul>
-<li class="chapter" data-level="4.1" data-path="Rasch.html"><a href="Rasch.html#packages-necessary-for-running-the-rasch-model"><i class="fa fa-check"></i><b>4.1</b> Packages Necessary for running the Rasch model</a></li>
-<li class="chapter" data-level="4.2" data-path="Rasch.html"><a href="Rasch.html#reading-in-data"><i class="fa fa-check"></i><b>4.2</b> Reading in Data</a></li>
-<li class="chapter" data-level="4.3" data-path="Rasch.html"><a href="Rasch.html#see-the-first-few-rows-and-columns"><i class="fa fa-check"></i><b>4.3</b> See the first few rows and columns</a></li>
-<li class="chapter" data-level="4.4" data-path="Rasch.html"><a href="Rasch.html#the-rasch-model"><i class="fa fa-check"></i><b>4.4</b> The Rasch Model</a></li>
+<li class="chapter" data-level="4" data-path="Rasch.html"><a href="Rasch.html"><i class="fa fa-check"></i><b>4</b> The Rasch Model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="Rasch.html"><a href="Rasch.html#basics"><i class="fa fa-check"></i><b>4.1</b> Basics</a></li>
+<li class="chapter" data-level="4.2" data-path="Rasch.html"><a href="Rasch.html#packages-necessary-for-running-the-rasch-model"><i class="fa fa-check"></i><b>4.2</b> Packages Necessary for running the Rasch model</a></li>
+<li class="chapter" data-level="4.3" data-path="Rasch.html"><a href="Rasch.html#reading-in-data"><i class="fa fa-check"></i><b>4.3</b> Reading in Data</a></li>
+<li class="chapter" data-level="4.4" data-path="Rasch.html"><a href="Rasch.html#check-out-the-data-set"><i class="fa fa-check"></i><b>4.4</b> Check out the data set</a></li>
 <li class="chapter" data-level="4.5" data-path="Rasch.html"><a href="Rasch.html#running-the-rasch-model"><i class="fa fa-check"></i><b>4.5</b> Running the Rasch model</a></li>
 <li class="chapter" data-level="4.6" data-path="Rasch.html"><a href="Rasch.html#item-difficulties"><i class="fa fa-check"></i><b>4.6</b> Item Difficulties</a></li>
-<li class="chapter" data-level="4.7" data-path="Rasch.html"><a href="Rasch.html#visualize"><i class="fa fa-check"></i><b>4.7</b> Visualize</a></li>
-<li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a><ul>
+<li class="chapter" data-level="4.7" data-path="Rasch.html"><a href="Rasch.html#visualize---get-item-characteristic-curves"><i class="fa fa-check"></i><b>4.7</b> Visualize - Get Item Characteristic Curves</a></li>
+<li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a>
+<ul>
 <li class="chapter" data-level="4.8.1" data-path="Rasch.html"><a href="Rasch.html#exercise"><i class="fa fa-check"></i><b>4.8.1</b> Exercise:</a></li>
 </ul></li>
-<li class="chapter" data-level="4.9" data-path="Rasch.html"><a href="Rasch.html#item-fit"><i class="fa fa-check"></i><b>4.9</b> Item Fit</a></li>
-<li class="chapter" data-level="4.10" data-path="Rasch.html"><a href="Rasch.html#optional-understanding-the-model-more-deeply"><i class="fa fa-check"></i><b>4.10</b> Optional: Understanding the model more deeply</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>5</b> Person Abilities</a><ul>
-<li class="chapter" data-level="5.1" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>5.1</b> Wright Map</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-1"><i class="fa fa-check"></i><b>5.1.1</b> Exercise:</a></li>
+<li class="chapter" data-level="5" data-path="item-fit.html"><a href="item-fit.html"><i class="fa fa-check"></i><b>5</b> Item Fit</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="item-fit.html"><a href="item-fit.html#exercise-1"><i class="fa fa-check"></i><b>5.0.1</b> Exercise:</a></li>
+<li class="chapter" data-level="5.1" data-path="item-fit.html"><a href="item-fit.html#optional---visualizing-item-fit"><i class="fa fa-check"></i><b>5.1</b> Optional - Visualizing Item Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="optional-understanding-the-model.html"><a href="optional-understanding-the-model.html"><i class="fa fa-check"></i><b>6</b> Optional: Understanding the model</a></li>
+<li class="chapter" data-level="7" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>7</b> Person Abilities</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="person-abilities.html"><a href="person-abilities.html#quick-descriptives-for-person-ability---well-use-wrightmap-to-bring-this-all-together"><i class="fa fa-check"></i><b>7.1</b> Quick descriptives for person ability - we’ll use WrightMap to bring this all together</a></li>
+<li class="chapter" data-level="7.2" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>7.2</b> Wright Map</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-2"><i class="fa fa-check"></i><b>7.2.1</b> Exercise:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>6</b> Polytomous Items</a><ul>
-<li class="chapter" data-level="6.1" data-path="polytomous-items.html"><a href="polytomous-items.html#polytymous-item-types-anything-with-a-rating-scale"><i class="fa fa-check"></i><b>6.1</b> Polytymous item types (anything with a rating Scale)</a></li>
-<li class="chapter" data-level="6.2" data-path="polytomous-items.html"><a href="polytomous-items.html#item-difficulties-1"><i class="fa fa-check"></i><b>6.2</b> Item Difficulties</a></li>
-<li class="chapter" data-level="6.3" data-path="polytomous-items.html"><a href="polytomous-items.html#person-ability-theta-estimates"><i class="fa fa-check"></i><b>6.3</b> Person ability (theta) estimates</a></li>
-<li class="chapter" data-level="6.4" data-path="polytomous-items.html"><a href="polytomous-items.html#item-fit-statistics"><i class="fa fa-check"></i><b>6.4</b> Item fit statistics</a></li>
-<li class="chapter" data-level="6.5" data-path="polytomous-items.html"><a href="polytomous-items.html#item-characteristic-curves-but-now-as-thresholds."><i class="fa fa-check"></i><b>6.5</b> Item characteristic curves (but now as thresholds).</a></li>
-<li class="chapter" data-level="6.6" data-path="polytomous-items.html"><a href="polytomous-items.html#wright-map-1"><i class="fa fa-check"></i><b>6.6</b> Wright Map</a></li>
-<li class="chapter" data-level="6.7" data-path="polytomous-items.html"><a href="polytomous-items.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises:</a></li>
-<li class="chapter" data-level="6.8" data-path="polytomous-items.html"><a href="polytomous-items.html#model-comparison"><i class="fa fa-check"></i><b>6.8</b> Model Comparison</a></li>
+<li class="chapter" data-level="8" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>8</b> Polytomous Items</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="polytomous-items.html"><a href="polytomous-items.html#polytymous-item-types-anything-with-a-rating-scale"><i class="fa fa-check"></i><b>8.1</b> Polytymous item types (anything with a rating Scale)</a></li>
+<li class="chapter" data-level="8.2" data-path="polytomous-items.html"><a href="polytomous-items.html#item-difficulties-1"><i class="fa fa-check"></i><b>8.2</b> Item Difficulties</a></li>
+<li class="chapter" data-level="8.3" data-path="polytomous-items.html"><a href="polytomous-items.html#person-ability-theta-estimates"><i class="fa fa-check"></i><b>8.3</b> Person ability (theta) estimates</a></li>
+<li class="chapter" data-level="8.4" data-path="polytomous-items.html"><a href="polytomous-items.html#item-fit-statistics"><i class="fa fa-check"></i><b>8.4</b> Item fit statistics</a></li>
+<li class="chapter" data-level="8.5" data-path="polytomous-items.html"><a href="polytomous-items.html#item-characteristic-curves-but-now-as-thresholds."><i class="fa fa-check"></i><b>8.5</b> Item characteristic curves (but now as thresholds).</a></li>
+<li class="chapter" data-level="8.6" data-path="polytomous-items.html"><a href="polytomous-items.html#wright-map-1"><i class="fa fa-check"></i><b>8.6</b> Wright Map</a></li>
+<li class="chapter" data-level="8.7" data-path="polytomous-items.html"><a href="polytomous-items.html#exercises"><i class="fa fa-check"></i><b>8.7</b> Exercises:</a></li>
+<li class="chapter" data-level="8.8" data-path="polytomous-items.html"><a href="polytomous-items.html#model-comparison"><i class="fa fa-check"></i><b>8.8</b> Model Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="multidimensional.html"><a href="multidimensional.html"><i class="fa fa-check"></i><b>7</b> Multidimensional Rasch Model</a><ul>
-<li class="chapter" data-level="7.1" data-path="multidimensional.html"><a href="multidimensional.html#we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix"><i class="fa fa-check"></i><b>7.1</b> we start by assigning the items to a dimension using a Q-matrix</a></li>
-<li class="chapter" data-level="7.2" data-path="multidimensional.html"><a href="multidimensional.html#run-the-multidimensional-rasch-model"><i class="fa fa-check"></i><b>7.2</b> Run the multidimensional Rasch model</a></li>
-<li class="chapter" data-level="7.3" data-path="multidimensional.html"><a href="multidimensional.html#theta-and-delta"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></a><ul>
-<li class="chapter" data-level="7.3.1" data-path="multidimensional.html"><a href="multidimensional.html#wright-map-2"><i class="fa fa-check"></i><b>7.3.1</b> Wright Map</a></li>
+<li class="chapter" data-level="9" data-path="multidimensional.html"><a href="multidimensional.html"><i class="fa fa-check"></i><b>9</b> Multidimensional Rasch Model</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="multidimensional.html"><a href="multidimensional.html#we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix"><i class="fa fa-check"></i><b>9.1</b> we start by assigning the items to a dimension using a Q-matrix</a></li>
+<li class="chapter" data-level="9.2" data-path="multidimensional.html"><a href="multidimensional.html#run-the-multidimensional-rasch-model"><i class="fa fa-check"></i><b>9.2</b> Run the multidimensional Rasch model</a></li>
+<li class="chapter" data-level="9.3" data-path="multidimensional.html"><a href="multidimensional.html#theta-and-delta"><i class="fa fa-check"></i><b>9.3</b> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="multidimensional.html"><a href="multidimensional.html#wright-map-2"><i class="fa fa-check"></i><b>9.3.1</b> Wright Map</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="multidimensional.html"><a href="multidimensional.html#exercises-1"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+<li class="chapter" data-level="9.4" data-path="multidimensional.html"><a href="multidimensional.html#exercises-1"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -192,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Measuring what Matters: Introduction to Rasch Analysis in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Rasch Modelling</a>
           </h1>
         </div>
 
@@ -200,31 +212,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="polytomous-items" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Polytomous Items</h1>
-<div id="polytymous-item-types-anything-with-a-rating-scale" class="section level2">
-<h2><span class="header-section-number">6.1</span> Polytymous item types (anything with a rating Scale)</h2>
+<div id="polytomous-items" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Polytomous Items</h1>
+<div id="polytymous-item-types-anything-with-a-rating-scale" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Polytymous item types (anything with a rating Scale)</h2>
 <p>We can use the Rasch Partial Credit Model (PCM) to look at polytomous data too. We’ll start by bringing in the polytomous items from the survey. Note that TAM needs the bottom category to be coded as 0, so you may need to recode.</p>
 <pre><code>hls2 &lt;- read.csv(&quot;hls_poly_scale.csv&quot;)</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">head</span>(hls2)</a></code></pre></div>
-<pre><code>##   Hls1 Hls2 Hls3 Hls4 Hls5 Hls6 Hls7 Hls8 Hls9 Hls10 Hls11 Hls12 Hls13 Hls14 Hls15 Hls16
-## 1    1    1    1    0    1    1    0    2    1     1     2     1     1     0     1     1
-## 2    2    1    1    1    2    1    1    2    1     1     2     2     2     1     1     2
-## 3    0    1    1    1    1    1    1    2    1     0     1     2     1     1     1     1
-## 4    1    1    0    0    2    1    0    1    0     0     2     1     1     1     2     1
-## 5    1    1    0    0    1    0    0    2    0     0     2     2     2     1     1     2
-## 6    1    1    1    1    2    1    1    1    1     0     2     2     2     1     2     1</code></pre>
+<p>We see these items are coded with four categories. And the categories are fairly sparse in the 4 fourth category (coded 3, since indexed starting with 0). This may be motivation to collapse categories.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="polytomous-items.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hls2)</span></code></pre></div>
+<pre><code>##   Hls1 Hls2 Hls3 Hls4 Hls5 Hls6 Hls7 Hls8 Hls9 Hls10 Hls11
+## 1    1    1    1    0    1    1    0    2    1     1     2
+## 2    2    1    1    1    2    1    1    2    1     1     2
+## 3    0    1    1    1    1    1    1    2    1     0     1
+## 4    1    1    0    0    2    1    0    1    0     0     2
+## 5    1    1    0    0    1    0    0    2    0     0     2
+## 6    1    1    1    1    2    1    1    1    1     0     2
+##   Hls12 Hls13 Hls14 Hls15 Hls16
+## 1     1     1     0     1     1
+## 2     2     2     1     1     2
+## 3     2     1     1     1     1
+## 4     1     1     1     2     1
+## 5     2     2     1     1     2
+## 6     2     2     1     2     1</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="polytomous-items.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(hls2, <span class="dv">2</span>, table)</span></code></pre></div>
+<pre><code>##   Hls1 Hls2 Hls3 Hls4 Hls5 Hls6 Hls7 Hls8 Hls9 Hls10 Hls11
+## 0   63   76  129  160   65   90  140   50  146   139    47
+## 1  204  207  176  148  166  196  162  154  144   163   116
+## 2   44   32   11    7   78   26   12  101   21    13   130
+## 3    6    2    1    2    8    5    3   12    6     2    24
+##   Hls12 Hls13 Hls14 Hls15 Hls16
+## 0    44    52    64    52    69
+## 1   138   176   181   148   185
+## 2   119    83    60   105    57
+## 3    16     6    12    12     6</code></pre>
 <pre><code>View(hls2)</code></pre>
 <p>TAM will automatically run the PCM when our data is polytomous. There are other model-types for polytomous data such as the rating scale model. This may be more appropriate for Likert-type items. For more information, read TAM documentation or see the reference list (Bond &amp; Fox, 2007)</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">mod2 &lt;-<span class="st"> </span><span class="kw">tam</span>(hls2)</a></code></pre></div>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">summary</span>(mod2)</a></code></pre></div>
-<pre><code>## ------------------------------------------------------------
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="polytomous-items.html#cb71-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">tam</span>(hls2)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="polytomous-items.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<pre style="max-height: 200px;" style="max-height: 200px;"><code>## ------------------------------------------------------------
 ## TAM 3.5-19 (2020-05-05 22:45:39) 
-## R version 3.5.2 (2018-12-20) x86_64, mingw32 | nodename=LAPTOP-K7402PLE | login=katzd 
+## R version 3.6.0 (2019-04-26) x86_64, mingw32 | nodename=LAPTOP-K7402PLE | login=katzd 
 ## 
-## Date of Analysis: 2020-05-19 10:52:15 
-## Time difference of 0.1549971 secs
-## Computation time: 0.1549971 
+## Date of Analysis: 2021-02-07 11:36:51 
+## Time difference of 0.256979 secs
+## Computation time: 0.256979 
 ## 
 ## Multidimensional Item Response Model in TAM 
 ## 
@@ -272,23 +303,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1,]    0
 ## ------------------------------------------------------------
 ## Item Parameters -A*Xsi
-##     item   N     M xsi.item AXsi_.Cat1 AXsi_.Cat2 AXsi_.Cat3 B.Cat1.Dim1 B.Cat2.Dim1 B.Cat3.Dim1
-## 1   Hls1 317 0.978    1.427     -1.846      0.452      4.282           1           2           3
-## 2   Hls2 317 0.874    2.074     -1.502      1.263      6.221           1           2           3
-## 3   Hls3 317 0.634    2.903     -0.381      3.581      8.709           1           2           3
-## 4   Hls4 317 0.530    2.809      0.176      4.500      8.428           1           2           3
-## 5   Hls5 317 1.091    1.198     -1.684     -0.302      3.595           1           2           3
-## 6   Hls6 317 0.830    1.818     -1.155      1.784      5.455           1           2           3
-## 7   Hls7 317 0.615    2.455     -0.166      3.587      7.364           1           2           3
-## 8   Hls8 317 1.237    0.781     -2.136     -1.239      2.342           1           2           3
-## 9   Hls9 317 0.644    2.098     -0.008      2.982      6.295           1           2           3
-## 10 Hls10 317 0.615    2.630     -0.183      3.511      7.890           1           2           3
-## 11 Hls11 317 1.413    0.325     -2.106     -1.934      0.974           1           2           3
-## 12 Hls12 317 1.338    0.512     -2.318     -1.805      1.537           1           2           3
-## 13 Hls13 317 1.136    1.162     -2.127     -0.789      3.487           1           2           3
-## 14 Hls14 317 1.063    1.070     -1.762      0.000      3.209           1           2           3
-## 15 Hls15 317 1.243    0.792     -2.043     -1.232      2.376           1           2           3
-## 16 Hls16 317 1.000    1.434     -1.629      0.278      4.303           1           2           3
+##     item   N     M xsi.item AXsi_.Cat1 AXsi_.Cat2
+## 1   Hls1 317 0.978    1.427     -1.846      0.452
+## 2   Hls2 317 0.874    2.074     -1.502      1.263
+## 3   Hls3 317 0.634    2.903     -0.381      3.581
+## 4   Hls4 317 0.530    2.809      0.176      4.500
+## 5   Hls5 317 1.091    1.198     -1.684     -0.302
+## 6   Hls6 317 0.830    1.818     -1.155      1.784
+## 7   Hls7 317 0.615    2.455     -0.166      3.587
+## 8   Hls8 317 1.237    0.781     -2.136     -1.239
+## 9   Hls9 317 0.644    2.098     -0.008      2.982
+## 10 Hls10 317 0.615    2.630     -0.183      3.511
+## 11 Hls11 317 1.413    0.325     -2.106     -1.934
+## 12 Hls12 317 1.338    0.512     -2.318     -1.805
+## 13 Hls13 317 1.136    1.162     -2.127     -0.789
+## 14 Hls14 317 1.063    1.070     -1.762      0.000
+## 15 Hls15 317 1.243    0.792     -2.043     -1.232
+## 16 Hls16 317 1.000    1.434     -1.629      0.278
+##    AXsi_.Cat3 B.Cat1.Dim1 B.Cat2.Dim1 B.Cat3.Dim1
+## 1       4.282           1           2           3
+## 2       6.221           1           2           3
+## 3       8.709           1           2           3
+## 4       8.428           1           2           3
+## 5       3.595           1           2           3
+## 6       5.455           1           2           3
+## 7       7.364           1           2           3
+## 8       2.342           1           2           3
+## 9       6.295           1           2           3
+## 10      7.890           1           2           3
+## 11      0.974           1           2           3
+## 12      1.537           1           2           3
+## 13      3.487           1           2           3
+## 14      3.209           1           2           3
+## 15      2.376           1           2           3
+## 16      4.303           1           2           3
 ## 
 ## Item Parameters Xsi
 ##               xsi se.xsi
@@ -360,11 +408,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 15 Hls15     1 0.792   -2.835    0.018    2.816
 ## 16 Hls16     1 1.434   -3.063    0.472    2.590</code></pre>
 </div>
-<div id="item-difficulties-1" class="section level2">
-<h2><span class="header-section-number">6.2</span> Item Difficulties</h2>
-<p>Now we’ll get item and person characteristics just like before</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">mod2<span class="op">$</span>xsi</a></code></pre></div>
-<pre><code>##                     xsi    se.xsi
+<div id="item-difficulties-1" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Item Difficulties</h2>
+<p>Now we’ll get item and person characteristics just like before.</p>
+<p>TAM also uses the delta-tau paramaterization of the partial credit model as default. The problem is, we may be curious about the thresholds (cumulative), the overall item difficulty, and steps. TAM provides this all but it’s not straightforward.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="polytomous-items.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deltas</span></span>
+<span id="cb74-2"><a href="polytomous-items.html#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="polytomous-items.html#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="polytomous-items.html#cb74-4" aria-hidden="true" tabindex="-1"></a>xsi <span class="ot">&lt;-</span> mod2<span class="sc">$</span>xsi</span>
+<span id="cb74-5"><a href="polytomous-items.html#cb74-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-6"><a href="polytomous-items.html#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="co"># get thresholds - Thurstone Thresholds get the cumulative values</span></span>
+<span id="cb74-7"><a href="polytomous-items.html#cb74-7" aria-hidden="true" tabindex="-1"></a>tthresh <span class="ot">&lt;-</span> <span class="fu">tam.threshold</span>(mod2)</span>
+<span id="cb74-8"><a href="polytomous-items.html#cb74-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-9"><a href="polytomous-items.html#cb74-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Delta-tau parameters</span></span>
+<span id="cb74-10"><a href="polytomous-items.html#cb74-10" aria-hidden="true" tabindex="-1"></a>delta_tau <span class="ot">&lt;-</span> mod2<span class="sc">$</span>item_irt</span>
+<span id="cb74-11"><a href="polytomous-items.html#cb74-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-12"><a href="polytomous-items.html#cb74-12" aria-hidden="true" tabindex="-1"></a><span class="co"># we have to do some addition...</span></span>
+<span id="cb74-13"><a href="polytomous-items.html#cb74-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-14"><a href="polytomous-items.html#cb74-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-15"><a href="polytomous-items.html#cb74-15" aria-hidden="true" tabindex="-1"></a>xsi</span></code></pre></div>
+<pre style="max-height: 200px;" style="max-height: 200px;"><code>##                     xsi    se.xsi
 ## Hls1_Cat1  -1.846046710 0.1770841
 ## Hls1_Cat2   2.298334842 0.1736858
 ## Hls1_Cat3   3.830385868 0.4635448
@@ -413,19 +476,134 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Hls16_Cat1 -1.628691156 0.1721913
 ## Hls16_Cat2  1.906727817 0.1604086
 ## Hls16_Cat3  4.024764112 0.4574405</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">ItemDiff2 &lt;-<span class="st"> </span>mod2<span class="op">$</span>xsi<span class="op">$</span>xsi </a>
-<a class="sourceLine" id="cb64-2" title="2">ItemDiff2</a></code></pre></div>
-<pre><code>##  [1] -1.846046710  2.298334842  3.830385868 -1.501715752  2.764560868  4.958324889 -0.380834628  3.962213547  5.127428610  0.175976124  4.324558567
-## [12]  3.927492901 -1.684131262  1.381933373  3.897482578 -1.155351142  2.939344680  3.671463609 -0.165823435  3.753328170  3.776319530 -2.135935885
-## [23]  0.896643565  3.581083599 -0.008019089  2.989853095  3.313295753 -0.183297684  3.694746057  4.379242422 -2.106058995  0.172650186  2.907183948
-## [34] -2.317865929  0.513325662  3.342199604 -2.127336182  1.338677184  4.275574749 -1.761463128  1.762102813  3.208316423 -2.042459839  0.810466042
-## [45]  3.608588261 -1.628691156  1.906727817  4.024764112</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="co">#note, if you want to see this in your viewer, you can also use View().</span></a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="polytomous-items.html#cb76-1" aria-hidden="true" tabindex="-1"></a>delta_tau</span></code></pre></div>
+<pre style="max-height: 200px;" style="max-height: 200px;"><code>##     item alpha      beta  tau.Cat1      tau.Cat2 tau.Cat3
+## 1   Hls1     1 1.4274710 -3.273603  0.8707754118 2.402828
+## 2   Hls2     1 2.0736329 -3.575436  0.6908361981 2.884600
+## 3   Hls3     1 2.9028463 -3.283771  1.0592759982 2.224495
+## 4   Hls4     1 2.8092628 -2.633376  1.5152150567 1.118161
+## 5   Hls5     1 1.1983411 -2.882556  0.1835035073 2.699053
+## 6   Hls6     1 1.8184015 -2.973840  1.1208578911 1.852982
+## 7   Hls7     1 2.4545273 -2.620439  1.2987189037 1.321721
+## 8   Hls8     1 0.7805103 -2.916528  0.1160446178 2.800483
+## 9   Hls9     1 2.0983006 -2.106406  0.8914751897 1.214930
+## 10 Hls10     1 2.6301446 -2.813531  1.0645139316 1.749018
+## 11 Hls11     1 0.3245074 -2.430645 -0.1519433803 2.582588
+## 12 Hls12     1 0.5124669 -2.830413  0.0007705277 2.829642
+## 13 Hls13     1 1.1622166 -3.289636  0.1763701702 3.113266
+## 14 Hls14     1 1.0695679 -2.831114  0.6924494287 2.138665
+## 15 Hls15     1 0.7921115 -2.834653  0.0182660931 2.816387
+## 16 Hls16     1 1.4341793 -3.062956  0.4724593127 2.590496</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="polytomous-items.html#cb78-1" aria-hidden="true" tabindex="-1"></a>mod2<span class="sc">$</span>item <span class="co">#PCM2 type parameteris</span></span></code></pre></div>
+<pre style="max-height: 200px;" style="max-height: 200px;"><code>##        item   N         M  xsi.item   AXsi_.Cat1
+## Hls1   Hls1 317 0.9779180 1.4274710 -1.846131898
+## Hls2   Hls2 317 0.8738170 2.0736329 -1.501802830
+## Hls3   Hls3 317 0.6340694 2.9028463 -0.380924234
+## Hls4   Hls4 317 0.5299685 2.8092628  0.175886380
+## Hls5   Hls5 317 1.0914826 1.1983411 -1.684215070
+## Hls6   Hls6 317 0.8296530 1.8184015 -1.155438051
+## Hls7   Hls7 317 0.6151420 2.4545273 -0.165912194
+## Hls8   Hls8 317 1.2365931 0.7805103 -2.136017661
+## Hls9   Hls9 317 0.6435331 2.0983006 -0.008105079
+## Hls10 Hls10 317 0.6151420 2.6301446 -0.183386855
+## Hls11 Hls11 317 1.4132492 0.3245074 -2.106137069
+## Hls12 Hls12 317 1.3375394 0.5124669 -2.317946089
+## Hls13 Hls13 317 1.1356467 1.1622166 -2.127419718
+## Hls14 Hls14 317 1.0630915 1.0695679 -1.761546575
+## Hls15 Hls15 317 1.2429022 0.7921115 -2.042541519
+## Hls16 Hls16 317 1.0000000 1.4341793 -1.628776280
+##          AXsi_.Cat2 AXsi_.Cat3 B.Cat1.Dim1 B.Cat2.Dim1
+## Hls1   0.4521145624  4.2824131           1           2
+## Hls2   1.2626663181  6.2208988           1           2
+## Hls3   3.5811980586  8.7085389           1           2
+## Hls4   4.5003642315  8.4277884           1           2
+## Hls5  -0.3023704998  3.5950232           1           2
+## Hls6   1.7838213033  5.4552044           1           2
+## Hls7   3.5873340076  7.3635819           1           2
+## Hls8  -1.2394627171  2.3415310           1           2
+## Hls9   2.9816706902  6.2949017           1           2
+## Hls10  3.5112716780  7.8904338           1           2
+## Hls11 -1.9335729998  0.9735223           1           2
+## Hls12 -1.8047086322  1.5374008           1           2
+## Hls13 -0.7888329123  3.4866499           1           2
+## Hls14  0.0004707108  3.2087036           1           2
+## Hls15 -1.2321639435  2.3763344           1           2
+## Hls16  0.2778623406  4.3025379           1           2
+##       B.Cat3.Dim1
+## Hls1            3
+## Hls2            3
+## Hls3            3
+## Hls4            3
+## Hls5            3
+## Hls6            3
+## Hls7            3
+## Hls8            3
+## Hls9            3
+## Hls10           3
+## Hls11           3
+## Hls12           3
+## Hls13           3
+## Hls14           3
+## Hls15           3
+## Hls16           3</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="polytomous-items.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co">#note, if you want to see this in your viewer, you can also use View().</span></span></code></pre></div>
+<p>Going between the different parameterizations:
+First, look at <code>xsi</code> Hls1 categories. As a reminder, the item has 4 categories, thus three thresholds. We see, that: -1.8460467, 2.2983348, 3.8303859 gives us deltas/steps for the first the three steps of <code>Hls1</code>.</p>
+<p>Now, look at the first row of delta_tau. The value 1.427471 gives us the item difficulty. The tau values, are-3.2736029, 0.8707754, 2.4028275 Believe it or not, this gives us the same information as <code>xsi</code> above. How, so?</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="polytomous-items.html#cb81-1" aria-hidden="true" tabindex="-1"></a>delta_tau <span class="ot">&lt;-</span> delta_tau <span class="sc">%&gt;%</span></span>
+<span id="cb81-2"><a href="polytomous-items.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">HLS_cat1 =</span> beta <span class="sc">+</span> tau.Cat1,</span>
+<span id="cb81-3"><a href="polytomous-items.html#cb81-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">HLS_cat2 =</span> beta <span class="sc">+</span> tau.Cat2,</span>
+<span id="cb81-4"><a href="polytomous-items.html#cb81-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">HLS_cat3 =</span> beta <span class="sc">+</span> tau.Cat3)</span>
+<span id="cb81-5"><a href="polytomous-items.html#cb81-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-6"><a href="polytomous-items.html#cb81-6" aria-hidden="true" tabindex="-1"></a>delta_tau</span></code></pre></div>
+<pre style="max-height: 200px;" style="max-height: 200px;"><code>##     item alpha      beta  tau.Cat1      tau.Cat2 tau.Cat3
+## 1   Hls1     1 1.4274710 -3.273603  0.8707754118 2.402828
+## 2   Hls2     1 2.0736329 -3.575436  0.6908361981 2.884600
+## 3   Hls3     1 2.9028463 -3.283771  1.0592759982 2.224495
+## 4   Hls4     1 2.8092628 -2.633376  1.5152150567 1.118161
+## 5   Hls5     1 1.1983411 -2.882556  0.1835035073 2.699053
+## 6   Hls6     1 1.8184015 -2.973840  1.1208578911 1.852982
+## 7   Hls7     1 2.4545273 -2.620439  1.2987189037 1.321721
+## 8   Hls8     1 0.7805103 -2.916528  0.1160446178 2.800483
+## 9   Hls9     1 2.0983006 -2.106406  0.8914751897 1.214930
+## 10 Hls10     1 2.6301446 -2.813531  1.0645139316 1.749018
+## 11 Hls11     1 0.3245074 -2.430645 -0.1519433803 2.582588
+## 12 Hls12     1 0.5124669 -2.830413  0.0007705277 2.829642
+## 13 Hls13     1 1.1622166 -3.289636  0.1763701702 3.113266
+## 14 Hls14     1 1.0695679 -2.831114  0.6924494287 2.138665
+## 15 Hls15     1 0.7921115 -2.834653  0.0182660931 2.816387
+## 16 Hls16     1 1.4341793 -3.062956  0.4724593127 2.590496
+##        HLS_cat1  HLS_cat2 HLS_cat3
+## 1  -1.846131898 2.2982465 3.830299
+## 2  -1.501802830 2.7644691 4.958233
+## 3  -0.380924234 3.9621223 5.127341
+## 4   0.175886380 4.3244779 3.927424
+## 5  -1.684215070 1.3818446 3.897394
+## 6  -1.155438051 2.9392594 3.671383
+## 7  -0.165912194 3.7532462 3.776248
+## 8  -2.136017661 0.8965549 3.580994
+## 9  -0.008105079 2.9897758 3.313231
+## 10 -0.183386855 3.6946585 4.379162
+## 11 -2.106137069 0.1725641 2.907095
+## 12 -2.317946089 0.5132375 3.342109
+## 13 -2.127419718 1.3385868 4.275483
+## 14 -1.761546575 1.7620173 3.208233
+## 15 -2.042541519 0.8103776 3.608498
+## 16 -1.628776280 1.9066386 4.024676</code></pre>
+<p>Note, now, that, that the delta_tau “item difficulty” (or <code>beta</code>) + <code>tau</code> gets you back to the estimates of <code>xsi</code></p>
+<p>This is the difference between two different parameterization in the PCM model. One parametrization is:
+<span class="math display">\[P(X_{si} = x) = \frac{exp[\sum_{k=0}^x(\theta_s-\delta_{ik})]}{\sum_{h=0}^{m_i}exp[\sum_{k=0}^h(\theta_s-\delta_{ik})]}\]</span>.</p>
+<p>This is roughly what you’re seeing for the <code>xsi</code> estimates. Here, <code>k</code> indexes item category, <span class="math inline">\(\delta\)</span> is the item, <code>s</code> indexes student.</p>
+<p>The other parameterization, delta_tau, helps us nicely transition to the Rating Scale model, showing that the Rating Scale Model is a special case of the PCM.</p>
+<p><span class="math display">\[P(X_{si} = x) = \frac{exp[\sum_{k=0}^x(\theta_s-\delta_{i}+\tau_{ik})]}{\sum_{h=0}^{m_i}exp[\sum_{k=0}^h(\theta_s-\delta_{i} + \tau_{ik})]}\]</span>.</p>
+<p>Here, <span class="math inline">\(\delta_i\)</span> is the item, and <span class="math inline">\(\tau\)</span> is the item category. In the PCM, the is item specific, it’s the “jump” of the category from the overall item difficulty.</p>
+<p>In the rating scale model, the delta_tau parameterization is used, but each is the same, or, at leas, each deviance amount is the same.</p>
+<p>The parameterization in <code>mod2</code> item lets you go between different parameterizations if you so choose. For instance, <code>mod2$item</code> gives you an <code>xsi.item</code> column that is the item difficulty in the <code>PCM2</code> parameterizations. The <code>AXsi_.Cat#</code> items are the sums of the <code>xsi</code> delta/step parameters up to that step.</p>
 </div>
-<div id="person-ability-theta-estimates" class="section level2">
-<h2><span class="header-section-number">6.3</span> Person ability (theta) estimates</h2>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">WLE.ability.poly &lt;-<span class="st"> </span><span class="kw">tam.wle</span>(mod2)</a></code></pre></div>
-<pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  2.6967 
+<div id="person-ability-theta-estimates" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Person ability (theta) estimates</h2>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="polytomous-items.html#cb83-1" aria-hidden="true" tabindex="-1"></a>WLE.ability.poly <span class="ot">&lt;-</span> <span class="fu">tam.wle</span>(mod2)</span></code></pre></div>
+<pre style="max-height: 200px;" style="max-height: 200px;"><code>## Iteration in WLE/MLE estimation  1   | Maximal change  2.6967 
 ## Iteration in WLE/MLE estimation  2   | Maximal change  2.1777 
 ## Iteration in WLE/MLE estimation  3   | Maximal change  0.368 
 ## Iteration in WLE/MLE estimation  4   | Maximal change  0.0135 
@@ -433,26 +611,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Iteration in WLE/MLE estimation  6   | Maximal change  0 
 ## ----
 ##  WLE Reliability= 0.9</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">person.ability.poly &lt;-<span class="st"> </span>WLE.ability.poly<span class="op">$</span>theta</a>
-<a class="sourceLine" id="cb69-2" title="2"><span class="kw">head</span>(person.ability)</a></code></pre></div>
-<pre><code>## Object of class &#39;tam.wle&#39;
-## Call: tam.wle(tamobj = mod2)
-## 
-##   WLEs for 317 observations and 1 dimension
-## 
-##   WLE Reliability=0.9
-##   Average error variance=0.307
-##   WLE mean=-0.02
-##   WLE variance=3.071</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="polytomous-items.html#cb85-1" aria-hidden="true" tabindex="-1"></a>person.ability.poly <span class="ot">&lt;-</span> WLE.ability.poly<span class="sc">$</span>theta</span>
+<span id="cb85-2"><a href="polytomous-items.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(person.ability.poly)</span></code></pre></div>
+<pre style="max-height: 200px;" style="max-height: 200px;"><code>## [1]  0.07670224  1.74460893  0.29326740 -0.14106713
+## [5]  0.07670224  1.14369491</code></pre>
 </div>
-<div id="item-fit-statistics" class="section level2">
-<h2><span class="header-section-number">6.4</span> Item fit statistics</h2>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">Fit.poly &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(mod2)</a></code></pre></div>
-<pre><code>## Item fit calculation based on 100 simulations
+<div id="item-fit-statistics" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Item fit statistics</h2>
+<p>The rest of the workflow from here now is pretty similar with a few different challenges</p>
+<p>We need to get infit and outfit (mean square) for each item. Only now it’ll be by item category.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="polytomous-items.html#cb87-1" aria-hidden="true" tabindex="-1"></a>Fit.poly <span class="ot">&lt;-</span> <span class="fu">tam.fit</span>(mod2)</span></code></pre></div>
+<pre style="max-height: 200px;" style="max-height: 200px;"><code>## Item fit calculation based on 100 simulations
 ## |**********|
 ## |----------|</code></pre>
 <pre><code>Fit.poly$itemfit</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">kable</span>(Fit.poly<span class="op">$</span>itemfit)</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="polytomous-items.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Fit.poly<span class="sc">$</span>itemfit)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -491,25 +664,25 @@ Infit_pholm
 Hls1_Cat1
 </td>
 <td style="text-align:right;">
-3.3798423
+3.0439335
 </td>
 <td style="text-align:right;">
-12.5685065
-</td>
-<td style="text-align:right;">
-0.0000000
+11.4187762
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.0274499
+0.0000000
 </td>
 <td style="text-align:right;">
-0.2793189
+1.0313860
 </td>
 <td style="text-align:right;">
-0.7800001
+0.3150890
+</td>
+<td style="text-align:right;">
+0.7526941
 </td>
 <td style="text-align:right;">
 1
@@ -520,25 +693,25 @@ Hls1_Cat1
 Hls1_Cat2
 </td>
 <td style="text-align:right;">
-3.2939892
+3.8472877
 </td>
 <td style="text-align:right;">
-12.9896303
-</td>
-<td style="text-align:right;">
-0.0000000
+14.2802477
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.1175415
+0.0000000
 </td>
 <td style="text-align:right;">
-1.1386441
+1.1243041
 </td>
 <td style="text-align:right;">
-0.2548516
+1.2002557
+</td>
+<td style="text-align:right;">
+0.2300401
 </td>
 <td style="text-align:right;">
 1
@@ -549,25 +722,25 @@ Hls1_Cat2
 Hls1_Cat3
 </td>
 <td style="text-align:right;">
-2218.3053670
+3841.5471968
 </td>
 <td style="text-align:right;">
-77.4970292
-</td>
-<td style="text-align:right;">
-0.0000000
+84.9774976
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-0.9678734
+0.0000000
 </td>
 <td style="text-align:right;">
-0.0341787
+0.9566579
 </td>
 <td style="text-align:right;">
-0.9727346
+0.0017079
+</td>
+<td style="text-align:right;">
+0.9986373
 </td>
 <td style="text-align:right;">
 1
@@ -578,25 +751,25 @@ Hls1_Cat3
 Hls2_Cat1
 </td>
 <td style="text-align:right;">
-24.6226749
+27.8281551
 </td>
 <td style="text-align:right;">
-50.9523506
-</td>
-<td style="text-align:right;">
-0.0000000
+51.4499262
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.0701740
+0.0000000
 </td>
 <td style="text-align:right;">
-0.7314071
+1.0711516
 </td>
 <td style="text-align:right;">
-0.4645305
+0.7431333
+</td>
+<td style="text-align:right;">
+0.4574010
 </td>
 <td style="text-align:right;">
 1
@@ -607,25 +780,25 @@ Hls2_Cat1
 Hls2_Cat2
 </td>
 <td style="text-align:right;">
-0.9355657
+0.9317189
 </td>
 <td style="text-align:right;">
--0.4834803
+-0.5148869
 </td>
 <td style="text-align:right;">
-0.6287548
+0.6066321
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-1.0439720
+1.0420203
 </td>
 <td style="text-align:right;">
-0.3637753
+0.3491282
 </td>
 <td style="text-align:right;">
-0.7160258
+0.7269931
 </td>
 <td style="text-align:right;">
 1
@@ -636,25 +809,25 @@ Hls2_Cat2
 Hls2_Cat3
 </td>
 <td style="text-align:right;">
-0.7609207
+0.8007581
 </td>
 <td style="text-align:right;">
--0.3315736
+-0.3150209
 </td>
 <td style="text-align:right;">
-0.7402112
+0.7527458
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-1.4142617
+1.4060785
 </td>
 <td style="text-align:right;">
-0.7872781
+0.7790337
 </td>
 <td style="text-align:right;">
-0.4311191
+0.4359599
 </td>
 <td style="text-align:right;">
 1
@@ -665,25 +838,25 @@ Hls2_Cat3
 Hls3_Cat1
 </td>
 <td style="text-align:right;">
-0.9350647
+0.9309129
 </td>
 <td style="text-align:right;">
--1.0367934
+-1.1110776
 </td>
 <td style="text-align:right;">
-0.2998321
+0.2665350
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.9605199
+0.9618953
 </td>
 <td style="text-align:right;">
--0.6120101
+-0.5925058
 </td>
 <td style="text-align:right;">
-0.5405311
+0.5535120
 </td>
 <td style="text-align:right;">
 1
@@ -694,25 +867,25 @@ Hls3_Cat1
 Hls3_Cat2
 </td>
 <td style="text-align:right;">
-0.8268350
+0.8311972
 </td>
 <td style="text-align:right;">
--0.6831683
+-0.6579216
 </td>
 <td style="text-align:right;">
-0.4945005
+0.5105885
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.9091984
+0.9070840
 </td>
 <td style="text-align:right;">
--0.2763494
+-0.2870984
 </td>
 <td style="text-align:right;">
-0.7822797
+0.7740369
 </td>
 <td style="text-align:right;">
 1
@@ -723,25 +896,25 @@ Hls3_Cat2
 Hls3_Cat3
 </td>
 <td style="text-align:right;">
-0.0134384
+0.0135733
 </td>
 <td style="text-align:right;">
--2.4535937
+-2.4977338
 </td>
 <td style="text-align:right;">
-0.0141437
+0.0124990
 </td>
 <td style="text-align:right;">
-0.3818791
+0.3249740
 </td>
 <td style="text-align:right;">
-0.8437388
+0.8332008
 </td>
 <td style="text-align:right;">
-0.0264663
+0.0181162
 </td>
 <td style="text-align:right;">
-0.9788854
+0.9855462
 </td>
 <td style="text-align:right;">
 1
@@ -752,25 +925,25 @@ Hls3_Cat3
 Hls4_Cat1
 </td>
 <td style="text-align:right;">
-0.8631748
+0.8666090
 </td>
 <td style="text-align:right;">
--2.6242416
+-2.5628405
 </td>
 <td style="text-align:right;">
-0.0086842
+0.0103820
 </td>
 <td style="text-align:right;">
-0.2518423
+0.2906952
 </td>
 <td style="text-align:right;">
-0.9282389
+0.9317082
 </td>
 <td style="text-align:right;">
--1.3332324
+-1.2692045
 </td>
 <td style="text-align:right;">
-0.1824556
+0.2043681
 </td>
 <td style="text-align:right;">
 1
@@ -781,25 +954,25 @@ Hls4_Cat1
 Hls4_Cat2
 </td>
 <td style="text-align:right;">
-0.6691367
+0.6807087
 </td>
 <td style="text-align:right;">
--1.2079769
+-1.1542441
 </td>
 <td style="text-align:right;">
-0.2270561
+0.2484001
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.8946024
+0.8803138
 </td>
 <td style="text-align:right;">
--0.2507590
+-0.3018424
 </td>
 <td style="text-align:right;">
-0.8020004
+0.7627722
 </td>
 <td style="text-align:right;">
 1
@@ -810,25 +983,25 @@ Hls4_Cat2
 Hls4_Cat3
 </td>
 <td style="text-align:right;">
-0.0105375
+0.0100432
 </td>
 <td style="text-align:right;">
--3.4211084
+-3.4506261
 </td>
 <td style="text-align:right;">
-0.0006237
+0.0005593
 </td>
 <td style="text-align:right;">
-0.0218283
+0.0195751
 </td>
 <td style="text-align:right;">
-0.4191013
+0.3910604
 </td>
 <td style="text-align:right;">
--1.0072363
+-1.0818346
 </td>
 <td style="text-align:right;">
-0.3138212
+0.2793260
 </td>
 <td style="text-align:right;">
 1
@@ -839,25 +1012,25 @@ Hls4_Cat3
 Hls5_Cat1
 </td>
 <td style="text-align:right;">
-0.8477491
+0.8489802
 </td>
 <td style="text-align:right;">
--1.6181061
+-1.6008439
 </td>
 <td style="text-align:right;">
-0.1056397
+0.1094115
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.8383643
+0.8397601
 </td>
 <td style="text-align:right;">
--1.5547939
+-1.5353651
 </td>
 <td style="text-align:right;">
-0.1199952
+0.1246942
 </td>
 <td style="text-align:right;">
 1
@@ -868,25 +1041,25 @@ Hls5_Cat1
 Hls5_Cat2
 </td>
 <td style="text-align:right;">
-1.6179260
+1.5933764
 </td>
 <td style="text-align:right;">
-7.1088678
-</td>
-<td style="text-align:right;">
-0.0000000
+6.6898502
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.0857692
+0.0000000
 </td>
 <td style="text-align:right;">
-1.2470419
+1.0830227
 </td>
 <td style="text-align:right;">
-0.2123821
+1.2109313
+</td>
+<td style="text-align:right;">
+0.2259217
 </td>
 <td style="text-align:right;">
 1
@@ -897,25 +1070,25 @@ Hls5_Cat2
 Hls5_Cat3
 </td>
 <td style="text-align:right;">
-2.0383325
+1.9617694
 </td>
 <td style="text-align:right;">
-2.2169440
+2.1197248
 </td>
 <td style="text-align:right;">
-0.0266269
+0.0340293
 </td>
 <td style="text-align:right;">
-0.6390461
+0.7826729
 </td>
 <td style="text-align:right;">
-1.0747180
+1.0713049
 </td>
 <td style="text-align:right;">
-0.3277730
+0.3166594
 </td>
 <td style="text-align:right;">
-0.7430833
+0.7515021
 </td>
 <td style="text-align:right;">
 1
@@ -926,25 +1099,25 @@ Hls5_Cat3
 Hls6_Cat1
 </td>
 <td style="text-align:right;">
-0.9248621
+0.9375763
 </td>
 <td style="text-align:right;">
--0.9030745
+-0.7614531
 </td>
 <td style="text-align:right;">
-0.3664864
+0.4463865
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.8699262
+0.8684791
 </td>
 <td style="text-align:right;">
--1.5638111
+-1.5805556
 </td>
 <td style="text-align:right;">
-0.1178619
+0.1139797
 </td>
 <td style="text-align:right;">
 1
@@ -955,25 +1128,25 @@ Hls6_Cat1
 Hls6_Cat2
 </td>
 <td style="text-align:right;">
-1.3125759
+1.3110188
 </td>
 <td style="text-align:right;">
-1.9011385
+1.8778416
 </td>
 <td style="text-align:right;">
-0.0572839
+0.0604028
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-1.0220103
+1.0117370
 </td>
 <td style="text-align:right;">
-0.1928904
+0.1220608
 </td>
 <td style="text-align:right;">
-0.8470448
+0.9028508
 </td>
 <td style="text-align:right;">
 1
@@ -984,25 +1157,25 @@ Hls6_Cat2
 Hls6_Cat3
 </td>
 <td style="text-align:right;">
-2.6403697
+2.8746737
 </td>
 <td style="text-align:right;">
-2.4832257
+2.7517809
 </td>
 <td style="text-align:right;">
-0.0130199
+0.0059272
 </td>
 <td style="text-align:right;">
-0.3645560
+0.1778165
 </td>
 <td style="text-align:right;">
-1.3026127
+1.3038619
 </td>
 <td style="text-align:right;">
-0.7918787
+0.7950537
 </td>
 <td style="text-align:right;">
-0.4284314
+0.4265822
 </td>
 <td style="text-align:right;">
 1
@@ -1013,25 +1186,25 @@ Hls6_Cat3
 Hls7_Cat1
 </td>
 <td style="text-align:right;">
-0.8267680
+0.8307029
 </td>
 <td style="text-align:right;">
--3.0749498
+-3.0064944
 </td>
 <td style="text-align:right;">
-0.0021054
+0.0026428
 </td>
 <td style="text-align:right;">
-0.0694775
+0.0872120
 </td>
 <td style="text-align:right;">
-0.9070271
+0.9098831
 </td>
 <td style="text-align:right;">
--1.5905535
+-1.5401877
 </td>
 <td style="text-align:right;">
-0.1117101
+0.1235146
 </td>
 <td style="text-align:right;">
 1
@@ -1042,25 +1215,25 @@ Hls7_Cat1
 Hls7_Cat2
 </td>
 <td style="text-align:right;">
-0.5530556
+0.5216551
 </td>
 <td style="text-align:right;">
--2.3096459
+-2.5230863
 </td>
 <td style="text-align:right;">
-0.0209078
+0.0116330
 </td>
 <td style="text-align:right;">
-0.5226941
+0.3140906
 </td>
 <td style="text-align:right;">
-0.9021556
+0.8911898
 </td>
 <td style="text-align:right;">
--0.3690015
+-0.4227159
 </td>
 <td style="text-align:right;">
-0.7121266
+0.6725025
 </td>
 <td style="text-align:right;">
 1
@@ -1071,25 +1244,25 @@ Hls7_Cat2
 Hls7_Cat3
 </td>
 <td style="text-align:right;">
-0.7849138
+0.5794161
 </td>
 <td style="text-align:right;">
--0.6639983
+-1.0636274
 </td>
 <td style="text-align:right;">
-0.5066914
+0.2874975
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-1.1523031
+1.1639083
 </td>
 <td style="text-align:right;">
-0.4265873
+0.4464487
 </td>
 <td style="text-align:right;">
-0.6696800
+0.6552732
 </td>
 <td style="text-align:right;">
 1
@@ -1100,25 +1273,25 @@ Hls7_Cat3
 Hls8_Cat1
 </td>
 <td style="text-align:right;">
-0.6464516
+0.6534279
 </td>
 <td style="text-align:right;">
--3.2718456
+-3.1949251
 </td>
 <td style="text-align:right;">
-0.0010685
+0.0013987
 </td>
 <td style="text-align:right;">
-0.0363283
+0.0475548
 </td>
 <td style="text-align:right;">
-0.8491744
+0.8481621
 </td>
 <td style="text-align:right;">
--1.2382249
+-1.2445071
 </td>
 <td style="text-align:right;">
-0.2156327
+0.2133130
 </td>
 <td style="text-align:right;">
 1
@@ -1129,25 +1302,25 @@ Hls8_Cat1
 Hls8_Cat2
 </td>
 <td style="text-align:right;">
-3.2559451
+2.3566135
 </td>
 <td style="text-align:right;">
-17.0107509
-</td>
-<td style="text-align:right;">
-0.0000000
+14.5831307
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.0817025
+0.0000000
 </td>
 <td style="text-align:right;">
-1.3927396
+1.0773659
 </td>
 <td style="text-align:right;">
-0.1636985
+1.3250409
+</td>
+<td style="text-align:right;">
+0.1851576
 </td>
 <td style="text-align:right;">
 1
@@ -1158,25 +1331,25 @@ Hls8_Cat2
 Hls8_Cat3
 </td>
 <td style="text-align:right;">
-1.3453680
+1.3986397
 </td>
 <td style="text-align:right;">
-1.1080454
+1.2172932
 </td>
 <td style="text-align:right;">
-0.2678422
+0.2234927
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.9561230
+0.9488540
 </td>
 <td style="text-align:right;">
--0.0960318
+-0.1270301
 </td>
 <td style="text-align:right;">
-0.9234953
+0.8989166
 </td>
 <td style="text-align:right;">
 1
@@ -1187,25 +1360,25 @@ Hls8_Cat3
 Hls9_Cat1
 </td>
 <td style="text-align:right;">
-0.8775059
+0.8846971
 </td>
 <td style="text-align:right;">
--2.1661054
+-2.0481504
 </td>
 <td style="text-align:right;">
-0.0303031
+0.0405453
 </td>
 <td style="text-align:right;">
-0.6666689
+0.8601289
 </td>
 <td style="text-align:right;">
-0.9507382
+0.9513439
 </td>
 <td style="text-align:right;">
--0.8371541
+-0.8297995
 </td>
 <td style="text-align:right;">
-0.4025059
+0.4066522
 </td>
 <td style="text-align:right;">
 1
@@ -1216,25 +1389,25 @@ Hls9_Cat1
 Hls9_Cat2
 </td>
 <td style="text-align:right;">
-1.4485249
+1.4632995
 </td>
 <td style="text-align:right;">
-2.3707398
+2.4422450
 </td>
 <td style="text-align:right;">
-0.0177525
+0.0145962
 </td>
 <td style="text-align:right;">
-0.4615656
+0.3649059
 </td>
 <td style="text-align:right;">
-1.0833870
+1.0826504
 </td>
 <td style="text-align:right;">
-0.5618552
+0.5580785
 </td>
 <td style="text-align:right;">
-0.5742147
+0.5767908
 </td>
 <td style="text-align:right;">
 1
@@ -1245,25 +1418,25 @@ Hls9_Cat2
 Hls9_Cat3
 </td>
 <td style="text-align:right;">
-0.9081042
+0.8921177
 </td>
 <td style="text-align:right;">
--0.4631097
+-0.5774570
 </td>
 <td style="text-align:right;">
-0.6432857
+0.5636308
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.9463479
+0.9342302
 </td>
 <td style="text-align:right;">
--0.0258200
+-0.0592753
 </td>
 <td style="text-align:right;">
-0.9794009
+0.9527328
 </td>
 <td style="text-align:right;">
 1
@@ -1274,25 +1447,25 @@ Hls9_Cat3
 Hls10_Cat1
 </td>
 <td style="text-align:right;">
-1.0304350
+1.0301790
 </td>
 <td style="text-align:right;">
-0.4935163
+0.4837050
 </td>
 <td style="text-align:right;">
-0.6216478
+0.6285952
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-1.0139287
+1.0163222
 </td>
 <td style="text-align:right;">
-0.2444766
+0.2821701
 </td>
 <td style="text-align:right;">
-0.8068617
+0.7778131
 </td>
 <td style="text-align:right;">
 1
@@ -1303,25 +1476,25 @@ Hls10_Cat1
 Hls10_Cat2
 </td>
 <td style="text-align:right;">
-112.8689205
+119.2297013
 </td>
 <td style="text-align:right;">
-42.2068552
-</td>
-<td style="text-align:right;">
-0.0000000
+42.5932611
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.1513660
+0.0000000
 </td>
 <td style="text-align:right;">
-0.7011534
+1.1400455
 </td>
 <td style="text-align:right;">
-0.4832073
+0.6562578
+</td>
+<td style="text-align:right;">
+0.5116583
 </td>
 <td style="text-align:right;">
 1
@@ -1332,25 +1505,25 @@ Hls10_Cat2
 Hls10_Cat3
 </td>
 <td style="text-align:right;">
-0.5451936
+0.4708052
 </td>
 <td style="text-align:right;">
--0.9283154
+-1.0633617
 </td>
 <td style="text-align:right;">
-0.3532440
+0.2876180
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-1.0459015
+1.0179819
 </td>
 <td style="text-align:right;">
-0.2677155
+0.2263507
 </td>
 <td style="text-align:right;">
-0.7889183
+0.8209287
 </td>
 <td style="text-align:right;">
 1
@@ -1361,25 +1534,25 @@ Hls10_Cat3
 Hls11_Cat1
 </td>
 <td style="text-align:right;">
-0.8058115
+0.7835965
 </td>
 <td style="text-align:right;">
--1.7681035
+-2.0631670
 </td>
 <td style="text-align:right;">
-0.0770436
+0.0390968
 </td>
 <td style="text-align:right;">
-1.0000000
+0.8601289
 </td>
 <td style="text-align:right;">
-0.8585936
+0.8623912
 </td>
 <td style="text-align:right;">
--1.1039740
+-1.0699041
 </td>
 <td style="text-align:right;">
-0.2696044
+0.2846625
 </td>
 <td style="text-align:right;">
 1
@@ -1390,25 +1563,25 @@ Hls11_Cat1
 Hls11_Cat2
 </td>
 <td style="text-align:right;">
-0.9278151
+0.9261580
 </td>
 <td style="text-align:right;">
--1.2839251
+-1.3217757
 </td>
 <td style="text-align:right;">
-0.1991682
+0.1862429
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-1.0198100
+1.0159972
 </td>
 <td style="text-align:right;">
-0.3463204
+0.2851401
 </td>
 <td style="text-align:right;">
-0.7291020
+0.7755368
 </td>
 <td style="text-align:right;">
 1
@@ -1419,25 +1592,25 @@ Hls11_Cat2
 Hls11_Cat3
 </td>
 <td style="text-align:right;">
-2.3087477
+3.3679284
 </td>
 <td style="text-align:right;">
-4.7807651
+5.7186816
 </td>
 <td style="text-align:right;">
-0.0000017
+0.0000000
 </td>
 <td style="text-align:right;">
-0.0000646
+0.0000004
 </td>
 <td style="text-align:right;">
-1.0001988
+0.9946603
 </td>
 <td style="text-align:right;">
-0.0503715
+0.0148465
 </td>
 <td style="text-align:right;">
-0.9598264
+0.9881546
 </td>
 <td style="text-align:right;">
 1
@@ -1448,25 +1621,25 @@ Hls11_Cat3
 Hls12_Cat1
 </td>
 <td style="text-align:right;">
-0.6990325
+0.6713411
 </td>
 <td style="text-align:right;">
--2.7591717
+-2.9300870
 </td>
 <td style="text-align:right;">
-0.0057948
+0.0033887
 </td>
 <td style="text-align:right;">
-0.1853222
+0.1084375
 </td>
 <td style="text-align:right;">
-0.7245498
+0.7263598
 </td>
 <td style="text-align:right;">
--2.2574915
+-2.2332983
 </td>
 <td style="text-align:right;">
-0.0239774
+0.0255293
 </td>
 <td style="text-align:right;">
 1
@@ -1477,25 +1650,25 @@ Hls12_Cat1
 Hls12_Cat2
 </td>
 <td style="text-align:right;">
-1.0519069
+1.0696493
 </td>
 <td style="text-align:right;">
-0.7781669
+0.9459401
 </td>
 <td style="text-align:right;">
-0.4364706
+0.3441791
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.9930691
+0.9903795
 </td>
 <td style="text-align:right;">
--0.1154073
+-0.1631844
 </td>
 <td style="text-align:right;">
-0.9081223
+0.8703733
 </td>
 <td style="text-align:right;">
 1
@@ -1506,25 +1679,25 @@ Hls12_Cat2
 Hls12_Cat3
 </td>
 <td style="text-align:right;">
-3.5285645
+5.6372690
 </td>
 <td style="text-align:right;">
-5.9104561
+7.1743702
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-0.0000001
+0.0000000
 </td>
 <td style="text-align:right;">
-1.0375550
+1.0366887
 </td>
 <td style="text-align:right;">
-0.2391138
+0.2332915
 </td>
 <td style="text-align:right;">
-0.8110173
+0.8155351
 </td>
 <td style="text-align:right;">
 1
@@ -1535,25 +1708,25 @@ Hls12_Cat3
 Hls13_Cat1
 </td>
 <td style="text-align:right;">
-0.9169067
+0.9134777
 </td>
 <td style="text-align:right;">
--0.8548505
+-0.8489833
 </td>
 <td style="text-align:right;">
-0.3926339
+0.3958906
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.7674195
+0.7663847
 </td>
 <td style="text-align:right;">
--2.0428349
+-2.0487006
 </td>
 <td style="text-align:right;">
-0.0410688
+0.0404914
 </td>
 <td style="text-align:right;">
 1
@@ -1564,25 +1737,25 @@ Hls13_Cat1
 Hls13_Cat2
 </td>
 <td style="text-align:right;">
-1.0070908
+1.0132565
 </td>
 <td style="text-align:right;">
-0.0913032
+0.1922261
 </td>
 <td style="text-align:right;">
-0.9272517
+0.8475651
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-1.0538756
+1.0597572
 </td>
 <td style="text-align:right;">
-0.8243906
+0.9118795
 </td>
 <td style="text-align:right;">
-0.4097177
+0.3618321
 </td>
 <td style="text-align:right;">
 1
@@ -1593,25 +1766,25 @@ Hls13_Cat2
 Hls13_Cat3
 </td>
 <td style="text-align:right;">
-2.5711729
+2.3359886
 </td>
 <td style="text-align:right;">
-2.2147316
+2.1556209
 </td>
 <td style="text-align:right;">
-0.0267785
+0.0311133
 </td>
 <td style="text-align:right;">
-0.6390461
+0.7467187
 </td>
 <td style="text-align:right;">
-0.9058678
+0.8977504
 </td>
 <td style="text-align:right;">
--0.1411631
+-0.1660076
 </td>
 <td style="text-align:right;">
-0.8877411
+0.8681509
 </td>
 <td style="text-align:right;">
 1
@@ -1622,25 +1795,25 @@ Hls13_Cat3
 Hls14_Cat1
 </td>
 <td style="text-align:right;">
-0.8257131
+0.8147296
 </td>
 <td style="text-align:right;">
--1.7333353
+-1.8327667
 </td>
 <td style="text-align:right;">
-0.0830361
+0.0668373
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.9065843
+0.9103947
 </td>
 <td style="text-align:right;">
--0.8599511
+-0.8197424
 </td>
 <td style="text-align:right;">
-0.3898160
+0.4123630
 </td>
 <td style="text-align:right;">
 1
@@ -1651,25 +1824,25 @@ Hls14_Cat1
 Hls14_Cat2
 </td>
 <td style="text-align:right;">
-2.0973589
+2.1728088
 </td>
 <td style="text-align:right;">
-9.8420638
-</td>
-<td style="text-align:right;">
-0.0000000
+10.0546321
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.0795115
+0.0000000
 </td>
 <td style="text-align:right;">
-1.0074620
+1.0805920
 </td>
 <td style="text-align:right;">
-0.3137128
+1.0198680
+</td>
+<td style="text-align:right;">
+0.3077911
 </td>
 <td style="text-align:right;">
 1
@@ -1680,25 +1853,25 @@ Hls14_Cat2
 Hls14_Cat3
 </td>
 <td style="text-align:right;">
-0.6016384
+0.6117242
 </td>
 <td style="text-align:right;">
--1.9570591
+-1.8749118
 </td>
 <td style="text-align:right;">
-0.0503405
+0.0608049
 </td>
 <td style="text-align:right;">
 1.0000000
 </td>
 <td style="text-align:right;">
-0.9822605
+0.9732229
 </td>
 <td style="text-align:right;">
-0.0051623
+-0.0353880
 </td>
 <td style="text-align:right;">
-0.9958811
+0.9717704
 </td>
 <td style="text-align:right;">
 1
@@ -1709,25 +1882,25 @@ Hls14_Cat3
 Hls15_Cat1
 </td>
 <td style="text-align:right;">
-0.7141917
+0.6937713
 </td>
 <td style="text-align:right;">
--2.6691312
+-2.8783037
 </td>
 <td style="text-align:right;">
-0.0076048
+0.0039982
 </td>
 <td style="text-align:right;">
-0.2281432
+0.1239442
 </td>
 <td style="text-align:right;">
-0.8067855
+0.8057344
 </td>
 <td style="text-align:right;">
--1.6530598
+-1.6561192
 </td>
 <td style="text-align:right;">
-0.0983187
+0.0976977
 </td>
 <td style="text-align:right;">
 1
@@ -1738,25 +1911,25 @@ Hls15_Cat1
 Hls15_Cat2
 </td>
 <td style="text-align:right;">
-1.1229066
+1.1198943
 </td>
 <td style="text-align:right;">
-2.0540492
+1.9878822
 </td>
 <td style="text-align:right;">
-0.0399709
+0.0468247
 </td>
 <td style="text-align:right;">
-0.8393896
+0.9364944
 </td>
 <td style="text-align:right;">
-1.0727933
+1.0737999
 </td>
 <td style="text-align:right;">
-1.2618040
+1.2807554
 </td>
 <td style="text-align:right;">
-0.2070193
+0.2002796
 </td>
 <td style="text-align:right;">
 1
@@ -1767,25 +1940,25 @@ Hls15_Cat2
 Hls15_Cat3
 </td>
 <td style="text-align:right;">
-5.3396682
+9.7829931
 </td>
 <td style="text-align:right;">
-6.5934117
-</td>
-<td style="text-align:right;">
-0.0000000
+8.2016304
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-0.9607897
+0.0000000
 </td>
 <td style="text-align:right;">
--0.0777234
+0.9590226
 </td>
 <td style="text-align:right;">
-0.9380481
+-0.0868480
+</td>
+<td style="text-align:right;">
+0.9307924
 </td>
 <td style="text-align:right;">
 1
@@ -1796,25 +1969,25 @@ Hls15_Cat3
 Hls16_Cat1
 </td>
 <td style="text-align:right;">
-1.4909676
+1.5155241
 </td>
 <td style="text-align:right;">
-4.0419669
+4.1755381
 </td>
 <td style="text-align:right;">
-0.0000530
+0.0000297
 </td>
 <td style="text-align:right;">
-0.0019082
+0.0010702
 </td>
 <td style="text-align:right;">
-0.9451271
+0.9477807
 </td>
 <td style="text-align:right;">
--0.5105442
+-0.4835234
 </td>
 <td style="text-align:right;">
-0.6096703
+0.6287242
 </td>
 <td style="text-align:right;">
 1
@@ -1825,25 +1998,25 @@ Hls16_Cat1
 Hls16_Cat2
 </td>
 <td style="text-align:right;">
-1.9242564
+1.8796393
 </td>
 <td style="text-align:right;">
-8.0883035
-</td>
-<td style="text-align:right;">
-0.0000000
+7.8654274
 </td>
 <td style="text-align:right;">
 0.0000000
 </td>
 <td style="text-align:right;">
-1.0633595
+0.0000000
 </td>
 <td style="text-align:right;">
-0.7490822
+1.0633908
 </td>
 <td style="text-align:right;">
-0.4538077
+0.7504951
+</td>
+<td style="text-align:right;">
+0.4529566
 </td>
 <td style="text-align:right;">
 1
@@ -1854,25 +2027,25 @@ Hls16_Cat2
 Hls16_Cat3
 </td>
 <td style="text-align:right;">
-0.2769356
+0.2987204
 </td>
 <td style="text-align:right;">
--2.7593685
+-2.7048792
 </td>
 <td style="text-align:right;">
-0.0057913
+0.0068329
 </td>
 <td style="text-align:right;">
-0.1853222
+0.1981547
 </td>
 <td style="text-align:right;">
-0.8178413
+0.8146684
 </td>
 <td style="text-align:right;">
--0.4046003
+-0.4158382
 </td>
 <td style="text-align:right;">
-0.6857714
+0.6775284
 </td>
 <td style="text-align:right;">
 1
@@ -1881,11 +2054,11 @@ Hls16_Cat3
 </tbody>
 </table>
 </div>
-<div id="item-characteristic-curves-but-now-as-thresholds." class="section level2">
-<h2><span class="header-section-number">6.5</span> Item characteristic curves (but now as thresholds).</h2>
+<div id="item-characteristic-curves-but-now-as-thresholds." class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> Item characteristic curves (but now as thresholds).</h2>
 <p>There are item characteristic curves (ICCs) for each item choice</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">tthresh.poly &lt;-<span class="st"> </span><span class="kw">tam.threshold</span>(mod2)</a>
-<a class="sourceLine" id="cb75-2" title="2"><span class="kw">plot</span>(mod2, <span class="dt">type =</span> <span class="st">&quot;items&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="polytomous-items.html#cb91-1" aria-hidden="true" tabindex="-1"></a>tthresh.poly <span class="ot">&lt;-</span> <span class="fu">tam.threshold</span>(mod2)</span>
+<span id="cb91-2"><a href="polytomous-items.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">type =</span> <span class="st">&quot;items&quot;</span>)</span></code></pre></div>
 <pre><code>## Iteration in WLE/MLE estimation  1   | Maximal change  2.6967 
 ## Iteration in WLE/MLE estimation  2   | Maximal change  2.1777 
 ## Iteration in WLE/MLE estimation  3   | Maximal change  0.368 
@@ -1894,16 +2067,16 @@ Hls16_Cat3
 ## Iteration in WLE/MLE estimation  6   | Maximal change  0 
 ## ----
 ##  WLE Reliability= 0.9</code></pre>
-<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-1.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-2.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-3.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-4.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-5.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-6.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-7.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-8.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-9.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-10.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-11.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-12.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-13.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-14.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-15.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-46-16.png" width="672" /></p>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-1.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-2.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-3.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-4.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-5.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-6.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-7.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-8.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-9.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-10.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-11.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-12.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-13.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-14.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-15.png" width="672" /><img src="Rasch_Biome_files/figure-html/unnamed-chunk-51-16.png" width="672" /></p>
 <pre><code>## ....................................................
 ##  Plots exported in png format into folder:
 ##  C:/Users/katzd/Desktop/Rprojects/Rasch_BIOME/DBER_Rasch-data/Plots</code></pre>
 </div>
-<div id="wright-map-1" class="section level2">
-<h2><span class="header-section-number">6.6</span> Wright Map</h2>
+<div id="wright-map-1" class="section level2" number="8.6">
+<h2><span class="header-section-number">8.6</span> Wright Map</h2>
 <p>Here’s a polytomous Wright Map</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">wrightMap</span>(person.ability.poly, tthresh.poly)</a></code></pre></div>
-<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="polytomous-items.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wrightMap</span>(person.ability.poly, tthresh.poly)</span></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <pre><code>##              Cat1      Cat2     Cat3
 ## Hls1  -1.86154175 2.1462708 3.998566
 ## Hls2  -1.51547241 2.6820374 5.054901
@@ -1922,25 +2095,28 @@ Hls16_Cat3
 ## Hls15 -2.09591675 0.8077698 3.664764
 ## Hls16 -1.65664673 1.8318787 4.128021</code></pre>
 </div>
-<div id="exercises" class="section level2">
-<h2><span class="header-section-number">6.7</span> Exercises:</h2>
+<div id="exercises" class="section level2" number="8.7">
+<h2><span class="header-section-number">8.7</span> Exercises:</h2>
 <ol style="list-style-type: decimal">
 <li>Find an item for which Cat 3 is actually easier than the Cat 2 of another item.</li>
 <li>Find an item that has two categories that are extremely close in severity.</li>
 <li>Look at the ICC for item 14. Describe what is happening with Cat 3.</li>
 </ol>
 </div>
-<div id="model-comparison" class="section level2">
-<h2><span class="header-section-number">6.8</span> Model Comparison</h2>
+<div id="model-comparison" class="section level2" number="8.8">
+<h2><span class="header-section-number">8.8</span> Model Comparison</h2>
 <p>say we want to compare the two models we just ran (note, these aren’t really comparable since it’s a completely different model - not nested data)</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">logLik</span>(mod1)</a></code></pre></div>
-<pre><code>## &#39;log Lik.&#39; -7494.028 (df=16)</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">logLik</span>(mod2)</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="polytomous-items.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(mod1)</span></code></pre></div>
+<pre><code>## &#39;log Lik.&#39; -7343.562 (df=16)</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="polytomous-items.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(mod2)</span></code></pre></div>
 <pre><code>## &#39;log Lik.&#39; -4185.626 (df=49)</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">anova</span>(mod1, mod2)</a></code></pre></div>
-<pre><code>##   Model   loglike  Deviance Npars       AIC       BIC    Chisq df  p
-## 1  mod1 -7494.028 14988.056    16 15020.056 15098.580 6616.804 33  0
-## 2  mod2 -4185.626  8371.252    49  8469.252  8653.438       NA NA NA</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="polytomous-items.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod1, mod2)</span></code></pre></div>
+<pre><code>##   Model   loglike  Deviance Npars       AIC       BIC
+## 1  mod1 -7343.562 14687.124    16 14719.124 14797.649
+## 2  mod2 -4185.626  8371.252    49  8469.252  8653.438
+##      Chisq df  p
+## 1 6315.872 33  0
+## 2       NA NA NA</code></pre>
 <p>Log likelihood is the foundation of both AIC and BIC. AIC and BIC allow you to compare non-nested models while penalizing for model complexity (BIC penalizes more). In general, the model with a smaller AIC/BIC is the one that the data fit better. The two criteria sometimes disagree.</p>
 
 </div>
@@ -1993,7 +2169,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Rasch_Biome.pdf", "Rasch_Biome.epub"],
+"download": ["Rasch_Biome.pdf"],
 "toc": {
 "collapse": "subsection"
 }
