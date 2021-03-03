@@ -26,13 +26,12 @@ local({
 ## Polytymous item types (anything with a rating Scale)
 We can use the Rasch Partial Credit Model (PCM) to look at polytomous data too. We’ll start by bringing in the polytomous items from the survey. Note that TAM needs the bottom category to be coded as 0, so you may need to recode.
 
-```{r include=FALSE}
-hls2 <- read.csv("data/hls_poly_scale.csv")
+We'll use a dataset that you can read in via `github` (no need to download locally and then read in). 
+
+```{r results="hide"}
+hls2 <- read_csv("https://raw.githubusercontent.com/danielbkatz/DBER_Rasch-data/master/data/hls_poly_scale.csv")
 ```
 
-```
-hls2 <- read.csv("hls_poly_scale.csv")
-```
 
 We see these items are coded with four categories. And the categories are fairly sparse in the 4 fourth category (coded 3, since indexed starting with 0). This may be motivation to collapse categories. 
 ```{r}
@@ -116,9 +115,9 @@ The other parameterization, delta_tau, helps us nicely transition to the Rating 
 $$P(X_{si} = x) = \frac{exp[\sum_{k=0}^x(\theta_s-\delta_{i}+\tau_{ik})]}{\sum_{h=0}^{m_i}exp[\sum_{k=0}^h(\theta_s-\delta_{i} + \tau_{ik})]}$$.
  
 
-Here, $\delta_i$ is the item, and $\tau$ is the item category. In the PCM, the \tau is item specific, it's the "jump" of the category from the overall item difficulty.
+Here, $\delta_i$ is the overall item difficulty, and $\tau$ is the item category. In the PCM, the \tau is item specific, it's the "jump" of the category from the overall item difficulty. Note that *i* indexes item, and *k* indexes category. 
 
-In the rating scale model, the delta_tau parameterization is used, but each \tau is the same, or, at leas, each deviance amount is the same. 
+In the rating scale model, the delta_tau parameterization is used, but each \tau is the same, or, at least, each deviance amount is the same. 
 
 The parameterization in `mod2` item lets you go between different parameterizations if you so choose. For instance, `mod2$item` gives you an `xsi.item` column that is the item difficulty in the `PCM2` parameterizations. The `AXsi_.Cat#` items are the sums of the `xsi` delta/step parameters up to that step.
 
@@ -185,4 +184,410 @@ anova(mod1, mod2)
 ```
 
 Log likelihood is the foundation of both AIC and BIC. AIC and BIC allow you to compare non-nested models while penalizing for model complexity (BIC penalizes more). In general, the model with a smaller AIC/BIC is the one that the data fit better. The two criteria sometimes disagree.
+
+# The Rasch Rating Scale Model
+## Introduction
+
+This is the second part of lab 6. You do not need to watch lab6a to run this lab. However, if you are following along, you do not need to re-read in the data we'll be using if it's already in your environment. We tend to use the Partial Cedit Model (PCM) when the item categories, and hence thresholds, may not be the same across items. This allows for items with different response options (i.e., an item with two response options, and an item with three response options on the same assessment). The rating scale model (RSM), is an alternative model for this setup. In this formulation, the items have the same response options, and the thresholds, or $\tau$s (representing the deviance of the particular category from the overall item difficulty or severity) are the same across items. Therefore, items can have different overall item difficulties/severities. 
+
+Goals:
+1. Learn how to run the rating scale model in TAM.
+2. Learn how to interpret the rating scale model.
+3. Learn how to do simple model comparison checking.
+4. Bonus: Use the `eRm` package for improved person item maps.
+
+
+##Rating Scale Model (RSM)
+
+The model can be expressed as follows. 
+
+$$P(X_{si} = x) = \frac{exp[\sum_{k=0}^x(\theta_s-\delta_{i}+\tau_{k})]}{\sum_{h=0}^{m_i}exp[\sum_{k=0}^h(\theta_s-\delta_{i} + \tau_{k})]}$$. 
+
+Here, $\delta_i$ is the overall item difficulty, and $\tau_k$ is the particular threshold deviance for category $k$. In the PCM, the $\tau$ is item specific, it's the "jump" of the category from the overall item difficulty. Note that *i* indexes item, and *k* indexes category. So, each $\tau$ is the same for each item because it is not indexed by item.
+
+
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+
+
+library(tidyverse)
+library(TAM)
+library(eRm)
+library(WrightMap)
+
+```
+
+
+## Data for today
+Data comes from a subset of the `Health Literacy Survey`. 
+
+These are the items in case you're interested (it doesn't matter, but here they are...)  
+  
+On a scale from very easy to very difficult, how easy would you say it is to:  
+1. find information on treatments of illnesses that concern you?  
+2. find out where to get professional help when you are ill?  
+3. understand what your doctor says to you?  
+4. understand your doctor’s or pharmacist’s instruction on how to take a prescribed medicine?  
+5. judge when you may need to get a second opinion from another doctor?  
+6. use information the doctor gives you to make decisions about your illness?  
+7. follow instructions from your doctor or pharmacist?  
+8. find information on how to manage mental health problems like stress or depression?  
+9. understand health warnings about behavior such as smoking, low physical activity and drinking too much?  
+10. understand why you need health screenings?  
+11. judge if the information on health risks in the media is reliable?  
+12. decide how you can protect yourself from illness based on information in the media?  
+13. find out about activities that are good for your mental well-being?  
+14. understand advice on health from family members or friends?  
+15. understand information in the media on how to get healthier?  
+16. judge which everyday behavior is related to your health?  
+
+The Likert scale contains four response options (very easy, easy, difficult, very difficult).
+The Likert scale contains four response options (very easy, easy, difficult, very difficult).
+
+### Reading in the data
+
+```{r echo=T, message=FALSE, warning=FALSE, results='hide'}
+hls <- read_csv("processed_data/hls.csv") %>%
+  select(-X1)
+
+```
+
+
+### Brief exploration of the data
+```{r}
+
+apply(hls, 2, table)
+
+```
+
+## Partial Credit Model
+
+To have a model to compare, we'll run a partial credit model in TAM. We won't get too far into analyzing the data here, since we did that in the last lab. However as a reminder, we'll run through the steps. 
+
+Remember - the partial credit model allows for the thresholds to differ for each item.
+
+For clarity, look at Hls8 and Hls9. Which one is harder?
+
+```{r, echo=T, results='hide'}
+
+mod_pcm <- tam(hls)
+
+```
+
+### Plot and look at difficulties/thresholds
+
+It's worth remembering what these plots show. The item characteristic curves represent the probability of responding in a particular category given ability. However, `xsi`, the non-cumulative show the "transition" points - these are the difficulties, or steps. So Cat1 is the first response category in the plot. However, when we look at `mod_pcm$xsi` or the equivalent, these are the steps. 
+
+```{r}
+
+# just look at a few items - items 5-8
+plot(mod_pcm, type = "items", export = F, high = 5, items = c(5:8))
+
+# extract item steps/adjacent category difficulties
+xsi_pcm <- mod_pcm$xsi
+head(xsi_pcm)
+
+# delta-tau
+delta_tau_pcm <- mod_pcm$item_irt
+head(delta_tau_pcm)
+```
+
+### Get thresholds
+Below, I given an example of how one may acquire thresholds and plot. We have to "pivot" our data into long form to make this feasible. What this means is that, instead of categories going across the top, there's now one row per each item-threshold pair. 
+
+```{r}
+thresh_pcm <- as.data.frame(tam.threshold(mod_pcm))
+
+# transition to long data
+thresh_pcm_long <- thresh_pcm %>%
+  mutate(item = rownames(.))%>%
+  pivot_longer(cols = c(Cat1, Cat2, Cat3))
+  
+head(thresh_pcm_long)
+
+ggplot(data = thresh_pcm_long, aes(x=item, y=value, colour = name)) + geom_point() +
+theme(axis.text.x = element_text(angle = 90))
+
+```
+
+### Plotting delta_tau
+If you're interested in plotting a nice item map. This is complicated method for plotting. 
+
+```{r}
+
+delta_tau_p <- delta_tau_pcm %>%
+  mutate(d1 = beta + tau.Cat1,
+         d2 = beta + tau.Cat2,
+         d3 = beta + tau.Cat3) %>% #create the deltas to get overall difficulty
+  select(item, beta, d1, d2, d3) %>% # keep just what's important
+  mutate(beta_diff = beta) %>% # for ordering later - just create a column with overall delta parameter/mean
+  pivot_longer(cols = c(beta, d1, d2, d3), names_to = "Parameter" ) %>% # turn into a long dataframe
+  mutate(type_delta = as.factor(if_else(Parameter == "beta", "beta", "delta"))) %>% # for plotting - will color based type_delta
+  arrange(beta_diff)
+
+delta_tau_p
+
+# this is pretty complicated, sorry...
+#but try removing and replacing different lines of code 
+# to see how it works
+pcmp <- ggplot(delta_tau_p, aes(x = reorder(item, beta_diff),  # ordering difficulties by beta
+                        y = value, #what's on the y-axis
+                        group = item, # the line segments need to "know" where to connect
+                        fill=type_delta, # what to fill on
+                        shape = type_delta, # only some shapes are fillable
+                        )) + 
+  geom_point(size = 2)+ # making points a little big
+  theme_bw() + 
+  scale_fill_manual(values = c("black", "white")) + #have to do this manually - so, two fill colors
+  scale_shape_manual(values = c(21, 21)) + # http://www.cookbook-r.com/Graphs/Shapes_and_line_types/
+  geom_line(aes(x=item, y=value)) + # add the lines
+  coord_flip() + #flip so the x-axis is on the y axist
+  ggtitle("Plot item difficulties in delta_tau for the PCM") +
+  xlab("Item") +
+  ylab("Difficulties in logits")
+
+pcmp
+
+```
+
+# Rating Scale Model
+
+Now, it doesn't take a lot to change the model from the partial credit model to the RSM
+
+```{r, echo=T, results='hide'}
+# Run the rating scale model
+
+hls[hls==3] <- 2
+
+mod_rsm <- tam.mml(hls, irtmodel = "RSM")
+
+```
+
+## Rating Scale Deltas/thresholds
+
+What are the difficulties in the first form of the partial credit model we learned? Nearly identical.
+
+Note, that for `xsi` for the rating scale model, you only get one overall item difficulty. This is because the rating scale/taus are the same.
+
+```{r}
+
+xsi_rsm <- mod_rsm$xsi
+
+
+#PCM steps/adjacent categories
+xsi_pcm[1:10, ]
+
+
+#note the differences - this is the RSM
+xsi_rsm
+
+#delta_tau for RSM
+mod_rsm$item_irt[1:5, ]
+
+```
+
+### Let's Plot the RSM
+
+Note the plots below - the item characteristic curves are the same for each category. Note items 7 and 8.
+
+```{r}
+
+plot(mod_rsm, type = "items", high = 5, items = c(5:8), export = F)
+
+```
+
+### Rating Scale in Delta_Tau vs PCM
+What about delta_tau parameterizations comparisons? This is where we *might* see some differences . . .
+
+These may be the same, but may not. But since the threshold are constrained equality, they might be a different.Here, they're quite different.
+
+```{r}
+
+delta_tau_rsm <- mod_rsm$item_irt
+
+
+
+```
+
+### Comparing the plots of the PCM and RSM
+
+First, need to get the RSM data into the proper form.
+```{r}
+delta_tau_r <- delta_tau_rsm %>%
+  mutate(d1 = beta + tau.Cat1,
+         d2 = beta + tau.Cat2,
+         d3 = beta + tau.Cat3) %>% 
+  select(item, beta, d1, d2, d3) %>% 
+  mutate(beta_diff = beta) %>% 
+  pivot_longer(cols = c(beta, d1, d2, d3), names_to = "Parameter" ) %>% 
+  mutate(type_delta = as.factor(if_else(Parameter == "beta", "beta", "delta"))) %>% 
+  arrange(beta_diff)
+
+delta_tau_r[1:10, ]
+```
+
+### Plot the RSM and the PCM!
+
+```{r}
+
+
+rsmp <- ggplot(delta_tau_r, aes(x = reorder(item, beta_diff),  
+                        y = value, #what's on the y-axis
+                        group = item, # the line segments need to "know" where to connect
+                        fill=type_delta, 
+                        shape = type_delta, # only some shapes are fillable
+                        )) + 
+  geom_point(size = 2)+ # making points a little big
+  theme_bw() + 
+  scale_fill_manual(values = c("black", "white")) + 
+  scale_shape_manual(values = c(21, 21)) +
+  geom_line(aes(x=item, y=value)) + # add the lines
+  coord_flip() + #flip so the x-axis is on the y axist
+  ggtitle("Plot item difficulties in delta_tau for the RSM") +
+  xlab("Item") +
+  ylab("Difficulties in logits")
+
+# RSM
+rsmp
+
+#PCM
+pcmp
+
+```
+
+## Abilities and thresholds
+
+For comparison sakes, let's compare ability estimates from the two models, RSM and PCM
+
+```{r, echo=T, results='hide'}
+
+#PCM
+abil_PCM <- tam.wle(mod_pcm)
+abil_RSM <- tam.wle(mod_rsm)
+
+thresh_pcm <- tam.threshold(mod_pcm)
+thresh_rsm <- tam.threshold(mod_rsm)
+
+```
+
+## Compare Wrightmaps
+```{r}
+
+
+
+WrightMap::wrightMap(thetas = abil_PCM$theta, thresholds = thresh_pcm,
+                     main.title = "WrightMap for PCM", return.thresholds = F)
+
+WrightMap::wrightMap(thetas = abil_RSM$theta, thresholds = thresh_rsm,
+                     main.title = "WrightMap for RSM", return.thresholds = F)
+
+```
+
+
+### Compare Item fit
+
+Note, the rating scale model in TAM has a specific parameterization so you have these general category fit stats as well, but they're not that informative here. 
+
+Note, because there is some simulation involved here, you may get different values. Most notably, because of the extremely sparse responses in certain categories, you'll get strange values.
+
+Note, for the rating scale fit, you really only get overall item fit from TAM.
+
+
+```{r results='hide'}
+# PCM
+
+fit_PCM <- tam.fit(mod_pcm)
+
+fit_RSM <- tam.fit(mod_rsm)
+
+#PCM
+head(fit_PCM$itemfit)
+
+#RSM
+head(fit_RSM$itemfit)
+
+```
+
+
+## Model Comparison
+
+TAM stores likelihood information in its model fitting procedure. You can access it individually, or, from the `CDM` package, which loads with TAM, it'll compare models for you. Just comparing the log likelihoods from the PCM and RSM (you can do this here because the models are nested). 
+
+We can also use `anova` which will give us fit stats. 
+
+
+TAM can compare two of the models it has produced using a likelihood ratio test with the `anova` function or with `IRT.compareModels`. `IRT.compareModels`, along with `anova` will give you chi-square difference tests between the likelihoods of the two models.
+
+AIC and BIC allow you to compare models while penalizing for model complexity (BIC penalizes more). In general, the model with a smaller AIC/BIC is the one that the data fit better.
+
+In our case, we see that the $G^2$ (Deviance) is lower for the PCM and this difference is statistically signigicance. However, it's worth noting that the BIC is is actually lower (and hence implies a better fitting model) for the RSM.
+```{r}
+
+log_lik_RSM <- logLik(mod_rsm)
+
+log_lik_PCM <- logLik(mod_pcm)
+
+# Model comparisons
+anova(mod_rsm, mod_pcm)
+
+#
+mod_comp <- IRT.compareModels(mod_pcm, mod_rsm)
+
+mod_comp$IC
+
+# Note based on deviance
+mod_comp$LRtest
+
+```
+
+
+
+## Using eRm
+
+Using the `Extended Rasch Modeling` Package or `eRm` is nice, but it uses some different parameterizations than TAM and the fact it uses conditional maximum likelihood estimation instead of maximum likelihood. The main goal is to use its plotting functionality.
+
+## Running the PCM and RSM in `eRm`
+
+```{r}
+
+
+#Run the PCM in eRm
+
+erm_pcm <- PCM(X = hls, )
+
+erm_RSM <- RSM(X = hls)  
+
+
+```
+
+
+### Getting model results
+```{r}
+
+# Get PCM item difficulties/model results
+summary(erm_pcm)
+
+
+# Get Rating Scale data
+summary(erm_RSM)
+
+
+
+```
+
+### Getting item person maps from eRm
+
+Let's be honest, this is what's best!
+
+
+```{r}
+
+#PCM Item Person Maps
+plotPImap(object = erm_pcm)
+
+
+#RSM Item Person Maps
+plotPImap(object = erm_RSM)
+```
+
 
