@@ -4,42 +4,44 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.11 Item Fit | Introduction to Rasch Modelling</title>
-  <meta name="description" content="2.11 Item Fit | Introduction to Rasch Modelling" />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <title>Chapter 5 Item Fit | Introduction to Rasch Modelling</title>
+  <meta name="description" content="This book is a guide for getting started using the Rasch model" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.11 Item Fit | Introduction to Rasch Modelling" />
+  <meta property="og:title" content="Chapter 5 Item Fit | Introduction to Rasch Modelling" />
   <meta property="og:type" content="book" />
   
   
-  
+  <meta property="og:description" content="This book is a guide for getting started using the Rasch model" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.11 Item Fit | Introduction to Rasch Modelling" />
+  <meta name="twitter:title" content="Chapter 5 Item Fit | Introduction to Rasch Modelling" />
   
-  
+  <meta name="twitter:description" content="This book is a guide for getting started using the Rasch model" />
   
 
-<meta name="author" content="Anthony Clairmont, Daniel Katz, Mike Wilton" />
+<meta name="author" content="Daniel Katz, Anthony Clairmont, Mike Wilton" />
 
 
+<meta name="date" content="2021-02-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="summarizing-the-distribution-of-difficulties.html"/>
-<link rel="next" href="person-abilities.html"/>
-<script src="assets/jquery-2.2.3/jquery.min.js"></script>
-<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link rel="prev" href="Rasch.html"/>
+<link rel="next" href="optional-understanding-the-model.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -52,25 +54,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -114,7 +118,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -127,67 +130,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Rasch Example</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>1</b> Installing R and R-Studio</a><ul>
-<li class="chapter" data-level="1.1" data-path="instructions-for-installing-r.html"><a href="instructions-for-installing-r.html"><i class="fa fa-check"></i><b>1.1</b> Instructions for installing R:</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="instructions-for-installing-r.html"><a href="instructions-for-installing-r.html#for-mac-do-the-following"><i class="fa fa-check"></i><b>1.1.1</b> For Mac, do the following:</a></li>
-<li class="chapter" data-level="1.1.2" data-path="instructions-for-installing-r.html"><a href="instructions-for-installing-r.html#for-windows-do-the-following"><i class="fa fa-check"></i><b>1.1.2</b> For Windows do the following:</a></li>
-<li class="chapter" data-level="1.1.3" data-path="instructions-for-installing-r.html"><a href="instructions-for-installing-r.html#for-linux-you-already-know-what-youre-doing.-ill-stay-out-of-your-way."><i class="fa fa-check"></i><b>1.1.3</b> For Linux, you already know what you’re doing. I’ll stay out of your way.</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installing R and R-Studio</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#instructions-for-installing-r"><i class="fa fa-check"></i><b>2.1</b> Instructions for installing R:</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="install.html"><a href="install.html#for-mac-do-the-following"><i class="fa fa-check"></i><b>2.1.1</b> For Mac, do the following:</a></li>
+<li class="chapter" data-level="2.1.2" data-path="install.html"><a href="install.html#for-windows-do-the-following"><i class="fa fa-check"></i><b>2.1.2</b> For Windows do the following:</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="instructions-for-installing-r-studio.html"><a href="instructions-for-installing-r-studio.html"><i class="fa fa-check"></i><b>1.2</b> Instructions for installing R-Studio:</a></li>
-<li class="chapter" data-level="1.3" data-path="appendix-troubleshooting-r-studio-installation.html"><a href="appendix-troubleshooting-r-studio-installation.html"><i class="fa fa-check"></i><b>1.3</b> Appendix: Troubleshooting R-Studio installation</a></li>
+<li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#instructions-for-installing-r-studio"><i class="fa fa-check"></i><b>2.2</b> Instructions for installing R-Studio:</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="Rasch.html"><a href="Rasch.html"><i class="fa fa-check"></i><b>2</b> The Rasch Model</a><ul>
-<li class="chapter" data-level="2.1" data-path="where-youll-be-working.html"><a href="where-youll-be-working.html"><i class="fa fa-check"></i><b>2.1</b> Where you’ll be working</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="where-youll-be-working.html"><a href="where-youll-be-working.html#loading-necessary-packages-for-managine-files-and-cleaning-data"><i class="fa fa-check"></i><b>2.1.1</b> Loading necessary “packages” for managine files and cleaning data</a></li>
-<li class="chapter" data-level="2.1.2" data-path="where-youll-be-working.html"><a href="where-youll-be-working.html#point-and-click-not-recommended"><i class="fa fa-check"></i><b>2.1.2</b> Point and Click (not recommended)</a></li>
+<li class="chapter" data-level="3" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html"><i class="fa fa-check"></i><b>3</b> Setting up your workspace: Rstudio Projects</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#loading-necessary-packages-for-managine-files-and-cleaning-data"><i class="fa fa-check"></i><b>3.0.1</b> Loading necessary “packages” for managine files and cleaning data</a></li>
+<li class="chapter" data-level="3.1" data-path="setting-up-your-workspace-rstudio-projects.html"><a href="setting-up-your-workspace-rstudio-projects.html#setting-up-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting up the working directory</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="setting-up-the-working-directory.html"><a href="setting-up-the-working-directory.html"><i class="fa fa-check"></i><b>2.2</b> Setting up the working directory</a></li>
-<li class="chapter" data-level="2.3" data-path="packages-necessary-for-running-the-rasch-model.html"><a href="packages-necessary-for-running-the-rasch-model.html"><i class="fa fa-check"></i><b>2.3</b> Packages Necessary for running the Rasch model</a></li>
-<li class="chapter" data-level="2.4" data-path="reading-in-data.html"><a href="reading-in-data.html"><i class="fa fa-check"></i><b>2.4</b> Reading in Data</a></li>
-<li class="chapter" data-level="2.5" data-path="see-the-first-few-rows-and-columns.html"><a href="see-the-first-few-rows-and-columns.html"><i class="fa fa-check"></i><b>2.5</b> See the first few rows and columns</a></li>
-<li class="chapter" data-level="2.6" data-path="the-rasch-model.html"><a href="the-rasch-model.html"><i class="fa fa-check"></i><b>2.6</b> The Rasch Model</a></li>
-<li class="chapter" data-level="2.7" data-path="running-the-rasch-model.html"><a href="running-the-rasch-model.html"><i class="fa fa-check"></i><b>2.7</b> Running the Rasch model</a></li>
-<li class="chapter" data-level="2.8" data-path="item-difficulties.html"><a href="item-difficulties.html"><i class="fa fa-check"></i><b>2.8</b> Item Difficulties</a></li>
-<li class="chapter" data-level="2.9" data-path="visualize.html"><a href="visualize.html"><i class="fa fa-check"></i><b>2.9</b> Visualize</a></li>
-<li class="chapter" data-level="2.10" data-path="summarizing-the-distribution-of-difficulties.html"><a href="summarizing-the-distribution-of-difficulties.html"><i class="fa fa-check"></i><b>2.10</b> Summarizing the distribution of difficulties</a><ul>
-<li class="chapter" data-level="2.10.1" data-path="summarizing-the-distribution-of-difficulties.html"><a href="summarizing-the-distribution-of-difficulties.html#exercise"><i class="fa fa-check"></i><b>2.10.1</b> Exercise:</a></li>
-<li class="chapter" data-level="2.10.2" data-path="summarizing-the-distribution-of-difficulties.html"><a href="summarizing-the-distribution-of-difficulties.html#optional-understanding-the-model"><i class="fa fa-check"></i><b>2.10.2</b> Optional: Understanding the model</a></li>
-</ul></li>
-<li class="chapter" data-level="2.11" data-path="item-fit.html"><a href="item-fit.html"><i class="fa fa-check"></i><b>2.11</b> Item Fit</a><ul>
-<li class="chapter" data-level="2.11.1" data-path="item-fit.html"><a href="item-fit.html#exercise-1"><i class="fa fa-check"></i><b>2.11.1</b> Exercise:</a></li>
-<li class="chapter" data-level="2.11.2" data-path="item-fit.html"><a href="item-fit.html#this-concludes-the-planned-instruction-in-the-rasch-model-for-our-workshop.-however-weve-provided-working-code-for-a-few-other-concepts-in-which-you-might-be-interested-including-using-the-rasch-model-with-polytomous-items-and-with-multidimensional-models."><i class="fa fa-check"></i><b>2.11.2</b> This concludes the planned instruction in the Rasch model for our workshop. However, we’ve provided working code for a few other concepts in which you might be interested, including using the Rasch model with polytomous items and with multidimensional models.</a></li>
+<li class="chapter" data-level="4" data-path="Rasch.html"><a href="Rasch.html"><i class="fa fa-check"></i><b>4</b> The Rasch Model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="Rasch.html"><a href="Rasch.html#basics"><i class="fa fa-check"></i><b>4.1</b> Basics</a></li>
+<li class="chapter" data-level="4.2" data-path="Rasch.html"><a href="Rasch.html#packages-necessary-for-running-the-rasch-model"><i class="fa fa-check"></i><b>4.2</b> Packages Necessary for running the Rasch model</a></li>
+<li class="chapter" data-level="4.3" data-path="Rasch.html"><a href="Rasch.html#reading-in-data"><i class="fa fa-check"></i><b>4.3</b> Reading in Data</a></li>
+<li class="chapter" data-level="4.4" data-path="Rasch.html"><a href="Rasch.html#check-out-the-data-set"><i class="fa fa-check"></i><b>4.4</b> Check out the data set</a></li>
+<li class="chapter" data-level="4.5" data-path="Rasch.html"><a href="Rasch.html#running-the-rasch-model"><i class="fa fa-check"></i><b>4.5</b> Running the Rasch model</a></li>
+<li class="chapter" data-level="4.6" data-path="Rasch.html"><a href="Rasch.html#item-difficulties"><i class="fa fa-check"></i><b>4.6</b> Item Difficulties</a></li>
+<li class="chapter" data-level="4.7" data-path="Rasch.html"><a href="Rasch.html#visualize---get-item-characteristic-curves"><i class="fa fa-check"></i><b>4.7</b> Visualize - Get Item Characteristic Curves</a></li>
+<li class="chapter" data-level="4.8" data-path="Rasch.html"><a href="Rasch.html#summarizing-the-distribution-of-difficulties"><i class="fa fa-check"></i><b>4.8</b> Summarizing the distribution of difficulties</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="Rasch.html"><a href="Rasch.html#exercise"><i class="fa fa-check"></i><b>4.8.1</b> Exercise:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>3</b> Person Abilities</a><ul>
-<li class="chapter" data-level="3.1" data-path="wright-map.html"><a href="wright-map.html"><i class="fa fa-check"></i><b>3.1</b> Wright Map</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="wright-map.html"><a href="wright-map.html#exercise-2"><i class="fa fa-check"></i><b>3.1.1</b> Exercise:</a></li>
+<li class="chapter" data-level="5" data-path="item-fit.html"><a href="item-fit.html"><i class="fa fa-check"></i><b>5</b> Item Fit</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="item-fit.html"><a href="item-fit.html#exercise-1"><i class="fa fa-check"></i><b>5.0.1</b> Exercise:</a></li>
+<li class="chapter" data-level="5.1" data-path="item-fit.html"><a href="item-fit.html#optional---visualizing-item-fit"><i class="fa fa-check"></i><b>5.1</b> Optional - Visualizing Item Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="optional-understanding-the-model.html"><a href="optional-understanding-the-model.html"><i class="fa fa-check"></i><b>6</b> Optional: Understanding the model</a></li>
+<li class="chapter" data-level="7" data-path="person-abilities.html"><a href="person-abilities.html"><i class="fa fa-check"></i><b>7</b> Person Abilities</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="person-abilities.html"><a href="person-abilities.html#quick-descriptives-for-person-ability---well-use-wrightmap-to-bring-this-all-together"><i class="fa fa-check"></i><b>7.1</b> Quick descriptives for person ability - we’ll use WrightMap to bring this all together</a></li>
+<li class="chapter" data-level="7.2" data-path="person-abilities.html"><a href="person-abilities.html#wright-map"><i class="fa fa-check"></i><b>7.2</b> Wright Map</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="person-abilities.html"><a href="person-abilities.html#exercise-2"><i class="fa fa-check"></i><b>7.2.1</b> Exercise:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>4</b> Polytomous Items</a><ul>
-<li class="chapter" data-level="4.1" data-path="polytymous-item-types-anything-with-a-rating-scale.html"><a href="polytymous-item-types-anything-with-a-rating-scale.html"><i class="fa fa-check"></i><b>4.1</b> Polytymous item types (anything with a rating Scale)</a></li>
-<li class="chapter" data-level="4.2" data-path="item-difficulties-1.html"><a href="item-difficulties-1.html"><i class="fa fa-check"></i><b>4.2</b> Item Difficulties</a></li>
-<li class="chapter" data-level="4.3" data-path="person-ability-theta-estimates.html"><a href="person-ability-theta-estimates.html"><i class="fa fa-check"></i><b>4.3</b> Person ability (theta) estimates</a></li>
-<li class="chapter" data-level="4.4" data-path="item-fit-statistics.html"><a href="item-fit-statistics.html"><i class="fa fa-check"></i><b>4.4</b> Item fit statistics</a></li>
-<li class="chapter" data-level="4.5" data-path="item-characteristic-curves-but-now-as-thresholds-.html"><a href="item-characteristic-curves-but-now-as-thresholds-.html"><i class="fa fa-check"></i><b>4.5</b> Item characteristic curves (but now as thresholds).</a></li>
-<li class="chapter" data-level="4.6" data-path="wright-map-1.html"><a href="wright-map-1.html"><i class="fa fa-check"></i><b>4.6</b> Wright Map</a></li>
-<li class="chapter" data-level="4.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>4.7</b> Exercises:</a></li>
-<li class="chapter" data-level="4.8" data-path="model-comparison.html"><a href="model-comparison.html"><i class="fa fa-check"></i><b>4.8</b> Model Comparison</a></li>
+<li class="chapter" data-level="8" data-path="polytomous-items.html"><a href="polytomous-items.html"><i class="fa fa-check"></i><b>8</b> Polytomous Items</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="polytomous-items.html"><a href="polytomous-items.html#polytymous-item-types-anything-with-a-rating-scale"><i class="fa fa-check"></i><b>8.1</b> Polytymous item types (anything with a rating Scale)</a></li>
+<li class="chapter" data-level="8.2" data-path="polytomous-items.html"><a href="polytomous-items.html#item-difficulties-1"><i class="fa fa-check"></i><b>8.2</b> Item Difficulties</a></li>
+<li class="chapter" data-level="8.3" data-path="polytomous-items.html"><a href="polytomous-items.html#person-ability-theta-estimates"><i class="fa fa-check"></i><b>8.3</b> Person ability (theta) estimates</a></li>
+<li class="chapter" data-level="8.4" data-path="polytomous-items.html"><a href="polytomous-items.html#item-fit-statistics"><i class="fa fa-check"></i><b>8.4</b> Item fit statistics</a></li>
+<li class="chapter" data-level="8.5" data-path="polytomous-items.html"><a href="polytomous-items.html#item-characteristic-curves-but-now-as-thresholds."><i class="fa fa-check"></i><b>8.5</b> Item characteristic curves (but now as thresholds).</a></li>
+<li class="chapter" data-level="8.6" data-path="polytomous-items.html"><a href="polytomous-items.html#wright-map-1"><i class="fa fa-check"></i><b>8.6</b> Wright Map</a></li>
+<li class="chapter" data-level="8.7" data-path="polytomous-items.html"><a href="polytomous-items.html#exercises"><i class="fa fa-check"></i><b>8.7</b> Exercises:</a></li>
+<li class="chapter" data-level="8.8" data-path="polytomous-items.html"><a href="polytomous-items.html#model-comparison"><i class="fa fa-check"></i><b>8.8</b> Model Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="multidimensional.html"><a href="multidimensional.html"><i class="fa fa-check"></i><b>5</b> Multidimensional Rasch Model</a><ul>
-<li class="chapter" data-level="5.1" data-path="we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix.html"><a href="we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix.html"><i class="fa fa-check"></i><b>5.1</b> we start by assigning the items to a dimension using a Q-matrix</a></li>
-<li class="chapter" data-level="5.2" data-path="run-the-multidimensional-rasch-model.html"><a href="run-the-multidimensional-rasch-model.html"><i class="fa fa-check"></i><b>5.2</b> Run the multidimensional Rasch model</a></li>
-<li class="chapter" data-level="5.3" data-path="theta-and-delta.html"><a href="theta-and-delta.html"><i class="fa fa-check"></i><b>5.3</b> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></a><ul>
-<li class="chapter" data-level="5.3.1" data-path="theta-and-delta.html"><a href="theta-and-delta.html#wright-map-2"><i class="fa fa-check"></i><b>5.3.1</b> Wright Map</a></li>
+<li class="chapter" data-level="9" data-path="multidimensional.html"><a href="multidimensional.html"><i class="fa fa-check"></i><b>9</b> Multidimensional Rasch Model</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="multidimensional.html"><a href="multidimensional.html#we-start-by-assigning-the-items-to-a-dimension-using-a-q-matrix"><i class="fa fa-check"></i><b>9.1</b> we start by assigning the items to a dimension using a Q-matrix</a></li>
+<li class="chapter" data-level="9.2" data-path="multidimensional.html"><a href="multidimensional.html#run-the-multidimensional-rasch-model"><i class="fa fa-check"></i><b>9.2</b> Run the multidimensional Rasch model</a></li>
+<li class="chapter" data-level="9.3" data-path="multidimensional.html"><a href="multidimensional.html#theta-and-delta"><i class="fa fa-check"></i><b>9.3</b> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\delta\)</span></a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="multidimensional.html"><a href="multidimensional.html#wright-map-2"><i class="fa fa-check"></i><b>9.3.1</b> Wright Map</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
+<li class="chapter" data-level="9.4" data-path="multidimensional.html"><a href="multidimensional.html#exercises-1"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -205,13 +212,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="item-fit" class="section level2">
-<h2><span class="header-section-number">2.11</span> Item Fit</h2>
-<p>Let’s find out if the data fit the model. Use the <code>tam.fit</code> function to compute fit statistics, then display.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">fit &lt;-<span class="st"> </span><span class="kw">tam.fit</span>(mod1)</a></code></pre></div>
+<div id="item-fit" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Item Fit</h1>
+<p>Let’s find out if the data fit the model. Use the <code>tam.fit</code> function to compute fit statistics, then display. We note that items V1 and V2 have outfits that are drastically different from the items’ infit values. We also note that infit values of V1 and V2 are different from any of the other items. We note that V1 is “over fitting,” it’s outfit and infit values being well below 1, while V2 is “underfitting.” This means that item V1 is too predictable - the amount of information is well predicted from other items which means it provides little new information above and beyond the other items. On the other hand, the underfitting V2 item has too much randomness.</p>
+<p>However, outfit is “outlier” sensitive whereas “infit” is not. This implies that for V2 there might be a few responses that are particularly random/unexpected.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="item-fit.html#cb36-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">tam.fit</span>(mod1)</span></code></pre></div>
 <pre><code>## Item fit calculation based on 15 simulations
 ## |**********|
 ## |----------|</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="item-fit.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(fit)</span></code></pre></div>
+<pre><code>## List of 3
+##  $ itemfit:&#39;data.frame&#39;: 15 obs. of  9 variables:
+##   ..$ parameter   : Factor w/ 15 levels &quot;V1&quot;,&quot;V10&quot;,&quot;V11&quot;,..: 1 8 9 10 11 12 13 14 15 2 ...
+##   ..$ Outfit      : num [1:15] 0.638 3.647 1.007 0.975 1.061 ...
+##   ..$ Outfit_t    : num [1:15] -8.155 16.823 0.13 -0.466 1.638 ...
+##   ..$ Outfit_p    : num [1:15] 3.48e-16 1.65e-63 8.97e-01 6.41e-01 1.01e-01 ...
+##   ..$ Outfit_pholm: num [1:15] 4.87e-15 2.48e-62 1.00 1.00 1.00 ...
+##   ..$ Infit       : num [1:15] 0.835 1.236 1.023 0.976 1.035 ...
+##   ..$ Infit_t     : num [1:15] -3.418 2.312 0.447 -0.418 0.955 ...
+##   ..$ Infit_p     : num [1:15] 0.000631 0.020791 0.655131 0.676105 0.339761 ...
+##   ..$ Infit_pholm : num [1:15] 0.00947 0.29108 1 1 1 ...
+##  $ time   : POSIXct[1:2], format: &quot;2021-02-07 11:36:28&quot; ...
+##  $ CALL   : language tam.fit(tamobj = mod1)
+##  - attr(*, &quot;class&quot;)= chr &quot;tam.fit&quot;</code></pre>
 <pre><code>View(fit$itemfit)</code></pre>
 <table>
 <thead>
@@ -251,10 +274,10 @@ Infit_pholm
 V1
 </td>
 <td style="text-align:right;">
-0.6285169
+0.6383714
 </td>
 <td style="text-align:right;">
--8.4110318
+-8.1554019
 </td>
 <td style="text-align:right;">
 0.0000000
@@ -263,16 +286,16 @@ V1
 0
 </td>
 <td style="text-align:right;">
-0.8261516
+0.8348462
 </td>
 <td style="text-align:right;">
--3.6073734
+-3.4177419
 </td>
 <td style="text-align:right;">
-0.0003093
+0.0006314
 </td>
 <td style="text-align:right;">
-0.0046397
+0.0094714
 </td>
 </tr>
 <tr>
@@ -280,10 +303,10 @@ V1
 V2
 </td>
 <td style="text-align:right;">
-3.4405952
+3.6465786
 </td>
 <td style="text-align:right;">
-15.9035417
+16.8231285
 </td>
 <td style="text-align:right;">
 0.0000000
@@ -292,16 +315,16 @@ V2
 0
 </td>
 <td style="text-align:right;">
-1.2352017
+1.2356222
 </td>
 <td style="text-align:right;">
-2.3081012
+2.3117556
 </td>
 <td style="text-align:right;">
-0.0209935
+0.0207912
 </td>
 <td style="text-align:right;">
-0.2939091
+0.2910762
 </td>
 </tr>
 <tr>
@@ -309,25 +332,25 @@ V2
 V3
 </td>
 <td style="text-align:right;">
-1.0146751
+1.0070340
 </td>
 <td style="text-align:right;">
-0.2872906
+0.1295754
 </td>
 <td style="text-align:right;">
-0.7738898
+0.8969024
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-1.0274009
+1.0228747
 </td>
 <td style="text-align:right;">
-0.5291926
+0.4466451
 </td>
 <td style="text-align:right;">
-0.5966719
+0.6551313
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -338,25 +361,25 @@ V3
 V4
 </td>
 <td style="text-align:right;">
-0.9571336
+0.9748497
 </td>
 <td style="text-align:right;">
--0.7979162
+-0.4659869
 </td>
 <td style="text-align:right;">
-0.4249191
+0.6412249
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.9738209
+0.9762107
 </td>
 <td style="text-align:right;">
--0.4631160
+-0.4177843
 </td>
 <td style="text-align:right;">
-0.6432813
+0.6761048
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -367,25 +390,25 @@ V4
 V5
 </td>
 <td style="text-align:right;">
-1.0597981
+1.0607335
 </td>
 <td style="text-align:right;">
-1.6060552
+1.6380141
 </td>
 <td style="text-align:right;">
-0.1082618
+0.1014188
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-1.0421749
+1.0346503
 </td>
 <td style="text-align:right;">
-1.1505321
+0.9546381
 </td>
 <td style="text-align:right;">
-0.2499248
+0.3397608
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -396,25 +419,25 @@ V5
 V6
 </td>
 <td style="text-align:right;">
-0.9892275
+0.9994803
 </td>
 <td style="text-align:right;">
--0.4239415
+-0.0267441
 </td>
 <td style="text-align:right;">
-0.6716085
+0.9786639
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.9933119
+0.9978029
 </td>
 <td style="text-align:right;">
--0.2550022
+-0.0809735
 </td>
 <td style="text-align:right;">
-0.7987214
+0.9354630
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -425,25 +448,25 @@ V6
 V7
 </td>
 <td style="text-align:right;">
-0.9631186
+0.9740049
 </td>
 <td style="text-align:right;">
--1.4095982
+-0.9865275
 </td>
 <td style="text-align:right;">
-0.1586584
+0.3238743
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.9754612
+0.9825199
 </td>
 <td style="text-align:right;">
--0.9266119
+-0.6577626
 </td>
 <td style="text-align:right;">
-0.3541281
+0.5106907
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -454,25 +477,25 @@ V7
 V8
 </td>
 <td style="text-align:right;">
-0.9709744
+0.9631538
 </td>
 <td style="text-align:right;">
--1.1288074
+-1.4311944
 </td>
 <td style="text-align:right;">
-0.2589791
+0.1523745
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.9676213
+0.9708594
 </td>
 <td style="text-align:right;">
--1.2570990
+-1.1250402
 </td>
 <td style="text-align:right;">
-0.2087178
+0.2605720
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -483,25 +506,25 @@ V8
 V9
 </td>
 <td style="text-align:right;">
-0.9856508
+0.9812937
 </td>
 <td style="text-align:right;">
--0.5394073
+-0.7150875
 </td>
 <td style="text-align:right;">
-0.5896058
+0.4745550
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.9876720
+0.9807213
 </td>
 <td style="text-align:right;">
--0.4599053
+-0.7252596
 </td>
 <td style="text-align:right;">
-0.6455842
+0.4682928
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -512,25 +535,25 @@ V9
 V10
 </td>
 <td style="text-align:right;">
-1.0315866
+1.0386943
 </td>
 <td style="text-align:right;">
-0.3441954
+0.4476908
 </td>
 <td style="text-align:right;">
-0.7306994
+0.6543764
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-1.0097855
+0.9988250
 </td>
 <td style="text-align:right;">
-0.1338341
+0.0122243
 </td>
 <td style="text-align:right;">
-0.8935337
+0.9902466
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -541,25 +564,25 @@ V10
 V11
 </td>
 <td style="text-align:right;">
-0.9497343
+0.9552567
 </td>
 <td style="text-align:right;">
--0.7451221
+-0.6506701
 </td>
 <td style="text-align:right;">
-0.4561979
+0.5152594
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.9954503
+0.9939558
 </td>
 <td style="text-align:right;">
--0.0484756
+-0.0671564
 </td>
 <td style="text-align:right;">
-0.9613372
+0.9464572
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -570,25 +593,25 @@ V11
 V12
 </td>
 <td style="text-align:right;">
-1.0468974
+1.0403143
 </td>
 <td style="text-align:right;">
-1.1343090
+0.9787221
 </td>
 <td style="text-align:right;">
-0.2566650
+0.3277173
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-1.0140512
+1.0168324
 </td>
 <td style="text-align:right;">
-0.3516093
+0.4227396
 </td>
 <td style="text-align:right;">
-0.7251313
+0.6724852
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -599,25 +622,25 @@ V12
 V13
 </td>
 <td style="text-align:right;">
-0.8437319
+0.8698424
 </td>
 <td style="text-align:right;">
--1.5567623
+-1.2907226
 </td>
 <td style="text-align:right;">
-0.1195269
+0.1967999
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-1.0014880
+0.9993232
 </td>
 <td style="text-align:right;">
-0.0438616
+0.0240080
 </td>
 <td style="text-align:right;">
-0.9650147
+0.9808462
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -628,25 +651,25 @@ V13
 V14
 </td>
 <td style="text-align:right;">
-0.9689793
+0.9619077
 </td>
 <td style="text-align:right;">
--1.1218075
+-1.3721399
 </td>
 <td style="text-align:right;">
-0.2619443
+0.1700199
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.9750127
+0.9773742
 </td>
 <td style="text-align:right;">
--0.8992750
+-0.8062110
 </td>
 <td style="text-align:right;">
-0.3685062
+0.4201212
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -657,25 +680,25 @@ V14
 V15
 </td>
 <td style="text-align:right;">
-0.9789799
+0.9826981
 </td>
 <td style="text-align:right;">
--0.8154168
+-0.6696410
 </td>
 <td style="text-align:right;">
-0.4148338
+0.5030867
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.9802165
+0.9830750
 </td>
 <td style="text-align:right;">
--0.7640186
+-0.6498991
 </td>
 <td style="text-align:right;">
-0.4448561
+0.5157574
 </td>
 <td style="text-align:right;">
 1.0000000
@@ -683,37 +706,65 @@ V15
 </tr>
 </tbody>
 </table>
-<div id="exercise-1" class="section level3">
-<h3><span class="header-section-number">2.11.1</span> Exercise:</h3>
+<div id="exercise-1" class="section level3" number="5.0.1">
+<h3><span class="header-section-number">5.0.1</span> Exercise:</h3>
 <ol style="list-style-type: decimal">
-<li>Look at the <code>Wright Map</code> and the histograms of person abilities (<span class="math inline">\(\theta_p\)</span>) and item difficulties (<span class="math inline">\(\delta_i\)</span>). Do you think this instrument is well-targeted for this sample? 2. How might it be optimized?</li>
-<li>Relative to other items, which item fit our model the worst?</li>
+<li>Which items fit best? Which items fit worst?</li>
+<li>How many, if any items, are outside the traditional bounds of mean-square item fit [.75, 1.33]?</li>
 </ol>
 </div>
-<div id="this-concludes-the-planned-instruction-in-the-rasch-model-for-our-workshop.-however-weve-provided-working-code-for-a-few-other-concepts-in-which-you-might-be-interested-including-using-the-rasch-model-with-polytomous-items-and-with-multidimensional-models." class="section level3">
-<h3><span class="header-section-number">2.11.2</span> This concludes the planned instruction in the Rasch model for our workshop. However, we’ve provided working code for a few other concepts in which you might be interested, including using the Rasch model with polytomous items and with multidimensional models.</h3>
-
+<div id="optional---visualizing-item-fit" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Optional - Visualizing Item Fit</h2>
+<p>If you’d like, we can use default <code>WrightMap</code> functionality to plot item fit statistics. In the <code>fit</code> object, <code>itemfit</code> is a dataframe containing various fit statistics. We’ll plot infit with a lowerbound of .75 (in mean-square error units) and an upper bound of 1.33</p>
+<p>The nice thing is that you can create unique fitbounds for each item (such that it’s sensitive to sample size). However, if we want all the same fit values, we have to just repeat the fit value (in our case, there are 15 items).</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="item-fit.html#cb41-1" aria-hidden="true" tabindex="-1"></a>infit <span class="ot">&lt;-</span> fit<span class="sc">$</span>itemfit<span class="sc">$</span>Infit</span>
+<span id="cb41-2"><a href="item-fit.html#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="item-fit.html#cb41-3" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x =</span> <span class="fl">1.33</span>, <span class="at">times =</span><span class="dv">15</span>) <span class="co"># this repeats 1.33 fifteen times</span></span>
+<span id="cb41-4"><a href="item-fit.html#cb41-4" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x =</span> .<span class="dv">75</span>, <span class="at">times =</span> <span class="dv">15</span>) </span>
+<span id="cb41-5"><a href="item-fit.html#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="item-fit.html#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># running fitgraph</span></span>
+<span id="cb41-7"><a href="item-fit.html#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="item-fit.html#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="item-fit.html#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">fitgraph</span>(<span class="at">fitEst =</span> infit, <span class="at">fitLB =</span> lower_bound, <span class="at">fitUB =</span> upper_bound, <span class="at">itemLabels =</span> <span class="fu">names</span>(hls))</span></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="item-fit.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what about outfit?</span></span>
+<span id="cb42-2"><a href="item-fit.html#cb42-2" aria-hidden="true" tabindex="-1"></a>outfit <span class="ot">&lt;-</span> fit<span class="sc">$</span>itemfit<span class="sc">$</span>Outfit</span>
+<span id="cb42-3"><a href="item-fit.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="item-fit.html#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="item-fit.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fitgraph</span>(<span class="at">fitEst =</span> outfit, <span class="at">fitLB =</span> lower_bound, <span class="at">fitUB =</span> upper_bound, <span class="at">itemLabels =</span> <span class="fu">names</span>(hls))</span></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-26-2.png" width="672" />
+If you wanted to do this with ggplot - play with the code to try to change the fit limits or plot outfit instead of infit.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="item-fit.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># put the fit data in a dataframe</span></span>
+<span id="cb43-2"><a href="item-fit.html#cb43-2" aria-hidden="true" tabindex="-1"></a>fit_stats <span class="ot">&lt;-</span> fit<span class="sc">$</span>itemfit</span>
+<span id="cb43-3"><a href="item-fit.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="item-fit.html#cb43-4" aria-hidden="true" tabindex="-1"></a>fit_stats <span class="sc">%&gt;%</span></span>
+<span id="cb43-5"><a href="item-fit.html#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>parameter, <span class="at">y =</span> infit)) <span class="sc">+</span> </span>
+<span id="cb43-6"><a href="item-fit.html#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb43-7"><a href="item-fit.html#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb43-8"><a href="item-fit.html#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb43-9"><a href="item-fit.html#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">15</span>)) <span class="sc">+</span> </span>
+<span id="cb43-10"><a href="item-fit.html#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Item Fit Statistics for Lab 3 Data&quot;</span>)</span></code></pre></div>
+<p><img src="Rasch_Biome_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="summarizing-the-distribution-of-difficulties.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="person-abilities.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="Rasch.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="optional-understanding-the-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
-<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -744,12 +795,9 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Rasch_Biome.pdf", "Rasch_Biome.epub"],
+"download": ["Rasch_Biome.pdf"],
 "toc": {
 "collapse": "subsection"
-},
-"toolbar": {
-"position": "static"
 }
 });
 });
