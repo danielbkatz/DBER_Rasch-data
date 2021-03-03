@@ -24,7 +24,33 @@ local({
 ```
 
 ## Polytymous item types (anything with a rating Scale)
-We can use the Rasch Partial Credit Model (PCM) to look at polytomous data too. We’ll start by bringing in the polytomous items from the survey. Note that TAM needs the bottom category to be coded as 0, so you may need to recode.
+We can use the Rasch Partial Credit Model (PCM) to look at polytomous data. We’ll start by bringing in the polytomous items from a survey. Note that TAM needs the bottom category to be coded as 0, so you may need to recode.
+
+## Data
+Data comes from a subset of the `Health Literacy Survey`. 
+
+These are the items in case you're interested (it doesn't matter, but here they are...)  
+  
+On a scale from very easy to very difficult, how easy would you say it is to:  
+1. find information on treatments of illnesses that concern you?  
+2. find out where to get professional help when you are ill?  
+3. understand what your doctor says to you?  
+4. understand your doctor’s or pharmacist’s instruction on how to take a prescribed medicine?  
+5. judge when you may need to get a second opinion from another doctor?  
+6. use information the doctor gives you to make decisions about your illness?  
+7. follow instructions from your doctor or pharmacist?  
+8. find information on how to manage mental health problems like stress or depression?  
+9. understand health warnings about behavior such as smoking, low physical activity and drinking too much?  
+10. understand why you need health screenings?  
+11. judge if the information on health risks in the media is reliable?  
+12. decide how you can protect yourself from illness based on information in the media?  
+13. find out about activities that are good for your mental well-being?  
+14. understand advice on health from family members or friends?  
+15. understand information in the media on how to get healthier?  
+16. judge which everyday behavior is related to your health?  
+
+The Likert scale contains four response options (very easy, easy, difficult, very difficult).
+The Likert scale contains four response options (very easy, easy, difficult, very difficult).
 
 We'll use a dataset that you can read in via `github` (no need to download locally and then read in). 
 
@@ -197,7 +223,7 @@ Goals:
 4. Bonus: Use the `eRm` package for improved person item maps.
 
 
-##Rating Scale Model (RSM)
+## Rating Scale Model (RSM)
 
 The model can be expressed as follows. 
 
@@ -218,7 +244,7 @@ library(WrightMap)
 ```
 
 
-## Data for today
+## Data
 Data comes from a subset of the `Health Literacy Survey`. 
 
 These are the items in case you're interested (it doesn't matter, but here they are...)  
@@ -242,13 +268,11 @@ On a scale from very easy to very difficult, how easy would you say it is to:
 16. judge which everyday behavior is related to your health?  
 
 The Likert scale contains four response options (very easy, easy, difficult, very difficult).
-The Likert scale contains four response options (very easy, easy, difficult, very difficult).
 
 ### Reading in the data
 
 ```{r echo=T, message=FALSE, warning=FALSE, results='hide'}
-hls <- read_csv("processed_data/hls.csv") %>%
-  select(-X1)
+hls2 <- read_csv("https://raw.githubusercontent.com/danielbkatz/DBER_Rasch-data/master/data/hls_poly_scale.csv")
 
 ```
 
@@ -256,11 +280,11 @@ hls <- read_csv("processed_data/hls.csv") %>%
 ### Brief exploration of the data
 ```{r}
 
-apply(hls, 2, table)
+apply(hls2, 2, table)
 
 ```
 
-## Partial Credit Model
+## Reviewing the Partial Credit Model
 
 To have a model to compare, we'll run a partial credit model in TAM. We won't get too far into analyzing the data here, since we did that in the last lab. However as a reminder, we'll run through the steps. 
 
@@ -270,7 +294,7 @@ For clarity, look at Hls8 and Hls9. Which one is harder?
 
 ```{r, echo=T, results='hide'}
 
-mod_pcm <- tam(hls)
+mod_pcm <- tam(hls2)
 
 ```
 
@@ -350,16 +374,15 @@ pcmp
 
 ```
 
-# Rating Scale Model
+## Rating Scale Model
 
 Now, it doesn't take a lot to change the model from the partial credit model to the RSM
 
 ```{r, echo=T, results='hide'}
 # Run the rating scale model
 
-hls[hls==3] <- 2
 
-mod_rsm <- tam.mml(hls, irtmodel = "RSM")
+mod_rsm <- tam.mml(hls2, irtmodel = "RSM")
 
 ```
 
@@ -542,7 +565,7 @@ mod_comp$LRtest
 
 
 
-## Using eRm
+## Using the eRm Package
 
 Using the `Extended Rasch Modeling` Package or `eRm` is nice, but it uses some different parameterizations than TAM and the fact it uses conditional maximum likelihood estimation instead of maximum likelihood. The main goal is to use its plotting functionality.
 
@@ -553,16 +576,16 @@ Using the `Extended Rasch Modeling` Package or `eRm` is nice, but it uses some d
 
 #Run the PCM in eRm
 
-erm_pcm <- PCM(X = hls, )
+erm_pcm <- PCM(X = hls2, )
 
-erm_RSM <- RSM(X = hls)  
+erm_RSM <- RSM(X = hls2)  
 
 
 ```
 
 
 ### Getting model results
-```{r}
+```{r max.height='200px'}
 
 # Get PCM item difficulties/model results
 summary(erm_pcm)
